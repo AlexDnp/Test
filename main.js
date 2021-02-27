@@ -33,6 +33,22 @@ let characteristicCache = null;
 // Промежуточный буфер для входящих данных
 let readBuffer = '';
 
+function connectAll() {
+  console.log('Requesting Bluetooth Device...');
+  navigator.bluetooth.requestDevice(
+      {
+        acceptAllDevices: true,
+      })
+      .then(device => {
+          console.log('> Found ' + device.name);
+          console.log('Connecting to GATT Server...');
+          return device.gatt.connect();
+      })
+      .catch(error => {
+          console.log('Argh! ' + error);
+      });
+}
+
 // Запустить выбор Bluetooth устройства и подключиться к выбранному
 function connect() {
   return (deviceCache ? Promise.resolve(deviceCache) :
@@ -47,8 +63,9 @@ function requestBluetoothDevice() {
   log('Requesting bluetooth device...');
 
   return navigator.bluetooth.requestDevice({
-    filters: [{ services: [0xFFE0] }],
-   // acceptAllDevices: true,
+    //filters: [{ services: [0xFFE0] }],
+    acceptAllDevices: true,
+   optionalServices: [0xFFE0]
   }).
     then(device => {
       log('"' + device.name + '" bluetooth device selected');
