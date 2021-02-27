@@ -32,11 +32,23 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="carousel.css" rel="stylesheet">
+
+    <!-- <script>
+        // Add a global error event listener early on in the page load, to help ensure that browsers
+        // which don't support specific functionality still end up displaying a meaningful message.
+        window.addEventListener('error', function (error) {
+            //   if (ChromeSamples && ChromeSamples.setStatus) {
+            console.error(error);
+            //       ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+            error.preventDefault();
+            //    }
+        });
+    </script> -->
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
             <a class="navbar-brand" href="#">Carousel</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,11 +152,37 @@
 
 </body>
 
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+=======
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+//     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+//     crossorigin="anonymous"></script> -->
+<!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script> -->
+>>>>>>> bd2a83c621ec95747e02644d090d9d65daf11fff
 <script src="bootstrap.bundle.min.js"></script>
+<script>
+    try {
+        navigator.bluetooth.getAvailability()
+            .then(isBluetoothAvailable => {
+                log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
+            });
+
+        if ('onavailabilitychanged' in navigator.bluetooth) {
+            navigator.bluetooth.addEventListener('availabilitychanged', function (event) {
+                log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
+            });
+        }
+    }
+    catch { 
+        document.getElementById("main").classList.add("d-none");
+        document.getElementById("navbar").classList.add("d-none");
+    }
+</script>
 <script>
 
     function fullScreen() {
