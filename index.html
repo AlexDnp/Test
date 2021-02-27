@@ -50,7 +50,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary" onclick="fullScreen()" href="fullScreen()">Link</a>
+                        <a class="btn btn-primary" onclick="fullScreen()" href="#">Link</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -134,13 +134,7 @@
 <script>
 var element=document.getElementById("full");
 function fullScreen() {
-  if(element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if(element.webkitrequestFullscreen) {
-    element.webkitRequestFullscreen();
-  } else if(element.mozRequestFullscreen) {
-    element.mozRequestFullScreen();
-  }
+    document.body.requestFullscreen();
 }
 </script>
 </html>
