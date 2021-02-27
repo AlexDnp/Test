@@ -50,7 +50,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="#">Link</a>
+                        <a class="btn btn-primary" onclick="fullScreen()" href="fullScreen()">Link</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -132,7 +132,15 @@
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
 <script src="bootstrap.bundle.min.js"></script>
 <script>
-var elem=document.getElementById("full").requestFullscreen();
-
+var element=document.getElementById("full");
+function fullScreen() {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.webkitrequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.mozRequestFullscreen) {
+    element.mozRequestFullScreen();
+  }
+}
 </script>
 </html>
