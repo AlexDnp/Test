@@ -5,7 +5,8 @@
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: #5a5a5a;
+  /* color:; */
+  background-color:  #5a5a5a;
 }
 
 
@@ -34,7 +35,16 @@ body {
   height: 32rem;
 }
 
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev{
+    display:block;
+}
+.mtext{
+  margin-left: 10%;
+  margin-right: 10%;
 
+}
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
