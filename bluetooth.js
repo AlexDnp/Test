@@ -14,15 +14,16 @@ connectButton.addEventListener('click', function () {
 // Отключение от устройства при нажатии на кнопку Disconnect
 disconnectButton.addEventListener('click', function () {
   disconnect();
+  StateConnect(false);
 });
 
-// // Обработка события отправки формы
-// sendForm.addEventListener('submit', function (event) {
-//   event.preventDefault(); // Предотвратить отправку формы
-//   send(inputField.value); // Отправить содержимое текстового поля
-//   inputField.value = '';  // Обнулить текстовое поле
-//   inputField.focus();     // Вернуть фокус на текстовое поле
-// });
+// Обработка события отправки формы
+sendForm.addEventListener('submit', function (event) {
+  event.preventDefault(); // Предотвратить отправку формы
+  send(inputField.value); // Отправить содержимое текстового поля
+  inputField.value = '';  // Обнулить текстовое поле
+  inputField.focus();     // Вернуть фокус на текстовое поле
+});
 
 // Кэш объекта выбранного устройства
 let deviceCache = null;
@@ -80,7 +81,7 @@ function requestBluetoothDevice() {
 // Обработчик разъединения
 function handleDisconnection(event) {
   let device = event.target;
-
+  StateConnect(false);
   log('"' + device.name +
     '" bluetooth device disconnected, trying to reconnect...');
 
@@ -123,6 +124,7 @@ function startNotifications(characteristic) {
   return characteristic.startNotifications().
     then(() => {
       log('Notifications started');
+      StateConnect(true);
       characteristic.addEventListener('characteristicvaluechanged',
         handleCharacteristicValueChanged);
     });
@@ -139,6 +141,7 @@ function handleCharacteristicValueChanged(event) {
 
       if (data) {
         receive(data);
+        receiveData(data);
       }
     }
     else {
