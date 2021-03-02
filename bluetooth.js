@@ -16,13 +16,13 @@ disconnectButton.addEventListener('click', function () {
   disconnect();
 });
 
-// Обработка события отправки формы
-sendForm.addEventListener('submit', function (event) {
-  event.preventDefault(); // Предотвратить отправку формы
-  send(inputField.value); // Отправить содержимое текстового поля
-  inputField.value = '';  // Обнулить текстовое поле
-  inputField.focus();     // Вернуть фокус на текстовое поле
-});
+// // Обработка события отправки формы
+// sendForm.addEventListener('submit', function (event) {
+//   event.preventDefault(); // Предотвратить отправку формы
+//   send(inputField.value); // Отправить содержимое текстового поля
+//   inputField.value = '';  // Обнулить текстовое поле
+//   inputField.focus();     // Вернуть фокус на текстовое поле
+// });
 
 // Кэш объекта выбранного устройства
 let deviceCache = null;
