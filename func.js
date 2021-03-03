@@ -155,7 +155,7 @@ function addSteps(number, count) {
     input.setAttribute('maxLength', '3');
     input.setAttribute('required', 'true');
     // input.pattern = "[0-9]{3}";
-    input.setAttribute('pattern', '[0-9]{3}');
+    //input.setAttribute('pattern', '[0-9]{3}');
     //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
     input.setAttribute('pattern', '\\d*');
     //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
