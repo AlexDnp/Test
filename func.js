@@ -150,14 +150,16 @@ function addSteps(number, count) {
     input.type = "number";
     input.name = "step" + i;
     input.id = "step" + i;
+    input.min=0;
+    input.setAttribute('max','300');
     input.value = "";
-    input.setAttribute('size', '2px');
-    input.setAttribute('maxLength', '3');
+    input.setAttribute('size', '3');
+    // input.setAttribute('maxLength', '3');
     input.setAttribute('required', 'true');
     // input.pattern = "[0-9]{3}";
    // input.setAttribute('pattern', '^[0–9]$');//
     //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
-    //input.setAttribute('pattern', '\\d*');
+    input.setAttribute('pattern', '\\d*');
     //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
 
     //<label class="circle"></label>
