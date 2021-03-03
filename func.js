@@ -154,7 +154,8 @@ function addSteps(number, count) {
     input.setAttribute('max','300');
     input.value = "";
     input.setAttribute('size', '3');
-    // input.setAttribute('maxLength', '3');
+    input.setAttribute('maxLength', '3');
+    input.setAttribute('oninput',"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);");
     input.setAttribute('required', 'true');
     // input.pattern = "[0-9]{3}";
    // input.setAttribute('pattern', '^[0–9]$');//
