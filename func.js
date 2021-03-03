@@ -32,6 +32,8 @@ function StateConnect(state) {
 
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
+
+    addSteps(0,8);
   }
   else if (state === false && isConnected) {
     isConnected = false;
@@ -118,7 +120,7 @@ function addSteps(number, count) {
   //var number = document.getElementById("iSteps").value;
 
   // Container <div> where dynamic content will be placed
-  toggle('saveSteps', 'hidden');
+  // toggle('saveSteps', 'hidden');
 
 
   // document.getElementById("").classList.remove('show');
@@ -133,7 +135,7 @@ function addSteps(number, count) {
     // container.appendChild(document.createTextNode("Member " + (i+1)));
     var label = document.createElement("label");
     label.setAttribute('for', 'step' + i);
-    label.style = "width: 200px";
+    label.style = "width: 120px";
     label.innerText = i + " ступень";
     label.name = i;
     var cr = document.createElement("label");
@@ -168,7 +170,7 @@ function addSteps(number, count) {
     // Append a line break 
     container.appendChild(document.createElement("br"));
   }
-  toggle('stepsLevel', 'show');
+  // toggle('stepsLevel', 'show');
   // document.getElementById('stepsLevel').classList.remove('hidden');
   // document.getElementById('stepsLevel').classList.add('show');
 
