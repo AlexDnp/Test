@@ -33,7 +33,7 @@ function StateConnect(state) {
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
-    addSteps(0,8);
+    addSteps(1,8);
   }
   else if (state === false && isConnected) {
     isConnected = false;
@@ -154,8 +154,11 @@ function addSteps(number, count) {
     input.setAttribute('size', '2px');
     input.setAttribute('maxLength', '3');
     input.setAttribute('required', 'true');
-    input.pattern = "[0-9]{3}";
-    input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
+    // input.pattern = "[0-9]{3}";
+    input.setAttribute('pattern', '[0-9]{3}');
+    //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
+    input.setAttribute('pattern', '\\d*');
+    //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
 
     //<label class="circle"></label>
 
