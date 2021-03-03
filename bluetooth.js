@@ -6,6 +6,7 @@ let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
 let logContainer = document.getElementById('log');
 
+
 // Подключение к устройству при нажатии на кнопку Connect
 connectButton.addEventListener('click', function () {
   connect();
@@ -124,6 +125,7 @@ function startNotifications(characteristic) {
   return characteristic.startNotifications().
     then(() => {
       log('Notifications started');
+      inputField.disabled=false;
       StateConnect(true);
       characteristic.addEventListener('characteristicvaluechanged',
         handleCharacteristicValueChanged);

@@ -12,7 +12,7 @@ var step;
 
 
 
-function submit_disabled(request) {
+function SubmitDisabled(request) {
   var element = document.getElementsByTagName("input");
   for (var i = 0; i < element.length; i++) {
     //  if (element[i].type === 'button') {
@@ -84,7 +84,7 @@ ajax.x = function () {
 };
 
 ajax.send = function (url, callback, method, data, async) {
-  // submit_disabled(true);
+  // SubmitDisabled(true);
   if (async === undefined) {
     async = true;
   }
@@ -92,7 +92,7 @@ ajax.send = function (url, callback, method, data, async) {
   x.open(method, url, async);
   x.onreadystatechange = function () {
     if (x.readyState == 4) {
-      // submit_disabled(false);
+      // SubmitDisabled(false);
       callback(x.responseText)
     }
   };
@@ -177,7 +177,7 @@ var timerState;
 // }
 function selectHistory(st, en) {
   var data = {};
-  submit_disabled(true);
+  SubmitDisabled(true);
   data['hcnt'] = en;
   //data['hend'] = st;
 
@@ -194,7 +194,7 @@ function selectHistory(st, en) {
       }
       catch{ }
     }
-    submit_disabled(false);
+    SubmitDisabled(false);
   }, true);
 
 }
@@ -268,14 +268,14 @@ function clickBody(idBody, request, obj) {
 }
 
 function getHistory(obj) {
-  submit_disabled(true);
+  SubmitDisabled(true);
   var container = document.getElementById("bodyHistory");
   var element = document.getElementById("divHistory").classList;
 
   if (element.contains('hidden') == false) {
     element.remove('show');
     element.add('hidden');
-    submit_disabled(false);
+    SubmitDisabled(false);
     return;
   }
   var element = document.getElementById("noHistory").classList;
@@ -283,7 +283,7 @@ function getHistory(obj) {
   if (element.contains('show')) {
     element.remove('show');
     element.add('hidden');
-    submit_disabled(false);
+    SubmitDisabled(false);
     return;
   }
 
@@ -360,13 +360,13 @@ function getHistory(obj) {
     }
     if (cl)
       cl.classList.add('d-none');
-    submit_disabled(false);
+    SubmitDisabled(false);
   }, true);
 
 }
 
 function requestJson(strJson, obj) {
-  submit_disabled(true);
+  SubmitDisabled(true);
   if (obj)
     var cl = obj.querySelector('.spinner-border');
   if (cl)
@@ -396,7 +396,7 @@ function requestJson(strJson, obj) {
     } else {
 
     }
-    submit_disabled(false);
+    SubmitDisabled(false);
   }, true);
 }
 
@@ -588,7 +588,7 @@ function changeLevelStep(idDiv) {
 }
 
 function sendData(name, dat, obj) {
-  submit_disabled(true);
+  SubmitDisabled(true);
   var data = {};
   data[name] = dat;
   if (obj)
@@ -601,12 +601,12 @@ function sendData(name, dat, obj) {
     if (response != "OK") {
       alert("Ошибка! Повторите попытку");
     }
-    submit_disabled(false);
+    SubmitDisabled(false);
   }, true);
 }
 
 function sendForm(idForm, head, obj) {
-  submit_disabled(true);
+  SubmitDisabled(true);
   var elem = document.getElementById(idForm);
   //form.preventDefault();
   //var data = new FormData(form);
@@ -628,7 +628,7 @@ function sendForm(idForm, head, obj) {
     if (response != "OK") {
       alert("Ошибка! Повторите попытку");
     }
-    submit_disabled(false);
+    SubmitDisabled(false);
   }, true);
 }
 
@@ -639,7 +639,7 @@ function addSteps(number, count) {
   //var number = document.getElementById("iSteps").value;
 
   // Container <div> where dynamic content will be placed
-  toggle('saveSteps', 'hidden');
+  // toggle('saveSteps', 'hidden');
 
 
   // document.getElementById("").classList.remove('show');
@@ -689,7 +689,7 @@ function addSteps(number, count) {
     // Append a line break 
     container.appendChild(document.createElement("br"));
   }
-  toggle('stepsLevel', 'show');
+  // toggle('stepsLevel', 'show');
   // document.getElementById('stepsLevel').classList.remove('hidden');
   // document.getElementById('stepsLevel').classList.add('show');
 
@@ -699,13 +699,13 @@ function addSteps(number, count) {
 
 function getSteps(st, num, obj, add) {
   var stRec = 1;
-  submit_disabled(true);
+  SubmitDisabled(true);
   if (obj)
     var cl = obj.querySelector('.spinner-border');
   if (cl)
     cl.classList.remove('d-none');
   ajax.get('steps' + num + '.json' + '?' + Math.random(), {}, function (response) {
-    submit_disabled(false);
+    SubmitDisabled(false);
     if (cl)
       cl.classList.add('d-none');
     if (response != "" && response[0] == '{') {
@@ -867,9 +867,9 @@ function getStateStr(val) {
 }
 
 function getStateDev() {
-  submit_disabled(true);
+  SubmitDisabled(true);
   ajax.get('StateDev.json' + '?' + Math.random(), {}, function (response) {
-    submit_disabled(false);
+    SubmitDisabled(false);
     if (response != 'FileNotFound' && response[0] == "{") {
       jsonStateDev = JSON.parse(response);
     }
@@ -877,9 +877,9 @@ function getStateDev() {
 }
 
 function getConfig() {
-  submit_disabled(true);
+  SubmitDisabled(true);
   ajax.get('config.json' + '?' + Math.random(), {}, function (response) {
-    submit_disabled(false);
+    SubmitDisabled(false);
     if (response != 'FileNotFound' && response != "") {
       var jsonResponse = JSON.parse(response);
       var jsonResponseOld = jsonResponse;

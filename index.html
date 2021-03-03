@@ -36,6 +36,20 @@
         /* #terminal div {
             color: gray;
         } */
+        .carousel-control {
+            /* overflow: auto; */
+            padding: 2px;
+            /* resize: both; */
+            width: 100%;
+            height: 87%;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: white;
+
+        }
+
         .page {
             overflow: auto;
             padding: 2px;
@@ -84,10 +98,7 @@
             color: white;
         }
     </style>
-    <script type="text/javascript">
-        var ttt = "noBluetooth";
 
-    </script>
 </head>
 <!--onclick="fullScreen()"-->
 
@@ -137,17 +148,17 @@
     <div id="carouselContent" class="carousel slide" data-ride="carousel" data-interval="false">
 
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item ">
-                <div class="page">
-                    <div id="Info">
+            <div class="carousel-item " id="info">
+                <div class="page ">
+                    <!-- <div id="Info"> -->
                         <form id="frmInfo" action="#">
-                            <fieldset class="info" disabled="disabled">
+                            <fieldset class="info" >
                                 <label for="iNumDev" style="width: 120px">№ устройства: </label>
                                 <input type="text" size="8px" maxlength="8" id="iN" name="iNumDev" value=""
                                     oninput="actionSave('Info','saveInfo')">
                                 <br>
-                                <label for="iPower" style="width: 120px">Мощность кВт: </label>
-                                <input type="text" size="2px" maxlength="3" id="iP" name="iPower" required
+                                <label for="iP" style="width: 120px">Мощность кВт: </label>
+                                <input type="text" size="2px" maxlength="3" id="iP" name="iP" required
                                     pattern="[0-9]{1,3}" value="" oninput="actionSave('Info','saveInfo')">
                                 <br>
                                 <label for="iDateProd" style="width: 120px">Изготовлен: </label>
@@ -155,28 +166,57 @@
                                     oninput="actionSave('Info','saveInfo')">
                                 <br>
                                 <label for="iS" style="width: 120px;">Ступеней: </label>
-                                <select id="iS" style="width: 60px; text-align: left"
+                                <select id="iS" style="width: 60px; text-align: left" 
                                     onchange="javascript: if(changeSteps(this)==true){actionSave('Info','saveInfo')} else toggle('saveInfo','hidden')">
                                     <option value="8">8</option>
                                     <option value="9">9</option>
-                                    <!-- <option value="10">10</option>
-                                    <option value="16">16</option> -->
+
                                 </select>
+                                <br>
+                                <label for="iC" style="width: 120px">Примечание: </label>
+                                <input type="text" size="20" maxlength="20" id="iC" name="iC" value=""
+                                    oninput="actionSave('Info','saveInfo')">
+                                <br>
                             </fieldset>
                         </form>
-
-                    </div>
+                        <br>
+                        <a> Дата ПО : <span id="iD" style="padding-left: 50px;"></span></a>
+                    <!-- </div> -->
                 </div>
             </div>
             <!-- <div class="carousel-item" style="padding-top: 50px; height: 100vh;" > -->
             <div class="carousel-item">
-                <div class="page" style="background-color: cadetblue; ">
+                <div class="page" id="levelsStep" style="font-size: 1.2rem">
+                    <button class="btn btn-primary btn-block " style="font-size: 1.75rem;"
+                        onclick="getLevelSteps(this)">Ступени
+                        <span class="spinner-border float-right d-none" role="status"></span>
+                    </button>
+                    <div class="card-body hidden" id="stepsLevel">
+                        <label>Входное напряжение :<label class="uin"
+                                style="width: 60px;margin-left: 10px ;text-align: center; background-color:#68b4d3"></label></label>
+                        <h4 class="card-text" style="text-align: center">Напряжение включения ступени</h4>
+                        <form id="frmSteps" action="#levels">
+                            <div id="countSteps">
+                            </div>
+                        </form>
+                        <button class="btn btn-block btn-success hidden" id="saveSteps"
+                            onclick="sendForm('frmSteps','steps',this);return false;">Сохранить
+                            <span class="spinner-border float-right d-none" role="status"></span>
+                        </button>
 
+                        <hr>
+                    </div>
                 </div>
             </div>
             <div class="carousel-item ">
                 <div class="page" id="history">
                     <h4 style="text-align: center;">История</h4>
+                    <!-- <div class="alert alert-success " role="alert"  style="font-size: 1.2rem"> -->
+
+                    <!-- <button class="card-header btn-block " style="font-size: 1.75rem"
+                            onclick="getHistory(this)">История
+                            <span class="spinner-border float-right d-none" role="status"></span>
+                        </button> -->
                     <label id="noHistory" class="hidden">Нет записей</label>
                     <div class="form-group " id="divHistory" style="font-size: 1rem">
 
@@ -212,8 +252,8 @@
                     <!-- </div> -->
                 </div>
             </div>
-            <div class="carousel-item active ">
-                <div class="page">
+            <div class="carousel-item active " id="term">
+                <div class="page ">
                     <h4 style="text-align: center;">Терминал</h4>
 
                     <button id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
@@ -253,53 +293,24 @@
     </div>
 
     <script>
-        var isConnected = false;
-        function StateConnect(state) {
+   
+        try {
+            navigator.bluetooth.getAvailability()
+                .then(isBluetoothAvailable => {
+                    // log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
+                });
 
-            if (state && isConnected === false) {
-                isConnected = true;
-                document.getElementById("carIndicators").classList.remove("d-none");
-                document.getElementById("carousel-control").classList.remove("d-none");
-                var lst = document.getElementsByClassName("nav-link");
-                for (var i = 0; i < lst.length; i++) {
-
-                    lst[i].classList.remove("disabled");
-                }
-
-                document.getElementById("connectBLE").classList.add("d-none");
-                document.getElementById("disconnectBLE").classList.remove("d-none");
-            }
-            else if (state === false && isConnected) {
-                isConnected = false;
-                document.getElementById("carIndicators").classList.add("d-none");
-                document.getElementById("carousel-control").classList.add("d-none");
-                var lst = document.getElementsByClassName("nav-link");
-                for (var i = 0; i < lst.length; i++) {
-                    if (lst[i].id != "term")
-                        lst[i].classList.add("disabled");
-                }
-                document.getElementById("connectBLE").classList.remove("d-none");
-                document.getElementById("disconnectBLE").classList.add("d-none");
+            if ('onavailabilitychanged' in navigator.bluetooth) {
+                navigator.bluetooth.addEventListener('availabilitychanged', function (event) {
+                    // log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
+                });
             }
         }
-
-        // try {
-        //     navigator.bluetooth.getAvailability()
-        //         .then(isBluetoothAvailable => {
-        //             // log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
-        //         });
-
-        //     if ('onavailabilitychanged' in navigator.bluetooth) {
-        //         navigator.bluetooth.addEventListener('availabilitychanged', function (event) {
-        //             // log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
-        //         });
-        //     }
-        // }
-        // catch {
-        //     document.getElementById("noBluetooth").classList.remove("d-none");
-        //     document.getElementById("carouselContent").classList.add("d-none");
-        //     document.getElementById("navbar").classList.add("d-none");
-        // }
+        catch {
+            document.getElementById("noBluetooth").classList.remove("d-none");
+            document.getElementById("carouselContent").classList.add("d-none");
+            document.getElementById("navbar").classList.add("d-none");
+        }
     </script>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -310,6 +321,7 @@
 <script src="bluetooth.js"></script>
 <script src="func.js"></script>
 <script>
+     SubmitDisabled(true);
     var navMain = $(".navbar-collapse");
     navMain.on("click", "a:not([data-toggle])", null, function () {
         navMain.collapse('hide');
