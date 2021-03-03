@@ -1,3 +1,22 @@
+const idInfo = {
+  InfLanguage = "iL",
+  InfNumDevice="iN",
+  InfPower ="iP",
+  InfComment ="iC",
+  InfSteps= "iS",
+  InfDate= "iD"
+}
+
+let strInfo = [
+  "iL",
+  "iN",
+  "iP",
+  "iC",
+  "iS",
+  "iD"
+]
+
+
 // Обработка полученных данных
 function receiveData(data) {
   var jsonResponse = JSON.parse(data);
