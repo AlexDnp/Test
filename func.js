@@ -147,7 +147,7 @@ function addSteps(number, count) {
     //label.appendChild(cr);
     // Create an <input> element, set its type and name attributes
     var input = document.createElement("input");
-    input.type = "text";
+    input.type = "number";
     input.name = "step" + i;
     input.id = "step" + i;
     input.value = "";
@@ -155,9 +155,9 @@ function addSteps(number, count) {
     input.setAttribute('maxLength', '3');
     input.setAttribute('required', 'true');
     // input.pattern = "[0-9]{3}";
-    //input.setAttribute('pattern', '[0-9]{3}');
+   // input.setAttribute('pattern', '^[0–9]$');//
     //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
-    input.setAttribute('pattern', '\\d*');
+    //input.setAttribute('pattern', '\\d*');
     //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
 
     //<label class="circle"></label>
