@@ -1,10 +1,10 @@
 const idInfo = {
-  InfLanguage = "iL",
-  InfNumDevice="iN",
-  InfPower ="iP",
-  InfComment ="iC",
-  InfSteps= "iS",
-  InfDate= "iD"
+  InfLanguage: "iL",
+  InfNumDevice: "iN",
+  InfPower: "iP",
+  InfComment: "iC",
+  InfSteps: "iS",
+  InfDate: "iD"
 }
 
 let strInfo = [
