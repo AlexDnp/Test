@@ -286,23 +286,23 @@
             }
         }
 
-        try {
-            navigator.bluetooth.getAvailability()
-                .then(isBluetoothAvailable => {
-                    log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
-                });
+        // try {
+        //     navigator.bluetooth.getAvailability()
+        //         .then(isBluetoothAvailable => {
+        //             // log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
+        //         });
 
-            if ('onavailabilitychanged' in navigator.bluetooth) {
-                navigator.bluetooth.addEventListener('availabilitychanged', function (event) {
-                    log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
-                });
-            }
-        }
-        catch {
-            document.getElementById("noBluetooth").classList.remove("d-none");
-            document.getElementById("carouselContent").classList.add("d-none");
-            document.getElementById("navbar").classList.add("d-none");
-        }
+        //     if ('onavailabilitychanged' in navigator.bluetooth) {
+        //         navigator.bluetooth.addEventListener('availabilitychanged', function (event) {
+        //             // log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
+        //         });
+        //     }
+        // }
+        // catch {
+        //     document.getElementById("noBluetooth").classList.remove("d-none");
+        //     document.getElementById("carouselContent").classList.add("d-none");
+        //     document.getElementById("navbar").classList.add("d-none");
+        // }
     </script>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
