@@ -195,11 +195,11 @@
                     <form id="frmInfo" action="#">
                         <fieldset class="info">
                             <label for="iNumDev" style="width: 120px">№ устройства: </label>
-                            <input type="text" size="14" maxlength="8" id="iN" name="iNumDev" value=""
+                            <input type="text" size="13" maxlength="8" id="iN" name="iNumDev" value=""
                                 oninput="actionSave('Info','saveInfo')">
                             <br>
                             <label for="iP" style="width: 120px">Мощность кВт: </label>
-                            <input type="text" size="14" maxlength="3" id="iP" name="iP" required pattern="[0-9]{1,3}"
+                            <input type="text" size="13" maxlength="3" id="iP" name="iP" required pattern="[0-9]{1,3}"
                                 value="" oninput="actionSave('Info','saveInfo')">
                             <br>
                             <label for="iDateProd" style="width: 120px">Изготовлен: </label>
@@ -215,7 +215,7 @@
                             </select>
                             <br>
                             <label for="iC" style="width: 120px">Примечание: </label>
-                            <input type="text" size="14" maxlength="20" id="iC" name="iC" value=""
+                            <input type="text" size="13" maxlength="20" id="iC" name="iC" value=""
                                 oninput="actionSave('Info','saveInfo')">
                             <br>
                         </fieldset>
@@ -311,6 +311,7 @@
 
                     <form id="send-form">
                         <input id="input" type="text" style="width: 80%; outline: none;">
+                        <br>
                         <button type="submit">Send</button>
                     </form>
                 </div>
