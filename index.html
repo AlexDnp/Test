@@ -97,6 +97,47 @@
             text-align: left;
             color: white;
         }
+
+        input:invalid+span:after {
+            color: red;
+            content: '✖';
+            padding-left: 5px;
+        }
+
+        input:valid+span:after {
+            content: '✓';
+            padding-left: 5px;
+        }
+
+        select:disabled,
+        input:disabled {
+            border: none;
+            background: transparent;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            color: white;
+        }
+
+        select option{
+            background-color: rgb(92, 92, 92);
+            color: white;
+
+        }
+
+        select,
+        input {
+            background: transparent;
+            border-radius: 1px;
+            color: white;
+            border-bottom: 1px solid #fff;
+        }
+
+        input[type=date]::-webkit-outer-spin-button,
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+            margin: 1;
+        }
     </style>
 
 </head>
@@ -151,36 +192,36 @@
             <div class="carousel-item " id="info">
                 <div class="page ">
                     <!-- <div id="Info"> -->
-                        <form id="frmInfo" action="#">
-                            <fieldset class="info" >
-                                <label for="iNumDev" style="width: 120px">№ устройства: </label>
-                                <input type="text" size="8px" maxlength="8" id="iN" name="iNumDev" value=""
-                                    oninput="actionSave('Info','saveInfo')">
-                                <br>
-                                <label for="iP" style="width: 120px">Мощность кВт: </label>
-                                <input type="text" size="2px" maxlength="3" id="iP" name="iP" required
-                                    pattern="[0-9]{1,3}" value="" oninput="actionSave('Info','saveInfo')">
-                                <br>
-                                <label for="iDateProd" style="width: 120px">Изготовлен: </label>
-                                <input type="date" size="8px" maxlength="10" id="iDateProd" name="iDateProd" value=""
-                                    oninput="actionSave('Info','saveInfo')">
-                                <br>
-                                <label for="iS" style="width: 120px;">Ступеней: </label>
-                                <select id="iS" style="width: 60px; text-align: left" 
-                                    onchange="javascript: if(changeSteps(this)==true){actionSave('Info','saveInfo')} else toggle('saveInfo','hidden')">
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
+                    <form id="frmInfo" action="#">
+                        <fieldset class="info">
+                            <label for="iNumDev" style="width: 120px">№ устройства: </label>
+                            <input type="text" size="15" maxlength="8" id="iN" name="iNumDev" value=""
+                                oninput="actionSave('Info','saveInfo')">
+                            <br>
+                            <label for="iP" style="width: 120px">Мощность кВт: </label>
+                            <input type="text" size="15" maxlength="3" id="iP" name="iP" required pattern="[0-9]{1,3}"
+                                value="" oninput="actionSave('Info','saveInfo')">
+                            <br>
+                            <label for="iDateProd" style="width: 120px">Изготовлен: </label>
+                            <input type="date" style="width: 145px" id="iDateProd" name="iDateProd" value=""
+                                oninput="actionSave('Info','saveInfo')">
+                            <br>
+                            <label for="iS" style="width: 120px;">Ступеней: </label>
+                            <select id="iS" style="width: 60px; text-align: left "
+                                onchange="javascript: if(changeSteps(this)==true){actionSave('Info','saveInfo')} else toggle('saveInfo','hidden')">
+                                <option value="8">8</option>
+                                <option value="9">9</option>
 
-                                </select>
-                                <br>
-                                <label for="iC" style="width: 120px">Примечание: </label>
-                                <input type="text" size="20" maxlength="20" id="iC" name="iC" value=""
-                                    oninput="actionSave('Info','saveInfo')">
-                                <br>
-                            </fieldset>
-                        </form>
-                        <br>
-                        <a> Дата ПО : <span id="iD" style="padding-left: 50px;"></span></a>
+                            </select>
+                            <br>
+                            <label for="iC" style="width: 120px">Примечание: </label>
+                            <input type="text" size="15" maxlength="20" id="iC" name="iC" value=""
+                                oninput="actionSave('Info','saveInfo')">
+                            <br>
+                        </fieldset>
+                    </form>
+                    <br>
+                    <a> Дата ПО : <span id="iD" style="padding-left: 50px;"></span></a>
                     <!-- </div> -->
                 </div>
             </div>
@@ -260,11 +301,16 @@
 
                     <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
                     <br>
+
                     <br>
+                    <label title="Всплывающая подсказка">
+                        <input type="number" pattern="[0-9]{3}" max="321" min="3" style=" width: 150px;">
+                    </label>
+
                     <div id="terminal"></div>
 
                     <form id="send-form">
-                        <input id="input" type="text" style="width: 80%;">
+                        <input id="input" type="text" style="width: 80%; outline: none;">
                         <button type="submit">Send</button>
                     </form>
                 </div>
@@ -294,7 +340,7 @@
     </div>
 
     <script>
-   
+
         try {
             navigator.bluetooth.getAvailability()
                 .then(isBluetoothAvailable => {
@@ -322,11 +368,13 @@
 <script src="bluetooth.js"></script>
 <script src="func.js"></script>
 <script>
-     SubmitDisabled(true);
+      SubmitDisabled(true);
     var navMain = $(".navbar-collapse");
     navMain.on("click", "a:not([data-toggle])", null, function () {
         navMain.collapse('hide');
     });
+
+
 
     function ItemSelect(cnt) {
         $("#carouselContent").carousel(cnt);

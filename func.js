@@ -18,6 +18,56 @@ let strInfo = [
 
 var isConnected = false;
 
+
+
+$(document).ready(function () {
+  $('input').bind('copy paste', function (e) {
+    e.preventDefault();
+  });
+  $('input[type=number]').on('keydown', checkInputNumber);
+  $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
+});
+
+
+
+function checkInputNumber(event) {
+  let key = event.key;
+  if (key === "Backspace" || key === "Delete") {
+    return true;
+  }
+  let value = event.target.value;
+  let new_value = Number(value + key);
+  let max = Number(event.target.max);
+  if (new_value > max || new_value === 0) {
+    event.preventDefault();
+  }
+  var regex = /[0-9]/;
+  if (!regex.test(key)) {
+    event.preventDefault();
+  }
+
+}
+
+function selectCarouselItem(e) {
+  if (isConnected) {
+    var id = e.relatedTarget.id;
+    switch (id) {
+      case "info":
+        // do something the id is 1
+        break;
+      case "2":
+        // do something the id is 2
+        break;
+      case "3":
+        // do something the id is 3
+        break;
+      default:
+      //the id is none of the above
+    }
+  }
+
+}
+
 function StateConnect(state) {
 
   if (state && isConnected === false) {
@@ -33,7 +83,7 @@ function StateConnect(state) {
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
-    addSteps(1,8);
+    addSteps(1, 8);
   }
   else if (state === false && isConnected) {
     isConnected = false;
@@ -49,32 +99,6 @@ function StateConnect(state) {
     document.getElementById("disconnectBLE").classList.add("d-none");
   }
 }
-
-function getInfo() {
-
-}
-
-
-$(document).ready(function () {
-  $("#carouselContent").on('slide.bs.carousel', function (e) {
-    if (isConnected) {
-      var id = e.relatedTarget.id;
-      switch (id) {
-        case "info":
-          // do something the id is 1
-          break;
-        case "2":
-          // do something the id is 2
-          break;
-        case "3":
-          // do something the id is 3
-          break;
-        default:
-        //the id is none of the above
-      }
-    }
-  });
-});
 
 function SubmitDisabled(request) {
   var element = document.getElementsByTagName("input");
@@ -115,6 +139,43 @@ function receiveData(data) {
   }
 }
 
+// var dig = 0;
+// function validate(evt, sender) {
+//   var theEvent = evt || window.event;
+
+//   // Handle paste
+//   if (theEvent.type === 'paste') {
+//     key = event.clipboardData.getData('text/plain');
+//   } else {
+//     // Handle key press
+//     var key = theEvent.keyCode || theEvent.which;
+//     key = String.fromCharCode(key);
+//   }
+//   var regex = /[0-9]/;
+//   if (!regex.test(key)) {
+//     theEvent.returnValue = false;
+//     if (theEvent.preventDefault) theEvent.preventDefault();
+//   }
+
+// }
+
+// function checkValue(sender) {
+//   let min = sender.min;
+//   let max = sender.max;
+//   // here we perform the parsing instead of calling another function
+//   let value = parseInt(sender.value);
+//   if (isNaN(value))
+//     return false;
+//   if (sender.value.length > sender.maxLength)
+//     sender.value = sender.value.slice(0, sender.maxLength);
+//   if (value > max) {
+//     sender.value = max;
+//   } else if (value < min) {
+//     sender.value = min;
+//   }
+
+// }
+
 function addSteps(number, count) {
   // Number of inputs to create
   //var number = document.getElementById("iSteps").value;
@@ -144,21 +205,30 @@ function addSteps(number, count) {
     cr.classList.add('cr');
     cr.id = 'cr' + i;
     cr.classList.add('d-none');
-    //label.appendChild(cr);
+
+    //<span class="validity"></span>
+    var sp = document.createElement("span");
+    sp.classList.add('validity');
+
     // Create an <input> element, set its type and name attributes
     var input = document.createElement("input");
     input.type = "number";
     input.name = "step" + i;
     input.id = "step" + i;
-    input.min=0;
-    input.setAttribute('max','300');
+    input.min = 100;
+    input.step = 1;
+    input.max = 300;
     input.value = "";
+    //input.disabled=true;
     input.setAttribute('size', '3');
     input.setAttribute('maxLength', '3');
-    input.setAttribute('oninput',"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);");
+    input.addEventListener('keydown', checkInputNumber);
+    // input.setAttribute('oninput', "checkValue(this)");
+    //"javascript:if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);");
     input.setAttribute('required', 'true');
+    //oninput="checkValue(this);"
     // input.pattern = "[0-9]{3}";
-   // input.setAttribute('pattern', '^[0–9]$');//
+    // input.setAttribute('pattern', '^[0–9]$');//
     //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
     input.setAttribute('pattern', '\\d*');
     //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
@@ -170,6 +240,7 @@ function addSteps(number, count) {
 
     container.appendChild(label);
     container.appendChild(input);
+    container.appendChild(sp);
     container.appendChild(cr);
 
 
