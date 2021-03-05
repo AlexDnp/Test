@@ -118,7 +118,7 @@
             color: white;
         }
 
-        select option{
+        select option {
             background-color: rgb(92, 92, 92);
             color: white;
 
@@ -137,6 +137,10 @@
             display: none;
             -webkit-appearance: none;
             margin: 1;
+        }
+
+        .textBorder {
+            border-bottom: 1px solid #fff;
         }
     </style>
 
@@ -191,17 +195,23 @@
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item " id="info">
                 <div class="page ">
-                    <!-- <div id="Info"> -->
+                    <h4 style="text-align: center;">Информация</h4>
                     <form id="frmInfo" action="#">
                         <fieldset class="info">
-                            <label for="iNumDev" style="width: 120px">№ устройства: </label>
-                            <input type="text" size="13" maxlength="8" id="iN" name="iNumDev" value=""
-                                oninput="actionSave('Info','saveInfo')">
-                            <br>
-                            <label for="iP" style="width: 120px">Мощность кВт: </label>
-                            <input type="text" size="13" maxlength="3" id="iP" name="iP" required pattern="[0-9]{1,3}"
-                                value="" oninput="actionSave('Info','saveInfo')">
-                            <br>
+                            <div class="row">
+                                <div class=" col-sm">
+                                    <label for="iNumDev" style="width: 120px">№ устройства: </label>
+                                    <input type="text" size="13" maxlength="8" id="iN" name="iNumDev" value=""
+                                        oninput="actionSave('Info','saveInfo')">
+
+                                </div>
+                                <div class=" col-sm">
+                                    <label for="iP" style="width: 120px">Мощность кВт: </label>
+                                    <input type="text" size="13" maxlength="3" id="iP" name="iP" required
+                                        pattern="[0-9]{1,3}" value="" oninput="actionSave('Info','saveInfo')">
+
+                                </div>
+                            </div>
                             <label for="iDateProd" style="width: 120px">Изготовлен: </label>
                             <input type="date" style="width: 135px" id="iDateProd" name="iDateProd" value=""
                                 oninput="actionSave('Info','saveInfo')">
@@ -218,6 +228,7 @@
                             <input type="text" size="13" maxlength="20" id="iC" name="iC" value=""
                                 oninput="actionSave('Info','saveInfo')">
                             <br>
+
                         </fieldset>
                     </form>
                     <br>
@@ -297,21 +308,32 @@
                 <div class="page ">
                     <h4 style="text-align: center;">Терминал</h4>
 
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm-8">col-sm-8</div>
+                          <div class="col-sm-4">col-sm-4</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm">col-sm</div>
+                          <div class="col-sm">col-sm</div>
+                          <div class="col-sm">col-sm</div>
+                        </div>
+                      </div>
+
                     <button id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
 
                     <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
                     <br>
-
+                    <div class="textBorder">gfshsfhfs</div>
                     <br>
                     <label title="Всплывающая подсказка">
                         <input type="number" pattern="[0-9]{3}" max="321" min="3" style=" width: 150px;">
                     </label>
 
                     <div id="terminal"></div>
-
+                    <br>
                     <form id="send-form">
-                        <input id="input" type="text" style="width: 80%; outline: none;">
-                        <br>
+                        <input id="input" type="text" style="width: 75%; outline: none;">
                         <button type="submit">Send</button>
                     </form>
                 </div>
@@ -369,7 +391,7 @@
 <script src="bluetooth.js"></script>
 <script src="func.js"></script>
 <script>
-      SubmitDisabled(true);
+    SubmitDisabled(true);
     var navMain = $(".navbar-collapse");
     navMain.on("click", "a:not([data-toggle])", null, function () {
         navMain.collapse('hide');
