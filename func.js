@@ -4,17 +4,18 @@ const idInfo = {
   InfPower: "iP",
   InfComment: "iC",
   InfSteps: "iS",
-  InfDate: "iD"
+  InfDateProduction: "iDP",
+  InfDateSoft: "iDS"
 }
 
-let strInfo = [
-  "iL",
-  "iN",
-  "iP",
-  "iC",
-  "iS",
-  "iD"
-]
+// let strInfo = [
+//   "iL",
+//   "iN",
+//   "iP",
+//   "iC",
+//   "iS",
+//   "iD"
+// ]
 
 var isConnected = false;
 var isPageInfo = false;
