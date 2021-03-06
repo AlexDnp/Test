@@ -17,7 +17,7 @@ let strInfo = [
 ]
 
 var isConnected = false;
-
+var isPageInfo = false;
 
 
 $(document).ready(function () {
@@ -28,6 +28,32 @@ $(document).ready(function () {
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 });
 
+document.onkeydown = function (e) {
+  var evtobj = window.event ? event : e
+  // var element = document.getElementById('edit-content');
+  var charCode = String.fromCharCode(evtobj.which).toLowerCase();
+  // if (charCode === 'e' && evtobj.ctrlKey && element) { window.open('/edit', '_blank'); }
+  // if (charCode === 'm' && evtobj.ctrlKey && element) { toggle('edit-content'); toggle('url-content'); }
+  // if (charCode === 's' && evtobj.ctrlKey && element) {
+  //   evtobj.preventDefault(); send_request_edit(this, val('edit-json'), window.location.search.substring(1).split("&")[0] + '.json'); toggle('edit-content'); toggle('url-content');
+  // }
+  if (charCode === 'm' && evtobj.ctrlKey) {
+    SubmitDisabledToggle();
+  }
+}
+
+function requestPage(page) {
+  switch (page) {
+    case "info":
+      if (isPageInfo === false) {
+        isPageInfo = true;
+        send(page);
+      }
+      break;
+
+  }
+
+}
 
 
 function checkInputNumber(event) {
@@ -51,8 +77,11 @@ function checkInputNumber(event) {
 function selectCarouselItem(e) {
   if (isConnected) {
     var id = e.relatedTarget.id;
+    requestPage(id);
     switch (id) {
       case "info":
+
+
         // do something the id is 1
         break;
       case "2":
@@ -97,6 +126,21 @@ function StateConnect(state) {
     }
     document.getElementById("connectBLE").classList.remove("d-none");
     document.getElementById("disconnectBLE").classList.add("d-none");
+  }
+}
+
+function SubmitDisabledToggle() {
+  var element = document.getElementsByTagName("input");
+  for (var i = 0; i < element.length; i++) {
+    //  if (element[i].type === 'button') {
+    element[i].disabled = !element[i].disabled;
+    //  }
+  }
+  var element = document.getElementsByTagName("select");
+  for (var i = 0; i < element.length; i++) {
+    //  if (element[i].type === 'button') {
+    element[i].disabled = !element[i].disabled;
+    //  }
   }
 }
 

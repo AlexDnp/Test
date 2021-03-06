@@ -198,7 +198,7 @@ function send(data) {
   if (!data || !characteristicCache) {
     return;
   }
-
+  data += '\r';
   data += '\n';
 
   if (data.length > 20) {
