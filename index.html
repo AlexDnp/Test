@@ -104,7 +104,9 @@
             padding-left: 5px;
         }
 
+
         input:valid+span:after {
+            color: green;
             content: '✓';
             padding-left: 5px;
         }
@@ -228,7 +230,7 @@
                                 </div>
                                 <div class=" col-sm-auto">
                                     <label style="width: 120px">Наработка : </label>
-                                    <label  id="iT" style="width: 110px">12133</label>
+                                    <label id="iT" style="width: 110px">12133</label>
                                 </div>
                                 <div class=" col-sm-auto">
                                     <div> Дата ПО : <span id="iDS" style="padding-left: 50px;"></span></div>
@@ -251,18 +253,92 @@
             <div class="carousel-item">
                 <div class="page" id="levelsStep">
                     <h4 style="text-align: center;">Ступени</h4>
-                   <div style="text-align: center;"> Напряжение переключения</div> 
-                        <form id="frmSteps" action="#levels">
-                            <div id="countSteps">
-                            </div>
-                        </form>
-                        <button class="btn btn-block btn-success d-none" id="saveSteps"
-                            onclick="sendForm('frmSteps','steps',this);return false;">Сохранить
-                            <span class="spinner-border float-right d-none" role="status"></span>
-                        </button>
+                    <div style="text-align: center;"> Напряжение переключения</div>
+                    <form id="frmSteps" action="#levels">
+                        <div id="countSteps">
+                        </div>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 " style="margin-left: 0px;">
+                            <fieldset name="st1" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">1 ступень :
+                                </div>
+                                <input class="steps" name="1" type="number" size="3" id="st1" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st2" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">2 ступень :
+                                </div>
+                                <input class="steps" name="2" type="number" size="3" id="st2" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st3" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">3 ступень :
+                                </div>
+                                <input type="number" size="3" id="st3" maxlength="3" min="100" max="300" step="1"
+                                    style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st4" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">4 ступень :
+                                </div>
+                                <input type="number" size="3" id="st4" maxlength="3" min="100" max="300" step="1"
+                                    style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st5" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">5 ступень :
+                                </div>
+                                <input class="steps" name="5" type="number" size="3" id="st5" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st6" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">6 ступень :
+                                </div>
+                                <input class="steps" name="6" type="number" size="3" id="st6" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st7" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">7 ступень :
+                                </div>
+                                <input class="steps" name="7" type="number" size="3" id="st7" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st8" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">8 ступень :
+                                </div>
+                                <input class="steps" name="8" type="number" size="3" id="st8" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+                            <fieldset name="st9" class="d-none">
+                                <div style="display: inline-block;;  padding-left: 10px; width: 45%;">9 ступень :
+                                </div>
+                                <input class="steps" name="9" type="number" size="3" id="st9" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
+                                <span class="validity"></span>
+                            </fieldset>
+    
+                        </div>
+                        <br>
+                    </form>
+                    <button class="btn btn-block btn-success d-none" id="saveSteps"
+                        onclick="sendForm('frmSteps','steps',this);return false;">Сохранить
+                        <span class="spinner-border float-right d-none" role="status"></span>
+                    </button>
 
-                        <hr>
-                  
+                    <hr>
+
                 </div>
             </div>
             <div class="carousel-item ">
@@ -312,14 +388,9 @@
             <div class="carousel-item active " id="term">
                 <div class="page ">
                     <h4 style="text-align: center;">Терминал</h4>
+                    <!-- <div class="container"> -->
 
-                  
-                        <div class="row">
-                            <div class="col-sm" >col-sm <span class="textBorder" style="display:inline-block; width: 100px;">123</span> </div>
-                            <div class="col-sm" >прверка <span class="textBorder" style="display:inline-block; width: 100px;">hghghgghh</span></div>
-                            <!-- <div class="col-sm">col-sm</div> -->
-                        </div>
-                
+                    <!-- </div> -->
 
                     <button id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
 

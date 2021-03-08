@@ -8,6 +8,17 @@ const idInfo = {
   InfDateSoft: "iDS"
 }
 
+const idStep = [
+  "st1",
+  "st2",
+  "st3",
+  "st4",
+  "st5",
+  "st6",
+  "st7",
+  "st8",
+  "st9"
+]
 // let strInfo = [
 //   "iL",
 //   "iN",
@@ -26,6 +37,9 @@ $(document).ready(function () {
     e.preventDefault();
   });
   $('input[type=number]').on('keydown', checkInputNumber);
+  $('input[type=number]').on('change', changeInputNumber);
+
+
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 });
 
@@ -41,6 +55,12 @@ document.onkeydown = function (e) {
   if (charCode === 'm' && evtobj.ctrlKey) {
     SubmitDisabledToggle();
   }
+}
+
+function changeInputNumber(e) {
+  let vl = e.target.validity;
+  var validity = e.target.checkValidity();
+  let value = e.target.value;
 }
 
 function requestPage(page) {
@@ -113,7 +133,7 @@ function StateConnect(state) {
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
-    addSteps(1, 8);
+    //addSteps(1, 8);
   }
   else if (state === false && isConnected) {
     isConnected = false;
@@ -177,9 +197,17 @@ function receiveData(data) {
       }
       else if (elem.tagName == 'INPUT') {
         elem.value = jsonResponse[key];
+        let inputs = document.getElementsByName(key);
+        for (let i = 0; i < inputs.length; i++) { // проходим циклом по всем элементам 
+          inputs[i].classList.remove('d-none');
+        }
       } else {
         elem.innerHTML = jsonResponse[key];
       }
+    } else {
+      if (key[0] == 's')
+        addStep(key, jsonResponse[key]);
+
     }
   }
 }
@@ -220,6 +248,31 @@ function receiveData(data) {
 //   }
 
 // }
+
+function addStep(key, value) {
+  var container = document.getElementById("countSteps");
+  if (container) {
+    if ((i = idStep.indexOf(key)) >= 0) {
+      console.log(key);
+      console.log(i);
+      var label = document.createElement("label");
+      label.style = "width: 120px";
+      label.innerText = i + " ступень";
+      var input = document.createElement("input");
+      input.type = "number";
+      input.name = "step" + i;
+      input.id = "step" + i;
+      input.min = 100;
+      input.step = 1;
+      input.max = 300;
+      input.value = value;
+      //  label.appendChild(input);
+      container.appendChild(label);
+      container.appendChild(input);
+      container.appendChild(document.createElement("br"));
+    };
+  }
+}
 
 function addSteps(number, count) {
   // Number of inputs to create
@@ -264,6 +317,7 @@ function addSteps(number, count) {
     input.step = 1;
     input.max = 300;
     input.value = "";
+
     //input.disabled=true;
     input.setAttribute('size', '3');
     input.setAttribute('maxLength', '3');
