@@ -106,7 +106,7 @@
 
 
         input:valid+span:after {
-            color: green;
+            color: rgb(73, 236, 73);
             content: '✓';
             padding-left: 5px;
         }
@@ -141,8 +141,16 @@
             margin: 1;
         }
 
-        .textBorder {
+        /* .textBorder {
             border-bottom: 1px solid #fff;
+        } */
+
+        .btnPage{
+            background: transparent;
+            color: white;
+            /* border: none; */
+            border-bottom: transparent;
+            
         }
     </style>
 
@@ -252,11 +260,12 @@
             <!-- <div class="carousel-item" style="padding-top: 50px; height: 100vh;" > -->
             <div class="carousel-item">
                 <div class="page" id="levelsStep">
-                    <h4 style="text-align: center;">Ступени</h4>
+                    <h4 style="text-align: center;"><button class="btnPage">Ступени </button></h4>
+                    
                     <div style="text-align: center;"> Напряжение переключения</div>
                     <form id="frmSteps" action="#levels">
-                        <div id="countSteps">
-                        </div>
+                        <!-- <div id="countSteps">
+                        </div> -->
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 " style="margin-left: 0px;">
                             <fieldset name="st1" class="d-none">
                                 <div style="display: inline-block;;  padding-left: 10px; width: 45%;">1 ступень :
@@ -388,9 +397,10 @@
             <div class="carousel-item active " id="term">
                 <div class="page ">
                     <h4 style="text-align: center;">Терминал</h4>
-                    <!-- <div class="container"> -->
-
-                    <!-- </div> -->
+                    <div onclick="alert('Кнопка нажата')" 
+                    style="cursor:pointer;border-width:1px;
+                    border-style:solid;background-color:gray;width:100%;
+                    text-align:center;color:#ffffff;">Текст</div> 
 
                     <button id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
 

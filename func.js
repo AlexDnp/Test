@@ -204,10 +204,6 @@ function receiveData(data) {
       } else {
         elem.innerHTML = jsonResponse[key];
       }
-    } else {
-      if (key[0] == 's')
-        addStep(key, jsonResponse[key]);
-
     }
   }
 }
@@ -249,108 +245,108 @@ function receiveData(data) {
 
 // }
 
-function addStep(key, value) {
-  var container = document.getElementById("countSteps");
-  if (container) {
-    if ((i = idStep.indexOf(key)) >= 0) {
-      console.log(key);
-      console.log(i);
-      var label = document.createElement("label");
-      label.style = "width: 120px";
-      label.innerText = i + " ступень";
-      var input = document.createElement("input");
-      input.type = "number";
-      input.name = "step" + i;
-      input.id = "step" + i;
-      input.min = 100;
-      input.step = 1;
-      input.max = 300;
-      input.value = value;
-      //  label.appendChild(input);
-      container.appendChild(label);
-      container.appendChild(input);
-      container.appendChild(document.createElement("br"));
-    };
-  }
-}
+// function addStep(key, value) {
+//   var container = document.getElementById("countSteps");
+//   if (container) {
+//     if ((i = idStep.indexOf(key)) >= 0) {
+//       console.log(key);
+//       console.log(i);
+//       var label = document.createElement("label");
+//       label.style = "width: 120px";
+//       label.innerText = i + " ступень";
+//       var input = document.createElement("input");
+//       input.type = "number";
+//       input.name = "step" + i;
+//       input.id = "step" + i;
+//       input.min = 100;
+//       input.step = 1;
+//       input.max = 300;
+//       input.value = value;
+//       //  label.appendChild(input);
+//       container.appendChild(label);
+//       container.appendChild(input);
+//       container.appendChild(document.createElement("br"));
+//     };
+//   }
+// }
 
-function addSteps(number, count) {
-  // Number of inputs to create
-  //var number = document.getElementById("iSteps").value;
+// function addSteps(number, count) {
+//   // Number of inputs to create
+//   //var number = document.getElementById("iSteps").value;
 
-  // Container <div> where dynamic content will be placed
-  // toggle('saveSteps', 'hidden');
-
-
-  // document.getElementById("").classList.remove('show');
-  // document.getElementById("saveSteps").classList.add('hidden');
-  var container = document.getElementById("countSteps");
-  // Clear previous contents of the container
-  while (container.hasChildNodes()) {
-    container.removeChild(container.lastChild);
-  }
-  for (i = number; i < count + 1; i++) {
-    // Append a node with a random text
-    // container.appendChild(document.createTextNode("Member " + (i+1)));
-    var label = document.createElement("label");
-    label.setAttribute('for', 'step' + i);
-    label.style = "width: 120px";
-    label.innerText = i + " ступень";
-    label.name = i;
-    var cr = document.createElement("label");
-    //<label class="circle"></label>
-    cr.classList.add('circle');
-    cr.classList.add('cr');
-    cr.id = 'cr' + i;
-    cr.classList.add('d-none');
-
-    //<span class="validity"></span>
-    var sp = document.createElement("span");
-    sp.classList.add('validity');
-
-    // Create an <input> element, set its type and name attributes
-    var input = document.createElement("input");
-    input.type = "number";
-    input.name = "step" + i;
-    input.id = "step" + i;
-    input.min = 100;
-    input.step = 1;
-    input.max = 300;
-    input.value = "";
-
-    //input.disabled=true;
-    input.setAttribute('size', '3');
-    input.setAttribute('maxLength', '3');
-    input.addEventListener('keydown', checkInputNumber);
-    // input.setAttribute('oninput', "checkValue(this)");
-    //"javascript:if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);");
-    input.setAttribute('required', 'true');
-    //oninput="checkValue(this);"
-    // input.pattern = "[0-9]{3}";
-    // input.setAttribute('pattern', '^[0–9]$');//
-    //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
-    input.setAttribute('pattern', '\\d*');
-    //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
-
-    //<label class="circle"></label>
+//   // Container <div> where dynamic content will be placed
+//   // toggle('saveSteps', 'hidden');
 
 
-    // input.oninput=actionSave('countSteps','saveSteps');
+//   // document.getElementById("").classList.remove('show');
+//   // document.getElementById("saveSteps").classList.add('hidden');
+//   var container = document.getElementById("countSteps");
+//   // Clear previous contents of the container
+//   while (container.hasChildNodes()) {
+//     container.removeChild(container.lastChild);
+//   }
+//   for (i = number; i < count + 1; i++) {
+//     // Append a node with a random text
+//     // container.appendChild(document.createTextNode("Member " + (i+1)));
+//     var label = document.createElement("label");
+//     label.setAttribute('for', 'step' + i);
+//     label.style = "width: 120px";
+//     label.innerText = i + " ступень";
+//     label.name = i;
+//     var cr = document.createElement("label");
+//     //<label class="circle"></label>
+//     cr.classList.add('circle');
+//     cr.classList.add('cr');
+//     cr.id = 'cr' + i;
+//     cr.classList.add('d-none');
 
-    container.appendChild(label);
-    container.appendChild(input);
-    container.appendChild(sp);
-    container.appendChild(cr);
+//     //<span class="validity"></span>
+//     var sp = document.createElement("span");
+//     sp.classList.add('validity');
+
+//     // Create an <input> element, set its type and name attributes
+//     var input = document.createElement("input");
+//     input.type = "number";
+//     input.name = "step" + i;
+//     input.id = "step" + i;
+//     input.min = 100;
+//     input.step = 1;
+//     input.max = 300;
+//     input.value = "";
+
+//     //input.disabled=true;
+//     input.setAttribute('size', '3');
+//     input.setAttribute('maxLength', '3');
+//     input.addEventListener('keydown', checkInputNumber);
+//     // input.setAttribute('oninput', "checkValue(this)");
+//     //"javascript:if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);");
+//     input.setAttribute('required', 'true');
+//     //oninput="checkValue(this);"
+//     // input.pattern = "[0-9]{3}";
+//     // input.setAttribute('pattern', '^[0–9]$');//
+//     //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
+//     input.setAttribute('pattern', '\\d*');
+//     //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
+
+//     //<label class="circle"></label>
 
 
-    // Append a line break 
-    container.appendChild(document.createElement("br"));
-  }
-  // toggle('stepsLevel', 'show');
-  // document.getElementById('stepsLevel').classList.remove('hidden');
-  // document.getElementById('stepsLevel').classList.add('show');
+//     // input.oninput=actionSave('countSteps','saveSteps');
 
-}
+//     container.appendChild(label);
+//     container.appendChild(input);
+//     container.appendChild(sp);
+//     container.appendChild(cr);
+
+
+//     // Append a line break 
+//     container.appendChild(document.createElement("br"));
+//   }
+//   // toggle('stepsLevel', 'show');
+//   // document.getElementById('stepsLevel').classList.remove('hidden');
+//   // document.getElementById('stepsLevel').classList.add('show');
+
+// }
 // function changeValueById(elem, newValue) {
 //   if (elem.tagName == 'INPUT') {
 //     elem.value = newValue;
