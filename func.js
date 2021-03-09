@@ -41,6 +41,12 @@ $(document).ready(function () {
 
 
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
+
+  $(".titlePage").click(function(e){
+    let nm=$(this).attr('name');
+    //your JS here
+});
+
 });
 
 document.onkeydown = function (e) {
@@ -70,6 +76,9 @@ function requestPage(page) {
         isPageInfo = true;
         send(page);
       }
+      break;
+      case "steps":
+
       break;
 
   }
