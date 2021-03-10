@@ -158,9 +158,11 @@
         }
 
         .titlePage {
+            padding-top: 10px;
             background: transparent;
             text-align: center;
             text-decoration: underline;
+            color: white;
         }
 
         .nameInf {
@@ -252,19 +254,28 @@
     </div>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
-        <a class="navbar-brand" href="#">Страж</a>
-
-        <div class="d-none" id="devState" style="text-align: left; ">
+        <div id="vStW" class="d-none navbar-brand"style="width: 2em; text-align: left;" >Страж</div>        
+<div style="display: inline-block;">
+        <div id="vUi" class="navbar-brand" style="width: 1.5em; text-align: right;" >0</div>
+<div style="display: inline-block; background-color: gray;width: 9em; color: white; font-size: 1.15em;">Ток: 
+    <span id="vCur" style="width: 2em; display: inline-block; text-align: right;">0</span>А
+    <span id="vCuP" style="width: 2em; display: inline-block; text-align: right;">0</span>%
+</div>
+        <div id="vUo" class="navbar-brand" style="width: 1.5em; text-align: right;" >0</div>
+</div>
+               <div class="d-none "  id="devState" style="text-align: left; ">
             <div class="n-text" id="idUin">123</div>
             <div class="n-text" id="idCur">456</div>
             <div class="n-text" id="idUout">789</div>
             <!-- <div class="navbar-text">123</div>
             <div class="navbar-text">789</div>   onclick="connect()"-->
-        </div>
+        </div> 
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
@@ -282,44 +293,43 @@
                             class="sr-only">(current)</span></a>
                 </li>
             </ul>
-
         </div>
+
+
     </nav>
 
     <div id="carouselContent" class="carousel slide" data-ride="carousel" data-interval="false">
 
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item col-md-6" id="info">
-
-                <div class="page ">
-                    <h4 class="titlePage" name="info"> Информация</h4>
+            <div class="carousel-item col-md-6 " id="info" >
+                <h4 class="titlePage" name="info"> Информация</h4>
+                <div class="page d-none" id="pageinfo">                  
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 " style="margin-left: 0px;">
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">№ устройства: </div>
-                            <input type="text" style="width: 40%;" maxlength="7" id="iN" name="iNumDev" value="">
+                            <input type="text" style="width: 40%;" maxlength="7" id="iN" name="set" value="">
                         </fieldset>
 
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Мощность кВт: </div>
-                            <input type="text" style="width: 40%;" maxlength="3" id="iP" name="iP" required
+                            <input type="text" style="width: 40%;" maxlength="3" id="iP" name="set" required
                                 pattern="[0-9]{1,3}" value="">
                         </fieldset>
 
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Изготовлен: </div>
-                            <input type="date" style="width: 40%;" id="iDP" name="iDateProd" value="">
+                            <input type="date" style="width: 40%;" id="iDP"  value="">
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Ступеней: </div>
-                            <select id="iS" style="width: 40%; text-align: left "
-                                onchange="javascript: if(changeSteps(this)==true){actionSave('Info','saveInfo')} else toggle('saveInfo','hidden')">
+                            <select id="iS" style="width: 40%; text-align: left " name="set">
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                             </select>
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Наработка : </div>
-                            <label id="iT" style="width: 40%;">12133</label>
+                            <label id="iT" style="width: 40%;"></label>
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf"> Дата ПО :</div>
@@ -327,83 +337,78 @@
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Примечание: </div>
-                            <input type="text" style="width: 40%;" maxlength="20" id="iC" name="iC" value="">
+                            <input type="text" style="width: 40%;" maxlength="20" id="iC" name="set" value="">
                         </fieldset>
 
                     </div>
                     <br>
-
-                    <!-- </div> -->
                 </div>
             </div>
-            <!-- <div class="carousel-item" style="padding-top: 50px; height: 100vh;" > -->
-            <div class="carousel-item col-md-6" id="steps">
-                <div class="page ">
-                    <h4 class="titlePage" name="steps" style="text-align: center;">Ступени</h4>
+            <div class="carousel-item col-md-6 " id="steps">
+                 <h4 class="titlePage" name="steps" style="text-align: center;">Ступени</h4>
+                <div class="page d-none" id="pagesteps">                   
                     <br>
                     <!-- <div style="text-align: center;"> Напряжение переключения</div> -->
                     <form id="frmSteps" action="#levels">
-                        <!-- <div id="countSteps">
-                        </div> -->
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 "
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 "
                             style="margin-left: 0px;">
                             <fieldset name="st1" class="d-none">
                                 <div class="numSteps"> 1 ступень :</div>
-                                <input class="steps" name="1" type="number" size="3" id="st1" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st1" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st2" class="d-none">
                                 <div class="numSteps">2 ступень :</div>
-                                <input class="steps" name="2" type="number" size="3" id="st2" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st2" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st3" class="d-none">
                                 <div class="numSteps">3 ступень :</div>
-                                <input type="number" size="3" id="st3" maxlength="3" min="100" max="300" step="1"
+                                <input class="steps" name="set" type="number" size="3" id="st3" maxlength="3" min="100" max="300" step="1"
                                     style="width: 40%; text-align: center;" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st4" class="d-none">
                                 <div class="numSteps">4 ступень :</div>
-                                <input type="number" size="3" id="st4" maxlength="3" min="100" max="300" step="1"
+                                <input class="steps" name="set" type="number" size="3" id="st4" maxlength="3" min="100" max="300" step="1"
                                     style="width: 40%; text-align: center;" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st5" class="d-none">
                                 <div class="numSteps">5 ступень :</div>
-                                <input class="steps" name="5" type="number" size="3" id="st5" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st5" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st6" class="d-none">
                                 <div class="numSteps">6 ступень :</div>
-                                <input class="steps" name="6" type="number" size="3" id="st6" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st6" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st7" class="d-none">
                                 <div class="numSteps">7 ступень :</div>
-                                <input class="steps" name="7" type="number" size="3" id="st7" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st7" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st8" class="d-none">
                                 <div class="numSteps">8 ступень :</div>
-                                <input class="steps" name="8" type="number" size="3" id="st8" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st8" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st9" class="d-none">
                                 <div class="numSteps">9 ступень :</div>
-                                <input class="steps" name="9" type="number" size="3" id="st9" maxlength="3" min="100"
+                                <input class="steps" name="set" type="number" size="3" id="st9" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
@@ -421,16 +426,11 @@
 
                 </div>
             </div>
-            <div class="carousel-item  col-md-6">
-                <div class="page" id="history">
-                    <h4 class="titlePage" name="history" style="text-align: center;">История</h4>
-                    <!-- <div class="alert alert-success " role="alert"  style="font-size: 1.2rem"> -->
+            <div class="carousel-item  col-md-6 " id="history">
+                <h4 class="titlePage" name="history" style="text-align: center;">История</h4>
 
-                    <!-- <button class="card-header btn-block " style="font-size: 1.75rem"
-                            onclick="getHistory(this)">История
-                            <span class="spinner-border float-right d-none" role="status"></span>
-                        </button> -->
-                    <label id="noHistory" class="hidden">Нет записей</label>
+                <div class="page " id="pagehistory">                  
+                    <h4 id="noHistory" class="d-none" style="text-align: center;">Нет записей</h4>
                     <div class="form-group " id="divHistory" style="font-size: 1rem">
 
                         <label for="selectCountHistory" style="width: 80px" id="lbCountHistory">Записи: </label>
@@ -472,6 +472,8 @@
                     <button id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
 
                     <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
+                    <br>
+                 
                     <div id="terminal"></div>
                     <br>
                     <form id="send-form">

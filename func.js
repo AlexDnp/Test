@@ -33,19 +33,45 @@ var isPageInfo = false;
 
 
 $(document).ready(function () {
+  $("#vUi").html('222');
+
   $('input').bind('copy paste', function (e) {
     e.preventDefault();
   });
   $('input[type=number]').on('keydown', checkInputNumber);
   $('input[type=number]').on('change', changeInputNumber);
+  $('input[name="set"]').change(function () {
+    let id = $(this).attr('id');
+    let vl = $(this).val();
+    if (vl != "") {
+      let js = "{" + id + ":" + vl + "}";
+      send(js);
+    }
+  });
+  $('input[type=date]').on('change', sendNewValue);
 
+$('input[type=date]').keypress(function (e) {
+    $(this).off('change blur');
+
+    $(this).blur(function () {
+      sendNewValue(e);
+    });
+
+    if (e.keyCode === 13) {
+      sendNewValue(e);
+    }
+});
 
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 
-  $(".titlePage").click(function(e){
-    let nm=$(this).attr('name');
-    //your JS here
-});
+  $(".titlePage").click(function (e) {
+    let nm = $(this).attr('name');
+    requestPage(nm);
+    // let id = '#page' + nm;
+    // if ($(id).length) {
+    //   send(nm);
+    // }
+  });
 
 });
 
@@ -63,26 +89,30 @@ document.onkeydown = function (e) {
   }
 }
 
+
+function sendNewValue(e) {
+  let id = e.target.id;
+  let vl = e.target.value;
+  if (vl != "") {
+    let js = "{" + id + ":" + vl + "}";
+    send(js);
+  }
+}
+
 function changeInputNumber(e) {
   let vl = e.target.validity;
   var validity = e.target.checkValidity();
   let value = e.target.value;
 }
 
-function requestPage(page) {
-  switch (page) {
-    case "info":
-      if (isPageInfo === false) {
-        isPageInfo = true;
-        send(page);
-      }
-      break;
-      case "steps":
-
-      break;
-
+function requestPage(rq) {
+  let id = '#page' + rq
+  if ($(id).length) {
+    if ($(id).hasClass('d-none')) {
+      $(id).removeClass('d-none');
+      send(rq);
+    }
   }
-
 }
 
 
@@ -108,21 +138,6 @@ function selectCarouselItem(e) {
   if (isConnected) {
     var id = e.relatedTarget.id;
     requestPage(id);
-    switch (id) {
-      case "info":
-
-
-        // do something the id is 1
-        break;
-      case "2":
-        // do something the id is 2
-        break;
-      case "3":
-        // do something the id is 3
-        break;
-      default:
-      //the id is none of the above
-    }
   }
 
 }
