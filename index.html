@@ -177,6 +177,23 @@
             width: 45%;
         }
 
+        fieldset.scheduler-border {
+            border: 1px groove #ddd !important;
+            /* padding: 0 1.4em 1.4em 1.4em !important; */
+            margin: 0 0 1.5em 0 !important;
+            -webkit-box-shadow: 0px 0px 0px 0px #000;
+            box-shadow: 0px 0px 0px 0px #000;
+        }
+
+        legend.scheduler-border {
+            font-size: 1.2em !important;
+            font-weight: bold !important;
+            text-align: left !important;
+            width: auto;
+            padding: 0 10px;
+            border-bottom: none;
+        }
+
 
         @media (min-width: 768px) {
 
@@ -254,22 +271,22 @@
     </div>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
-        <div id="vStW" class="d-none navbar-brand"style="width: 2em; text-align: left;" >Страж</div>        
-<div style="display: inline-block;">
-        <div id="vUi" class="navbar-brand" style="width: 1.5em; text-align: right;" >0</div>
-<div style="display: inline-block; background-color: gray;width: 9em; color: white; font-size: 1.15em;">Ток: 
-    <span id="vCur" style="width: 2em; display: inline-block; text-align: right;">0</span>А
-    <span id="vCuP" style="width: 2em; display: inline-block; text-align: right;">0</span>%
-</div>
-        <div id="vUo" class="navbar-brand" style="width: 1.5em; text-align: right;" >0</div>
-</div>
-               <div class="d-none "  id="devState" style="text-align: left; ">
+        <div id="vStW" class=" d-none navbar-brand" style="width: 2em; text-align: left;">Страж</div>
+        <div style=" display: inline-block;">
+            <div id="vUi" class=" navbar-brand" style=" width: 1.2em; text-align: right;">0</div>
+            <div style="display: inline-block; background-color: gray;width: 8em; color: white; font-size: 1.1em;">Ток:
+                <span id="vCur" style="width: 2em; display: inline-block; text-align: right;">0</span>А
+                <span id="vCuP" style="width: 2em; display: inline-block; text-align: right;">0</span>%
+            </div>
+            <div id="vUo" class="navbar-brand" style="width: 1.2em; text-align: right;">220</div>
+        </div>
+        <div class="d-none " id="devState" style="text-align: left; ">
             <div class="n-text" id="idUin">123</div>
             <div class="n-text" id="idCur">456</div>
             <div class="n-text" id="idUout">789</div>
             <!-- <div class="navbar-text">123</div>
             <div class="navbar-text">789</div>   onclick="connect()"-->
-        </div> 
+        </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -301,9 +318,9 @@
     <div id="carouselContent" class="carousel slide" data-ride="carousel" data-interval="false">
 
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item col-md-6 " id="info" >
+            <div class="carousel-item col-md-6 " id="info">
                 <h4 class="titlePage" name="info"> Информация</h4>
-                <div class="page d-none" id="pageinfo">                  
+                <div class="page d-none" id="pageinfo">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 " style="margin-left: 0px;">
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">№ устройства: </div>
@@ -318,7 +335,7 @@
 
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Изготовлен: </div>
-                            <input type="date" style="width: 40%;" id="iDP"  value="">
+                            <input type="date" style="width: 40%;" id="iDP" value="">
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Ступеней: </div>
@@ -345,8 +362,8 @@
                 </div>
             </div>
             <div class="carousel-item col-md-6 " id="steps">
-                 <h4 class="titlePage" name="steps" style="text-align: center;">Ступени</h4>
-                <div class="page d-none" id="pagesteps">                   
+                <h4 class="titlePage" name="steps" style="text-align: center;">Ступени</h4>
+                <div class="page d-none" id="pagesteps">
                     <br>
                     <!-- <div style="text-align: center;"> Напряжение переключения</div> -->
                     <form id="frmSteps" action="#levels">
@@ -354,61 +371,63 @@
                             style="margin-left: 0px;">
                             <fieldset name="st1" class="d-none">
                                 <div class="numSteps"> 1 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st1" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st1" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st2" class="d-none">
                                 <div class="numSteps">2 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st2" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st2" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st3" class="d-none">
                                 <div class="numSteps">3 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st3" maxlength="3" min="100" max="300" step="1"
-                                    style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+                                <input  name="set" class="integer"  type="number" size="3" id="st3" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st4" class="d-none">
                                 <div class="numSteps">4 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st4" maxlength="3" min="100" max="300" step="1"
-                                    style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+                                <input  name="set" class="integer"  type="number" size="3" id="st4" maxlength="3" min="100"
+                                    max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
+                                    value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st5" class="d-none">
                                 <div class="numSteps">5 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st5" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st5" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st6" class="d-none">
                                 <div class="numSteps">6 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st6" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st6" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st7" class="d-none">
                                 <div class="numSteps">7 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st7" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st7" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st8" class="d-none">
                                 <div class="numSteps">8 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st8" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st8" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st9" class="d-none">
                                 <div class="numSteps">9 ступень :</div>
-                                <input class="steps" name="set" type="number" size="3" id="st9" maxlength="3" min="100"
+                                <input  name="set" class="integer"  type="number" size="3" id="st9" maxlength="3" min="100"
                                     max="300" step="1" style="width: 40%; text-align: center;" required pattern="\\d*"
                                     value="">
                                 <span class="validity"></span>
@@ -417,10 +436,10 @@
                         </div>
                         <br>
                     </form>
-                    <button class="btn btn-block btn-success d-none" id="saveSteps"
+                    <!-- <button class="btn btn-block btn-success d-none" id="saveSteps"
                         onclick="sendForm('frmSteps','steps',this);return false;">Сохранить
                         <span class="spinner-border float-right d-none" role="status"></span>
-                    </button>
+                    </button> -->
 
                     <hr>
 
@@ -429,7 +448,7 @@
             <div class="carousel-item  col-md-6 " id="history">
                 <h4 class="titlePage" name="history" style="text-align: center;">История</h4>
 
-                <div class="page " id="pagehistory">                  
+                <div class="page " id="pagehistory">
                     <h4 id="noHistory" class="d-none" style="text-align: center;">Нет записей</h4>
                     <div class="form-group " id="divHistory" style="font-size: 1rem">
 
@@ -462,9 +481,9 @@
                             </table>
                         </div>
                     </div>
-                    <!-- </div> -->
                 </div>
             </div>
+
             <div class="carousel-item col-md-6 active " id="term">
                 <div class="page ">
                     <h4 style="text-align: center; text-decoration: underline">Терминал</h4>
@@ -473,7 +492,7 @@
 
                     <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
                     <br>
-                 
+
                     <div id="terminal"></div>
                     <br>
                     <form id="send-form">
@@ -482,27 +501,103 @@
                     </form>
                 </div>
             </div>
-        </div>
-        <ol class="carousel-indicators d-none" id="carIndicators">
-            <li data-target="#carouselContent" data-slide-to="0"></li>
-            <li data-target="#carouselContent" data-slide-to="1"></li>
-            <li data-target="#carouselContent" data-slide-to="2"></li>
-            <li data-target="#carouselContent" data-slide-to="3" class="active"></li>
-        </ol>
-        <div id="carousel-control" class="d-none">
-            <div class="d-none d-md-block">
-                <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev"
-                    style="width: 10%;">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next"
-                    style="width: 10%;">
-                    <span class=" carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            <div class="carousel-item  col-md-6 " id="setting">
+                <h4 class="titlePage" name="setting" style="text-align: center;">Настройка</h4>
+
+                <div class="page " id="pagesetting">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border" style="color:blue; text-decoration: underline;">Установка</legend>
+                        <div class="nameInf">Вх. напряжения : </div>
+                        <input name="set"   type="number" size="4" step="0.0001" id="kUin" maxlength="8" min="0" max="10"
+                            style="width: 40%; text-align: center;" required pattern="[0-9.]{3.5}" value="">
+                        <div class="nameInf">Вых. напряжения : </div>
+                        <input name="set"   type="number" size="4" step="0.0001" id="kUout" maxlength="4" min="0" max="10"
+                            style="width: 40%; text-align: center;" required pattern="[0-9.]{3.5}" value="">
+                        <div class="nameInf">Входной ток :</div>
+
+                        <input name="set"   type="number" size="4" step="0.0001" id="kCur" maxlength="4" min="0" max="10"
+                            style="width: 40%; text-align: center;" required pattern="[0-9.]{3.5}" value="">
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Температура</legend>
+                        <div class="nameInf">Измеренная : </div>
+                        <span  name="vT" style="width: 40%; text-align: center;">ddddd</span>
+
+                        <div class="nameInf">Вкл. вентилятора : </div>
+                        <input name="set" class="integer"  type="number" size="2" id="trmFanOn" maxlength="2" min="10" max="99" step="1"
+                            style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+
+                        <div class="nameInf">Выкл. устройства : </div>
+                        <input name="set" class="integer"  class="integer"  type="number" size="2" id="trmOff" maxlength="2" min="10" max="99" step="1"
+                            style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+                    </fieldset>
+
+                    <h5 style="color: rgb(252, 14, 61)">Внимание!!!
+                        <p>Включать ключи только при выключенном стабилизаторе</p>
+                    </h5>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Проверка</legend>
+
+                        <label for="dkey" style="width: 50%">Вкл. ключа: </label>
+                        <select id="dkey" style="width: 40%; text-align: left">
+                            <option value="0">Выкл</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                        <label for="dfan" style="width: 180px">Вкл. вентилятор : </label>
+                        <input type="checkbox" id="dfan">
+                    </fieldset>
+
+                    <!-- <label for="kUin" style="width: 250px">Входное напряжение: </label>
+                    <input type="text" size="4px" maxlength="5" id="kUin" name="kUin" required pattern="[0-9]{1.3}"
+                        value="" oninput="actionSave('set','saveTrm')">
+                    <label class="uin" style="width: 100px ; text-align: center; background-color:#68b4d3"></label>
+                    <br>
+                    <label for="kUout" style="width: 250px">Выходное напряжение: </label>
+                    <input type="text" size="4px" maxlength="5" id="kUout" name="kUout" required pattern="[0-9]{1.3}"
+                        value="" oninput="actionSave('set','saveTrm')">
+                    <label class="uout" style="width: 100px ;text-align: center; background-color:#28b62c"></label>
+                    <br>
+                    <label for="kCur" style="width: 250px">Входной ток: </label>
+                    <input type="text" size="4px" maxlength="5" id="kCur" name="kCur" required pattern="[0-9]{1.3}"
+                        value="" oninput="actionSave('set','saveTrm')">
+                    <label class="cur" style="width: 100px ;text-align: center; background-color:#ff4136">111</label>
+                    <br> -->
+                    <div class="d-none">
+                        <label for="dgrd" style="width: 180px">Проверка защиты : </label>
+                        <input type="checkbox" id="dgrd">
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <ol class="carousel-indicators d-none" id="carIndicators">
+        <li data-target="#carouselContent" data-slide-to="0"></li>
+        <li data-target="#carouselContent" data-slide-to="1"></li>
+        <li data-target="#carouselContent" data-slide-to="2"></li>
+        <li data-target="#carouselContent" data-slide-to="3" class="active"></li>
+    </ol>
+    <div id="carousel-control" class="d-none">
+        <div class="d-none d-md-block">
+            <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev"
+                style="width: 10%;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next"
+                style="width: 10%;">
+                <span class=" carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
 
     </div>
 
@@ -559,28 +654,28 @@
     //     }
     // });
 
-  //  if ($(window).width() > 768) {
-        // $('#carouselContent').on('slide.bs.carousel', function (e) {
-        //     var $e = $(e.relatedTarget);
-        //     var idx = $e.index();
-        //     console.log("IDX :  " + idx);
-        //     var itemsPerSlide = 4;
-        //     var totalItems = $('.carousel-item').length;
+    //  if ($(window).width() > 768) {
+    // $('#carouselContent').on('slide.bs.carousel', function (e) {
+    //     var $e = $(e.relatedTarget);
+    //     var idx = $e.index();
+    //     console.log("IDX :  " + idx);
+    //     var itemsPerSlide = 4;
+    //     var totalItems = $('.carousel-item').length;
 
-        //     if (idx >= totalItems - (itemsPerSlide - 1)) {
-        //         var it = itemsPerSlide - (totalItems - idx);
-        //         for (var i = 0; i < it; i++) {
-        //             // append slides to end
-        //             if (e.direction == "left") {
-        //                 $('.carousel-item').eq(i).appendTo('.carousel-inner');
-        //             }
-        //             else {
-        //                 $('.carousel-item').eq(0).appendTo('.carousel-inner');
-        //             }
-        //         }
-        //     }
-        // });
- //   }
+    //     if (idx >= totalItems - (itemsPerSlide - 1)) {
+    //         var it = itemsPerSlide - (totalItems - idx);
+    //         for (var i = 0; i < it; i++) {
+    //             // append slides to end
+    //             if (e.direction == "left") {
+    //                 $('.carousel-item').eq(i).appendTo('.carousel-inner');
+    //             }
+    //             else {
+    //                 $('.carousel-item').eq(0).appendTo('.carousel-inner');
+    //             }
+    //         }
+    //     }
+    // });
+    //   }
 
     // $('.carousel .carousel-item').each(function () {
     //     var minPerSlide = 3;

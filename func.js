@@ -34,6 +34,21 @@ var isPageInfo = false;
 
 $(document).ready(function () {
   $("#vUi").html('222');
+  $('#dfan').change(function () {
+    let id = $(this).attr('id');
+    let vl = Number(this.checked);
+    let js = "{" + id + ":" + vl + "}";
+    send(js);
+  });
+
+  $('#dkey').change(function () {
+    let id = $(this).attr('id');
+    let vl = $(this).val();
+    if (vl != "") {
+      let js = "{" + id + ":" + vl + "}";
+      send(js);
+    }
+  });
 
   $('input').bind('copy paste', function (e) {
     e.preventDefault();
@@ -50,7 +65,7 @@ $(document).ready(function () {
   });
   $('input[type=date]').on('change', sendNewValue);
 
-$('input[type=date]').keypress(function (e) {
+  $('input[type=date]').keypress(function (e) {
     $(this).off('change blur');
 
     $(this).blur(function () {
@@ -60,7 +75,7 @@ $('input[type=date]').keypress(function (e) {
     if (e.keyCode === 13) {
       sendNewValue(e);
     }
-});
+  });
 
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 
@@ -121,14 +136,27 @@ function checkInputNumber(event) {
   if (key === "Backspace" || key === "Delete") {
     return true;
   }
+
   let value = event.target.value;
+  if (value === "0") {
+    if (key === "0" || key != ".")
+      event.preventDefault();
+  }
   let new_value = Number(value + key);
   let max = Number(event.target.max);
-  if (new_value > max || new_value === 0) {
-    event.preventDefault();
+  if ($(event.target).hasClass('integer')) {
+    if (new_value === 0) {
+      event.preventDefault();
+    }
+    var regex = /[0-9]/;
   }
-  var regex = /[0-9]/;
-  if (!regex.test(key)) {
+  else {
+    if (value > 0 & event.target.validity.valid === false)
+      event.preventDefault();
+    // var regex = /[0-9.]/;
+    var regex = /^\d*[.]?\d*$/;
+  }
+  if (!regex.test(key) || new_value > max) {
     event.preventDefault();
   }
 
