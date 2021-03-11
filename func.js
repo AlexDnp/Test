@@ -33,6 +33,8 @@ var isPageInfo = false;
 
 
 $(document).ready(function () {
+
+
   let wh = $(window).width();
   $("#vUi").html(wh);
   let h = $(window).height();
@@ -92,11 +94,17 @@ $(document).ready(function () {
 
   $(".titlePage").click(function (e) {
     let nm = $(this).attr('name');
-    requestPage(nm);
-    // let id = '#page' + nm;
-    // if ($(id).length) {
-    //   send(nm);
-    // }
+    let id = '#page' +nm;
+    if ($(id).length) {
+      if ($(id).hasClass('d-none'))
+        $(id).removeClass('d-none');
+      send(nm);
+    }
+  });
+
+  $('legend[name=legendClick]').click(function (e) {
+    let id = $(this).attr('id');
+    send(id);
   });
 
 });

@@ -1,5 +1,50 @@
-#terminal div {
+body {
+    background-color: rgb(92, 92, 92);
+
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+    display: block;
+    color: white;
+}
+
+.carousel-item {
+    padding-top: 50px;
+    height: 85vh;
+}
+
+
+/* #terminal div {
     color: gray;
+} */
+.carousel-control {
+    /* overflow: auto; */
+    padding: 2px;
+    /* resize: both; */
+    width: 100%;
+    height: 87%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+
+}
+
+.page {
+    overflow: auto;
+    padding: 2px;
+    /* resize: both; */
+    width: 100%;
+    height: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+
 }
 
 #terminal div.out {
@@ -9,15 +54,218 @@
 #terminal div.in {
     color: blue;
 }
-#terminal{
+
+#terminal {
     -moz-appearance: textfield-multiline;
     -webkit-appearance: textarea;
     border: 1px solid gray;
     font: medium -moz-fixed;
     font: -webkit-small-control;
-    height: 95px;
+    /* height: 95px; */
     overflow: auto;
     padding: 2px;
     resize: both;
     width: 100%;
+    height: 50%;
+    /* padding-left: 10%;
+    padding-right: 10%; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    color: black;
+}
+
+.n-text {
+    display: inline;
+    text-align: left;
+    color: white;
+}
+
+input:invalid+span:after {
+    color: red;
+    content: '✖';
+    padding-left: 5px;
+}
+
+
+input:valid+span:after {
+    color: rgb(73, 236, 73);
+    content: '✓';
+    padding-left: 5px;
+}
+
+select:disabled,
+input:disabled {
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    color: white;
+}
+
+select option {
+    background-color: rgb(92, 92, 92);
+    color: white;
+
+}
+
+select,
+input {
+    background: transparent;
+    border-radius: 1px;
+    color: white;
+    border-bottom: 1px solid #fff;
+}
+
+input[type=date]::-webkit-outer-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+    margin: 1;
+}
+
+/* .textBorder {
+    border-bottom: 1px solid #fff;
+} */
+
+/* .btnPage{
+    background: transparent;
+    color: white;
+    border: none;
+    border-bottom: transparent;
+    
+} */
+legend[name=legendClick]:active {
+    background-color: rgb(154, 165, 165);
+}
+
+.titlePage:active {
+    background-color: teal;
+}
+
+.titlePage {
+    padding-top: 10px;
+    background: transparent;
+    text-align: center;
+    text-decoration: underline;
+    color: white;
+}
+
+.nameInf {
+    display: inline-block;
+    padding-left: 5px;
+    width: 55%;
+}
+
+.numSteps {
+    display: inline-block;
+    padding-left: 10px;
+    width: 45%;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    /* padding: 0 1.4em 1.4em 1.4em !important; */
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+    padding-bottom: 10px;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+}
+
+@media (max-height: 400px) {
+    .carousel-indicators {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .page {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}
+
+/* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+    html {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        overflow-x: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+} */
+
+@media (min-width: 768px) {
+
+    /* show 3 items */
+    .carousel-inner .active,
+    .carousel-inner .active+.carousel-item {
+        display: block;
+    }
+
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item,
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item {
+        transition: none;
+        margin-right: initial;
+    }
+
+    .carousel-inner .carousel-item-next,
+    .carousel-inner .carousel-item-prev {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .carousel-inner .active.carousel-item+.carousel-item+.carousel-item {
+        position: absolute;
+        top: 0;
+        right: -50%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* left or forward direction */
+    .active.carousel-item-left+.carousel-item-next.carousel-item-left,
+    .carousel-item-next.carousel-item-left+.carousel-item,
+    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item,
+    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* farthest right hidden item must be abso position for animations */
+    .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
+    .carousel-item-prev.carousel-item-right+.carousel-item,
+    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item,
+    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+
 }
