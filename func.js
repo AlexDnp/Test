@@ -33,7 +33,18 @@ var isPageInfo = false;
 
 
 $(document).ready(function () {
-  $("#vUi").html('222');
+  let wh=$(window).width();
+  $("#vUi").html(wh);
+  let h=$(window).height();
+  $("#vUo").html(h);
+
+  $(window).on('resize', function(){
+    let wh=$(window).width();
+    $("#vUi").html(wh);
+    let h=$(window).height();
+    $("#vUo").html(h);
+});
+
   $('#dfan').change(function () {
     let id = $(this).attr('id');
     let vl = Number(this.checked);
