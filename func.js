@@ -40,17 +40,17 @@ $(document).ready(function () {
   $("body").css("-o-user-select", "none");
   $("body").css("user-select", "none");
 
-  let wh = $(window).width();
-  $("#vUi").html(wh);
-  let h = $(window).height();
-  $("#vUo").html(h);
+  // let wh = $(window).width();
+  // $("#vUi").html(wh);
+  // let h = $(window).height();
+  // $("#vUo").html(h);
 
-  $(window).on('resize', function () {
-    let wh = $(window).width();
-    $("#vUi").html(wh);
-    let h = $(window).height();
-    $("#vUo").html(h);
-  });
+  // $(window).on('resize', function () {
+  //   let wh = $(window).width();
+  //   $("#vUi").html(wh);
+  //   let h = $(window).height();
+  //   $("#vUo").html(h);
+  // });
 
   $('#dfan').change(function () {
     let id = $(this).attr('id');
