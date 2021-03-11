@@ -193,7 +193,11 @@
             padding: 0 10px;
             border-bottom: none;
         }
- 
+        @media (max-height: 400px) { 
+            .carousel-indicators{
+              display: none ; 
+            } 
+        }
 
         @media (min-width: 768px) {
 
@@ -578,7 +582,7 @@
             </div>
         </div>
     </div>
-    <ol class="carousel-indicators " id="carIndicators">
+    <ol class="carousel-indicators  " id="carIndicators">
         <li data-target="#carouselContent" data-slide-to="0"></li>
         <li data-target="#carouselContent" data-slide-to="1"></li>
         <li data-target="#carouselContent" data-slide-to="2"></li>
@@ -586,7 +590,7 @@
         <li data-target="#carouselContent" data-slide-to="4" class="active"></li>
     </ol>
     <div id="carousel-control" class="d-none">
-        <div class="d-none d-md-block">
+        <div class="d-none d-sm-block">
             <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev"
                 style="width: 10%;">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

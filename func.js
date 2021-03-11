@@ -33,17 +33,17 @@ var isPageInfo = false;
 
 
 $(document).ready(function () {
-  let wh=$(window).width();
+  let wh = $(window).width();
   $("#vUi").html(wh);
-  let h=$(window).height();
+  let h = $(window).height();
   $("#vUo").html(h);
 
-  $(window).on('resize', function(){
-    let wh=$(window).width();
+  $(window).on('resize', function () {
+    let wh = $(window).width();
     $("#vUi").html(wh);
-    let h=$(window).height();
+    let h = $(window).height();
     $("#vUo").html(h);
-});
+  });
 
   $('#dfan').change(function () {
     let id = $(this).attr('id');
@@ -185,7 +185,7 @@ function StateConnect(state) {
 
   if (state && isConnected === false) {
     isConnected = true;
-    document.getElementById("carIndicators").classList.remove("d-none");
+    // document.getElementById("carIndicators").classList.remove("d-none");
     document.getElementById("carousel-control").classList.remove("d-none");
     var lst = document.getElementsByClassName("nav-link");
     for (var i = 0; i < lst.length; i++) {
@@ -201,7 +201,7 @@ function StateConnect(state) {
   else if (state === false && isConnected) {
     isConnected = false;
     SubmitDisabled(true);
-    document.getElementById("carIndicators").classList.add("d-none");
+    // document.getElementById("carIndicators").classList.add("d-none");
     document.getElementById("carousel-control").classList.add("d-none");
     var lst = document.getElementsByClassName("nav-link");
     for (var i = 0; i < lst.length; i++) {
