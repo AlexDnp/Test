@@ -33,7 +33,12 @@ var isPageInfo = false;
 
 
 $(document).ready(function () {
-
+  $("body").css("-webkit-touch-callout", "none");
+  $("body").css("-webkit-user-select", "none");
+  $("body").css("-moz-user-select", "none");
+  $("body").css("-ms-user-select", "none");
+  $("body").css("-o-user-select", "none");
+  $("body").css("user-select", "none");
 
   let wh = $(window).width();
   $("#vUi").html(wh);
@@ -93,8 +98,10 @@ $(document).ready(function () {
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 
   $(".titlePage").click(function (e) {
+    if (isConnected === false)
+      return;
     let nm = $(this).attr('name');
-    let id = '#page' +nm;
+    let id = '#page' + nm;
     if ($(id).length) {
       if ($(id).hasClass('d-none'))
         $(id).removeClass('d-none');
@@ -189,11 +196,19 @@ function selectCarouselItem(e) {
 
 }
 
+
 function StateConnect(state) {
 
   if (state && isConnected === false) {
     isConnected = true;
-    // document.getElementById("carIndicators").classList.remove("d-none");
+    $(".page").each(function () {
+     // let id = this.id;
+      if (this.id === "") {
+        if ($(this).hasClass('d-none'))
+          $(this).removeClass('d-none');
+      }
+    });
+
     document.getElementById("carousel-control").classList.remove("d-none");
     var lst = document.getElementsByClassName("nav-link");
     for (var i = 0; i < lst.length; i++) {

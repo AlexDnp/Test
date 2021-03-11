@@ -102,6 +102,12 @@
             color: black;
         }
 
+        select[name=set],
+        input[name=set] {
+            width: 40%;
+            text-align: center;
+        }
+
         .n-text {
             display: inline;
             text-align: left;
@@ -162,12 +168,22 @@
             border-bottom: transparent;
             
         } */
+        legend[name=legendClick]:hover {
+
+            background-color: rgb(188, 229, 240);
+        }
+
         legend[name=legendClick]:active {
             background-color: rgb(154, 165, 165);
         }
 
-        .titlePage:active {
+        .titlePage:hover {
             background-color: teal;
+
+        }
+
+        .titlePage:active {
+            background-color: rgb(188, 229, 240);
         }
 
         .titlePage {
@@ -175,7 +191,7 @@
             background: transparent;
             text-align: center;
             text-decoration: underline;
-            color: white;
+            color: blue;
         }
 
         .nameInf {
@@ -330,7 +346,7 @@
                     <a class="nav-link " href="#" onclick="ItemSelect(0)">Информация </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#" onclick="ItemSelect(1)">Link</a>
+                    <a class="nav-link " href="#" onclick="ItemSelect(1)">Ступени</a>
 
                 </li>
                 <li class="nav-item">
@@ -358,37 +374,36 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 " style="margin-left: 0px;">
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">№ устройства: </div>
-                            <input type="text" style="width: 40%;" maxlength="7" id="iN" name="set" value="">
+                            <input type="text" maxlength="7" id="iN" name="set" value="">
                         </fieldset>
 
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Мощность кВт: </div>
-                            <input type="text" style="width: 40%;" maxlength="3" id="iP" name="set" required
-                                pattern="[0-9]{1,3}" value="">
+                            <input type="text" maxlength="3" id="iP" name="set" required pattern="[0-9]{1,3}" value="">
                         </fieldset>
 
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Изготовлен: </div>
-                            <input type="date" style="width: 40%;" id="iDP" value="">
+                            <input type="date" name="set" id="iDP" value="">
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Ступеней: </div>
-                            <select id="iS" style="width: 40%; text-align: left " name="set">
+                            <select id="iS" name="set1" style="width: 40%; text-align-last:center; ">
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                             </select>
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Наработка : </div>
-                            <label id="iT" style="width: 40%;"></label>
+                            <label id="iT" style="width: 40%; text-align: center;"></label>
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf"> Дата ПО :</div>
-                            <span id="iDS" style="width: 40%;"></span>
+                            <label id="iDS" style="width: 40%; text-align: center;"></label>
                         </fieldset>
                         <fieldset style="margin-top: 10px;">
                             <div class="nameInf">Примечание: </div>
-                            <input type="text" style="width: 40%;" maxlength="20" id="iC" name="set" value="">
+                            <input type="text" maxlength="20" id="iC" name="set" value="">
                         </fieldset>
 
                     </div>
@@ -406,64 +421,55 @@
                             <fieldset name="st1" class="d-none">
                                 <div class="numSteps"> 1 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st1" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st2" class="d-none">
                                 <div class="numSteps">2 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st2" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st3" class="d-none">
                                 <div class="numSteps">3 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st3" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st4" class="d-none">
                                 <div class="numSteps">4 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st4" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st5" class="d-none">
                                 <div class="numSteps">5 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st5" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st6" class="d-none">
                                 <div class="numSteps">6 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st6" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st7" class="d-none">
                                 <div class="numSteps">7 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st7" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st8" class="d-none">
                                 <div class="numSteps">8 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st8" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
                             <fieldset name="st9" class="d-none">
                                 <div class="numSteps">9 ступень :</div>
                                 <input name="set" class="integer" type="number" size="3" id="st9" maxlength="3"
-                                    min="100" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                                    min="100" max="300" step="1" required pattern="\\d*" value="">
                                 <span class="validity"></span>
                             </fieldset>
 
@@ -535,54 +541,50 @@
                 </div>
             </div>
             <div class="carousel-item  col-md-6 " id="setting">
-                <h4 style="text-align: center;">Настройка</h4>
+                <h4 style="text-align: center; color: white;">Настройка</h4>
 
-                <div class="page " id="pagesetting">
+                <div class="page d-none ">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" name="legendClick" id="qcoef"
-                            style="color:rgb(101, 157, 241); text-decoration: underline;">Установка
+                            style="color:blue; text-decoration: underline;">Установка
                         </legend>
                         <div class="nameInf">Вх. напряжения : </div>
                         <input name="set" type="number" size="4" step="0.0001" id="kUin" maxlength="8" min="0" max="10"
-                            style="width: 40%; text-align: center;" required pattern="[0-9.]{3.5}" value="">
+                            required pattern="[0-9.]{3.5}" value="">
                         <div class="nameInf">Вых. напряжения : </div>
                         <input name="set" type="number" size="4" step="0.0001" id="kUout" maxlength="4" min="0" max="10"
-                            style="width: 40%; text-align: center;" required pattern="[0-9.]{3.5}" value="">
+                            required pattern="[0-9.]{3.5}" value="">
                         <div class="nameInf">Входной ток :</div>
 
                         <input name="set" type="number" size="4" step="0.0001" id="kCur" maxlength="4" min="0" max="10"
-                            style="width: 40%; text-align: center;" required pattern="[0-9.]{3.5}" value="">
+                            required pattern="[0-9.]{3.5}" value="">
                     </fieldset>
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" name="legendClick" id="qtrm"
-                            style="color:rgb(101, 157, 241); text-decoration: underline;">Температура</legend>
+                            style="color:blue; text-decoration: underline;">Температура</legend>
                         <div class="nameInf">Измеренная : </div>
                         <span name="trmIzm" style="width: 40%; text-align: center;"></span>
 
                         <div class="nameInf">Вкл. вентилятора : </div>
                         <input name="set" class="integer" type="number" size="2" id="trmFanOn" maxlength="2" min="10"
-                            max="99" step="1" style="width: 40%; text-align: center;" required pattern="\\d*" value="">
+                            max="99" step="1" required pattern="\\d*" value="">
 
                         <div class="nameInf">Выкл. устройства : </div>
                         <input name="set" class="integer" class="integer" type="number" size="2" id="trmOff"
-                            maxlength="2" min="10" max="99" step="1" style="width: 40%; text-align: center;" required
-                            pattern="\\d*" value="">
+                            maxlength="2" min="10" max="99" step="1" required pattern="\\d*" value="">
                     </fieldset>
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" name="legendClick" id="qoff"
-                        style="color:rgb(101, 157, 241); text-decoration: underline;">Выключение</legend>
+                            style="color:blue; text-decoration: underline;">Выключение</legend>
                         <div class="nameInf">Напряжение мин. : </div>
                         <input name="set" class="integer" class="integer" type="number" size="3" id="oUmin"
-                            maxlength="3" min="80" max="300" step="1" style="width: 40%; text-align: center;" required
-                            pattern="\\d*" value="">
-                            <div class="nameInf">Напряжение макс.: </div>
-                            <input name="set" class="integer" class="integer" type="number" size="3" id="oUmax"
-                                maxlength="3" min="80" max="300" step="1" style="width: 40%; text-align: center;" required
-                                pattern="\\d*" value="">
-                                <div class="nameInf">Входной ток: </div>
-                                <input name="set" class="integer" class="integer" type="number" size="3" id="oCur"
-                                    maxlength="3" min="80" max="300" step="1" style="width: 40%; text-align: center;" required
-                                    pattern="\\d*" value="">
+                            maxlength="3" min="80" max="300" step="1" required pattern="\\d*" value="">
+                        <div class="nameInf">Напряжение макс.: </div>
+                        <input name="set" class="integer" class="integer" type="number" size="3" id="oUmax"
+                            maxlength="3" min="80" max="380" step="1" required pattern="\\d*" value="">
+                        <div class="nameInf">Входной ток: </div>
+                        <input name="set" class="integer" class="integer" type="number" size="3" id="oCur" maxlength="3"
+                            min="80" max="300" step="1" required pattern="\\d*" value="">
                     </fieldset>
 
                     <h5 style="color: rgb(252, 14, 61)">Внимание!!!
@@ -592,7 +594,7 @@
                         <legend class="scheduler-border">Проверка</legend>
 
                         <label for="dkey" style="width: 50%">Вкл. ключа: </label>
-                        <select id="dkey" style="width: 40%; text-align: left">
+                        <select id="dkey" style="width: 40%; text-align-last: center">
                             <option value="0">Выкл</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -604,8 +606,8 @@
                             <option value="8">8</option>
                             <option value="9">9</option>
                         </select>
-                        <label for="dfan" style="width: 180px">Вкл. вентилятор : </label>
-                        <input type="checkbox" id="dfan">
+                        <label for="dfan" style="width: 50%">Вкл. вентилятор : </label>
+                        <input type="checkbox" id="dfan" style="width: 40%;">
                     </fieldset>
 
                     <div class="d-none">
