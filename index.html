@@ -568,6 +568,22 @@
                             maxlength="2" min="10" max="99" step="1" style="width: 40%; text-align: center;" required
                             pattern="\\d*" value="">
                     </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border" name="legendClick" id="qoff"
+                        style="color:rgb(101, 157, 241); text-decoration: underline;">Выключение</legend>
+                        <div class="nameInf">Напряжение мин. : </div>
+                        <input name="set" class="integer" class="integer" type="number" size="3" id="oUmin"
+                            maxlength="3" min="80" max="300" step="1" style="width: 40%; text-align: center;" required
+                            pattern="\\d*" value="">
+                            <div class="nameInf">Напряжение макс.: </div>
+                            <input name="set" class="integer" class="integer" type="number" size="3" id="oUmax"
+                                maxlength="3" min="80" max="300" step="1" style="width: 40%; text-align: center;" required
+                                pattern="\\d*" value="">
+                                <div class="nameInf">Входной ток: </div>
+                                <input name="set" class="integer" class="integer" type="number" size="3" id="oCur"
+                                    maxlength="3" min="80" max="300" step="1" style="width: 40%; text-align: center;" required
+                                    pattern="\\d*" value="">
+                    </fieldset>
 
                     <h5 style="color: rgb(252, 14, 61)">Внимание!!!
                         <p>Включать ключи только при выключенном стабилизаторе</p>
