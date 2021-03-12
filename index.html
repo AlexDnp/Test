@@ -239,6 +239,10 @@
                 padding-left: 0%;
                 padding-right: 0%;
             }
+
+            /* .vizm[name="divizm"]{
+                width: 250px;
+            } */
         }
 
         /* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
@@ -252,12 +256,16 @@
                 left: 0;
             }
         } */
+        @media (max-width: 768px) {
+            .vizm[name="divizm"] {
+                width: 85%;
+            }
+        }
 
         @media (min-width: 768px) {
-             /* .navbar-collapse{
-text-align: right;
-
-            } */
+            .vizm[name="divizm"] {
+                width: 50%;
+            }
 
             /* show 3 items */
             .carousel-inner .active,
@@ -332,27 +340,49 @@ text-align: right;
         <h3> Устойства Bluetooth не поддерживаются</h3>
     </div>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
-        <div id="vSt" class="vStr  navbar-brand" style="width: 250px; text-align: left;">Страж</div>
-        <div class="titleIzm d-none" style="width: 250px; display: inline-block; padding-left: 10px;">
-            <div id="vUi" class=" navbar-brand" style=" width: 1.2em; text-align: right;">100</div>
-            <!-- <div id="vSw" class=" navbar-brand" style=" width: 0.5em; text-align: right;">9s</div> -->
+    <nav class=" navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
+        <button class=""  id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
+        <div id="vSt" class="vStr d-none navbar-brand" style="width: 250px; text-align: left;">Страж</div>
+        <!-- <div class="vizm  d-none" name="divizm" display: inline-block; padding-left: 10px;">
+            <div id="vUi" class="vizm navbar-brand" style=" width: 1.2em; text-align: right;">100</div>
             <div style="display: inline-block; background-color: gray;width: 6em; color: white; font-size: 1.1em;">
-                <div id="vCur" class="vIzm" style="width: 2em; display: inline-block; text-align: right;">130</div>А
-                <div id="vCuP"class="vIzm" style="width: 2em; display: inline-block; text-align: right;">120</div>%
+                <div id="vCr" class="vizm" style="width: 2em; display: inline-block; text-align: right;">130</div>А
+                <div id="vCrP" class="vizm" style="width: 2em; display: inline-block; text-align: right;">120</div>%
             </div>
-            <div id="vUo" class="navbar-brand" style="width: 1.2em; text-align: right; padding-left: 10px;">220</div>
+            <div id="vUo" class="navbar-brand vizm" style="width: 1.2em; text-align: right; padding-left: 10px;">220
+            </div>
+        </div> -->
+
+        <div class="row vizm d-none" name="divizm"
+            style="flex-wrap: nowrap; color: white; background-color: rgb(155, 155, 155);">
+            <div class="col-2 vizm" id="vUi" style="text-align: right; padding-left: 1px;">
+                <div class="d-none d-sm-inline-block">Вх</div>
+                123
+            </div>
+            <div class="col-2 vizm" id="vUi"
+                style="text-align: right; padding-left: 5px; background-color: rgb(116, 148, 148);">Ток:</div>
+            <div class="col-3 vizm" id="vCr"
+                style="background-color: rgb(116, 148, 148);padding-left: 10px; text-align: center;">130<span>A</span>
+            </div>
+            <div class="col-3 vizm" id="vCrP"
+                style="background-color: rgb(116, 148, 148);padding-left: 10px;text-align: center;">99<span>%</span>
+            </div>
+            <div class="col-2 vizm " id="vUo" style=" text-align: right; padding-left: 1px;">
+                <div class="d-none d-sm-inline-block">Вых</div>
+                289
+            </div>
         </div>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse " id="navbarCollapse" >
-            <ul class="navbar-nav ml-auto" >
+        <div class="collapse navbar-collapse " id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                    <a class="nav-link " href="#" onclick="ItemSelect(0)">Информация </a>
+                    <a class="nav-link " href="#" onclick="ItemSelect(0)">Информация <span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="#" onclick="ItemSelect(1)">Ступени</a>
@@ -362,22 +392,20 @@ text-align: right;
                     <a class="nav-link " href="#" onclick="ItemSelect(2)">История </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" id="term" href="#" onclick="ItemSelect(3)">Терминал<span
-                            class="sr-only">(current)</span></a>
+                    <a class="nav-link" id="term" href="#" onclick="ItemSelect(3)">Терминал</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" id="sett" href="#" onclick="ItemSelect(4)">Настройка</a>
                 </li>
             </ul>
         </div>
-
-
     </nav>
+
 
     <div id="carouselContent" class="carousel slide" data-ride="carousel" data-interval="false">
 
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item col-md-6 " id="info">
+            <div class="carousel-item col-md-6 active " id="info">
                 <h4 class="titlePage" name="info"> Информация</h4>
                 <div class="page d-none" id="pageinfo">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 " style="margin-left: 0px;">
@@ -522,12 +550,9 @@ text-align: right;
                 </div>
             </div>
 
-            <div class="carousel-item col-md-6 active " id="term">
+            <div class="carousel-item col-md-6 " id="term">
                 <div class="page ">
                     <h4 style="text-align: center; text-decoration: underline">Терминал</h4>
-
-                    <button id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
-
                     <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
                     <br>
                     <br>
@@ -542,7 +567,7 @@ text-align: right;
             <div class="carousel-item  col-md-6 " id="setting">
                 <h4 style="text-align: center; color: white; padding-top: 10px;">Настройка</h4>
 
-                <div class="page d-none ">
+                <div class="page d-none " id="pagesetting">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" name="legendClick" id="qcoef"
                             style="color:rgb(0, 153, 255); text-decoration: underline;">Установка
@@ -618,10 +643,10 @@ text-align: right;
         </div>
     </div>
     <ol class="carousel-indicators  " id="carIndicators">
-        <li data-target="#carouselContent" data-slide-to="0"></li>
+        <li data-target="#carouselContent" data-slide-to="0" class="active"></li>
         <li data-target="#carouselContent" data-slide-to="1"></li>
         <li data-target="#carouselContent" data-slide-to="2"></li>
-        <li data-target="#carouselContent" data-slide-to="3" class="active"></li>
+        <li data-target="#carouselContent" data-slide-to="3"></li>
         <li data-target="#carouselContent" data-slide-to="4"></li>
     </ol>
     <div id="carousel-control" class="d-none">

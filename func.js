@@ -114,6 +114,16 @@ $(document).ready(function () {
     send(id);
   });
 
+  $('.vizm').bind('DOMSubtreeModified', function () {
+    if ($(".vStr").hasClass('d-none')===false)
+        $(".vStr").addClass('d-none');
+    $(".vizm").each(function () {
+      if ($(this).hasClass('d-none'))
+        $(this).removeClass('d-none');
+
+    });
+  });
+
 });
 
 document.onkeydown = function (e) {
@@ -202,7 +212,7 @@ function StateConnect(state) {
   if (state && isConnected === false) {
     isConnected = true;
     $(".page").each(function () {
-     // let id = this.id;
+      // let id = this.id;
       if (this.id === "") {
         if ($(this).hasClass('d-none'))
           $(this).removeClass('d-none');
@@ -219,11 +229,21 @@ function StateConnect(state) {
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
-    //addSteps(1, 8);
+    send("vizm");
   }
   else if (state === false && isConnected) {
+    location.reload();
+    return;
     isConnected = false;
     SubmitDisabled(true);
+    $(".page").each(function () {
+      // let id = this.id;
+      if (this.id != "") {
+        if ($(this).hasClass('d-none')===false)
+          $(this).addClass('d-none');
+      }
+    });
+
     // document.getElementById("carIndicators").classList.add("d-none");
     document.getElementById("carousel-control").classList.add("d-none");
     var lst = document.getElementsByClassName("nav-link");
