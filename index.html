@@ -267,6 +267,10 @@
                 width: 50%;
             }
 
+            .navbar-expand-md .navbar-collapse {
+                flex-basis: unset;
+            }
+
             /* show 3 items */
             .carousel-inner .active,
             .carousel-inner .active+.carousel-item {
@@ -341,36 +345,47 @@
     </div>
 
     <nav class=" navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
-        <button class=""  id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
+        <button class="" id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
         <div id="vSt" class="vStr d-none navbar-brand" style="width: 250px; text-align: left;">Страж</div>
-        <!-- <div class="vizm  d-none" name="divizm" display: inline-block; padding-left: 10px;">
-            <div id="vUi" class="vizm navbar-brand" style=" width: 1.2em; text-align: right;">100</div>
-            <div style="display: inline-block; background-color: gray;width: 6em; color: white; font-size: 1.1em;">
-                <div id="vCr" class="vizm" style="width: 2em; display: inline-block; text-align: right;">130</div>А
-                <div id="vCrP" class="vizm" style="width: 2em; display: inline-block; text-align: right;">120</div>%
-            </div>
-            <div id="vUo" class="navbar-brand vizm" style="width: 1.2em; text-align: right; padding-left: 10px;">220
-            </div>
-        </div> -->
 
         <div class="row vizm d-none" name="divizm"
-            style="flex-wrap: nowrap; color: white; background-color: rgb(155, 155, 155);">
-            <div class="col-2 vizm" id="vUi" style="text-align: right; padding-left: 1px;">
-                <div class="d-none d-sm-inline-block">Вх</div>
-                123
+            style="flex-wrap: nowrap; color: white;  margin-right:0px;">
+
+            <div class="col-2 " style="min-width:60px;">
+                <div class="row" style=" text-align: right; padding-left: 5px;">
+                    <span class=" d-none d-lg-inline-block" style=" text-align: right;">Вх</span>
+                    <div class="col-1 " id="vUi" style=" min-width: 40px;padding-right: 1px; padding-left: 2px; text-align: right;">120</div>
+                    <div style="display: inline-block;">V</div>
+                </div>
             </div>
-            <div class="col-2 vizm" id="vUi"
-                style="text-align: right; padding-left: 5px; background-color: rgb(116, 148, 148);">Ток:</div>
-            <div class="col-3 vizm" id="vCr"
-                style="background-color: rgb(116, 148, 148);padding-left: 10px; text-align: center;">130<span>A</span>
+            <div class="col-1 vizm"
+                style="min-width: 30px; text-align: right; padding-left: 2px; background-color: rgb(116, 148, 148);">
+                Ток:</div>
+            <div class="col-1 vizm" style="min-width: 60px; background-color: rgb(116, 148, 148);display: inline-block;
+              padding-left: 2px; text-align: right;">
+                <div id="vCr" style="display: inline-block;">191</div>A
             </div>
-            <div class="col-3 vizm" id="vCrP"
-                style="background-color: rgb(116, 148, 148);padding-left: 10px;text-align: center;">99<span>%</span>
+            <div class="col-1 vizm" style="min-width: 50px; background-color: rgb(116, 148, 148);
+            padding-left: 2px;text-align: right;">
+                <span id="vCrP">140</span>%
             </div>
-            <div class="col-2 vizm " id="vUo" style=" text-align: right; padding-left: 1px;">
-                <div class="d-none d-sm-inline-block">Вых</div>
-                289
+            <div class="col-5 ">
+                <div class="row" style=" text-align: center; padding-left: 5px;">
+                    <span class=" d-none d-lg-inline-block" style=" text-align: right;">Вых</span>
+                    <div class="col-2" id="vUo" style=" min-width: 30px; padding-left: 2px; text-align: right;padding-right: 1px;">112</div>
+                    <div style="display: inline-block;">V</div>
+                    <div class=" d-none d-sm-block" style="background-color: teal; margin-left: 10px; ">
+                        <div id="vSw" style="padding-left: 5px; text-align: center; display: inline-block;">1</div>
+                        <div style="display: inline-block; width: 20px;">ст.</div>
+                    </div>
+
+                </div>
             </div>
+            <!-- <div class="col-2 d-none d-lg-inline-block">
+                <div class="" style="min-width: 40px; display: inline-block; padding-left: 2px;text-align: left;">
+                    
+                </div>
+            </div> -->
         </div>
 
         <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -586,8 +601,9 @@
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border" name="legendClick" id="qtrm"
                             style="color:rgb(0, 153, 255); text-decoration: underline;">Температура</legend>
-                        <div class="nameInf">Измеренная : </div>
-                        <span name="trmIzm" style="width: 40%; text-align: center;"></span>
+                        <div class="nameInf">Измеренная :</div>
+                        <div id="trmIzm" style="display: inline-block; width: 40%; text-align: center;"></div>
+                        <!-- <label id="iT"></label> -->
 
                         <div class="nameInf">Вкл. вентилятора : </div>
                         <input name="set" class="integer" type="number" size="2" id="trmFanOn" maxlength="2" min="10"

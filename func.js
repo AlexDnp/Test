@@ -30,6 +30,7 @@ const idStep = [
 
 var isConnected = false;
 var isPageInfo = false;
+let timerId;
 
 
 $(document).ready(function () {
@@ -206,6 +207,10 @@ function selectCarouselItem(e) {
 
 }
 
+function requestIzm(){
+  send("vizm");
+  timerId=setTimeout(requestIzm,500);
+}
 
 function StateConnect(state) {
 
@@ -229,9 +234,11 @@ function StateConnect(state) {
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
-    send("vizm");
+    timerId=setTimeout(requestIzm,500);
+    
   }
   else if (state === false && isConnected) {
+    clearTimeout(timerId);
     location.reload();
     return;
     isConnected = false;
@@ -308,7 +315,7 @@ function receiveData(data) {
           inputs[i].classList.remove('d-none');
         }
       } else {
-        elem.innerHTML = jsonResponse[key];
+        elem.innerText = jsonResponse[key];
       }
     }
   }

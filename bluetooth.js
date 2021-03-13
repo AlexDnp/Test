@@ -67,7 +67,7 @@ function requestBluetoothDevice() {
   return navigator.bluetooth.requestDevice({
     //filters: [{ services: [0xFFE0] }],
     acceptAllDevices: true,
-   optionalServices: [0xFFE0]
+    optionalServices: [0xFFE0]
   }).
     then(device => {
       log('"' + device.name + '" bluetooth device selected');
@@ -125,7 +125,7 @@ function startNotifications(characteristic) {
   return characteristic.startNotifications().
     then(() => {
       log('Notifications started');
-      inputField.disabled=false;
+      inputField.disabled = false;
       StateConnect(true);
       characteristic.addEventListener('characteristicvaluechanged',
         handleCharacteristicValueChanged);
@@ -163,6 +163,9 @@ function log(data, type = '') {
   terminalContainer.insertAdjacentHTML('beforeend',
     '<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
   terminalContainer.scrollTop = terminalContainer.scrollHeight;
+  let el = terminalContainer.querySelectorAll('div');
+  if (el.length > 20)
+    el[0].remove();
 }
 
 // Отключиться от подключенного устройства
