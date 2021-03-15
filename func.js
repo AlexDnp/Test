@@ -99,6 +99,8 @@ $(document).ready(function () {
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 
   $(".titlePage").click(function (e) {
+    let str=idInfo.InfComment;
+
     if (isConnected === false)
       return;
     let nm = $(this).attr('name');
@@ -110,18 +112,35 @@ $(document).ready(function () {
     }
   });
 
-  $('legend[name=legendClick]').click(function (e) {
+  // $('legend[name=legendClick]').click(function (e) {
+  //   let id = $(this).attr('id');
+  //   send(id);
+  // });
+
+  $('.legendClick').click(function (e) {
     let id = $(this).attr('id');
     send(id);
   });
 
   $('.vizm').bind('DOMSubtreeModified', function () {
-    if ($(".vStr").hasClass('d-none')===false)
-        $(".vStr").addClass('d-none');
+    if ($(".vStr").hasClass('d-none') === false)
+      $(".vStr").addClass('d-none');
     $(".vizm").each(function () {
       if ($(this).hasClass('d-none'))
         $(this).removeClass('d-none');
 
+    });
+  });
+
+  $('#hRec').bind('DOMSubtreeModified', function () {
+    let value = $('#hRec').text();
+    if (Number($('#hRec').text()) > 0) {
+      if ($('#hClr').hasClass('d-none'))
+        $('#hClr').removeClass('d-none');
+    }
+    $("[name='hRec']").each(function () {
+      if ($(this).hasClass('d-none'))
+        $(this).removeClass('d-none');
     });
   });
 
@@ -207,9 +226,9 @@ function selectCarouselItem(e) {
 
 }
 
-function requestIzm(){
+function requestIzm() {
   send("vizm");
-  timerId=setTimeout(requestIzm,500);
+  timerId = setTimeout(requestIzm, 500);
 }
 
 function StateConnect(state) {
@@ -234,8 +253,8 @@ function StateConnect(state) {
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
-    timerId=setTimeout(requestIzm,500);
-    
+    timerId = setTimeout(requestIzm, 500);
+
   }
   else if (state === false && isConnected) {
     clearTimeout(timerId);
@@ -246,7 +265,7 @@ function StateConnect(state) {
     $(".page").each(function () {
       // let id = this.id;
       if (this.id != "") {
-        if ($(this).hasClass('d-none')===false)
+        if ($(this).hasClass('d-none') === false)
           $(this).addClass('d-none');
       }
     });
@@ -321,149 +340,3 @@ function receiveData(data) {
   }
 }
 
-// var dig = 0;
-// function validate(evt, sender) {
-//   var theEvent = evt || window.event;
-
-//   // Handle paste
-//   if (theEvent.type === 'paste') {
-//     key = event.clipboardData.getData('text/plain');
-//   } else {
-//     // Handle key press
-//     var key = theEvent.keyCode || theEvent.which;
-//     key = String.fromCharCode(key);
-//   }
-//   var regex = /[0-9]/;
-//   if (!regex.test(key)) {
-//     theEvent.returnValue = false;
-//     if (theEvent.preventDefault) theEvent.preventDefault();
-//   }
-
-// }
-
-// function checkValue(sender) {
-//   let min = sender.min;
-//   let max = sender.max;
-//   // here we perform the parsing instead of calling another function
-//   let value = parseInt(sender.value);
-//   if (isNaN(value))
-//     return false;
-//   if (sender.value.length > sender.maxLength)
-//     sender.value = sender.value.slice(0, sender.maxLength);
-//   if (value > max) {
-//     sender.value = max;
-//   } else if (value < min) {
-//     sender.value = min;
-//   }
-
-// }
-
-// function addStep(key, value) {
-//   var container = document.getElementById("countSteps");
-//   if (container) {
-//     if ((i = idStep.indexOf(key)) >= 0) {
-//       console.log(key);
-//       console.log(i);
-//       var label = document.createElement("label");
-//       label.style = "width: 120px";
-//       label.innerText = i + " ступень";
-//       var input = document.createElement("input");
-//       input.type = "number";
-//       input.name = "step" + i;
-//       input.id = "step" + i;
-//       input.min = 100;
-//       input.step = 1;
-//       input.max = 300;
-//       input.value = value;
-//       //  label.appendChild(input);
-//       container.appendChild(label);
-//       container.appendChild(input);
-//       container.appendChild(document.createElement("br"));
-//     };
-//   }
-// }
-
-// function addSteps(number, count) {
-//   // Number of inputs to create
-//   //var number = document.getElementById("iSteps").value;
-
-//   // Container <div> where dynamic content will be placed
-//   // toggle('saveSteps', 'hidden');
-
-
-//   // document.getElementById("").classList.remove('show');
-//   // document.getElementById("saveSteps").classList.add('hidden');
-//   var container = document.getElementById("countSteps");
-//   // Clear previous contents of the container
-//   while (container.hasChildNodes()) {
-//     container.removeChild(container.lastChild);
-//   }
-//   for (i = number; i < count + 1; i++) {
-//     // Append a node with a random text
-//     // container.appendChild(document.createTextNode("Member " + (i+1)));
-//     var label = document.createElement("label");
-//     label.setAttribute('for', 'step' + i);
-//     label.style = "width: 120px";
-//     label.innerText = i + " ступень";
-//     label.name = i;
-//     var cr = document.createElement("label");
-//     //<label class="circle"></label>
-//     cr.classList.add('circle');
-//     cr.classList.add('cr');
-//     cr.id = 'cr' + i;
-//     cr.classList.add('d-none');
-
-//     //<span class="validity"></span>
-//     var sp = document.createElement("span");
-//     sp.classList.add('validity');
-
-//     // Create an <input> element, set its type and name attributes
-//     var input = document.createElement("input");
-//     input.type = "number";
-//     input.name = "step" + i;
-//     input.id = "step" + i;
-//     input.min = 100;
-//     input.step = 1;
-//     input.max = 300;
-//     input.value = "";
-
-//     //input.disabled=true;
-//     input.setAttribute('size', '3');
-//     input.setAttribute('maxLength', '3');
-//     input.addEventListener('keydown', checkInputNumber);
-//     // input.setAttribute('oninput', "checkValue(this)");
-//     //"javascript:if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);");
-//     input.setAttribute('required', 'true');
-//     //oninput="checkValue(this);"
-//     // input.pattern = "[0-9]{3}";
-//     // input.setAttribute('pattern', '^[0–9]$');//
-//     //input.oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');";
-//     input.setAttribute('pattern', '\\d*');
-//     //input.setAttribute('oninput', "changeLevelStep('countSteps',this); actionSave('countSteps','saveSteps')");
-
-//     //<label class="circle"></label>
-
-
-//     // input.oninput=actionSave('countSteps','saveSteps');
-
-//     container.appendChild(label);
-//     container.appendChild(input);
-//     container.appendChild(sp);
-//     container.appendChild(cr);
-
-
-//     // Append a line break 
-//     container.appendChild(document.createElement("br"));
-//   }
-//   // toggle('stepsLevel', 'show');
-//   // document.getElementById('stepsLevel').classList.remove('hidden');
-//   // document.getElementById('stepsLevel').classList.add('show');
-
-// }
-// function changeValueById(elem, newValue) {
-//   if (elem.tagName == 'INPUT') {
-//     elem.value = newValue;
-//   } else {
-//     elem.innerHTML = newValue;
-//   }
-// }
