@@ -99,7 +99,7 @@ $(document).ready(function () {
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 
   $(".titlePage").click(function (e) {
-    let str=idInfo.InfComment;
+    let str = idInfo.InfComment;
 
     if (isConnected === false)
       return;
@@ -131,6 +131,28 @@ $(document).ready(function () {
 
     });
   });
+
+
+  $('#pDev').bind('DOMSubtreeModified', function () {
+    let time = Number($('#pDev').text());
+    var sam = new Date();
+    sam.setTime(time * 1000);
+  });
+
+  // $('#hRec').trigger("contentchanged");
+
+
+  // $("#hRec").on("contentchanged", function () {
+  //   let value = $('#hRec').text();
+  //   if (Number($('#hRec').text()) > 0) {
+  //     if ($('#hClr').hasClass('d-none'))
+  //       $('#hClr').removeClass('d-none');
+  //   }
+  //   $("[name='hRec']").each(function () {
+  //     if ($(this).hasClass('d-none'))
+  //       $(this).removeClass('d-none');
+  //   });
+  // });
 
   $('#hRec').bind('DOMSubtreeModified', function () {
     let value = $('#hRec').text();
@@ -312,6 +334,10 @@ function SubmitDisabled(request) {
   }
 }
 
+function ParseTime() {
+
+}
+
 // Обработка полученных данных
 function receiveData(data) {
   var jsonResponse = JSON.parse(data);
@@ -336,6 +362,25 @@ function receiveData(data) {
       } else {
         elem.innerText = jsonResponse[key];
       }
+    }
+    else {
+      switch (key) {
+        case "pDev":
+        case "pWrk":
+          let distance = jsonResponse[key] * 1000;
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          if(days>0)
+       //   let str=days+"d"+ hours+"h"+minutes+"m";
+          $("#timeWork").text(days+"d"+ hours+"h"+minutes+"m");
+          else
+          $("#timeWork").text(hours+"h"+minutes+"m");
+          break;
+      }
+
     }
   }
 }

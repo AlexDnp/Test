@@ -448,7 +448,7 @@
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item col-md-6 active " id="info">
                 <h4 class="titlePage" name="info"> Информация</h4>
-                <div class="page d-none" id="pageinfo" style="padding-top: 20px;margin-bottom: 1.5em;">
+                <div class="page " id="pageinfo" style="padding-top: 20px;margin-bottom: 1.5em;">
                     <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 "
                        > -->
                         <fieldset class="scheduler-border">
@@ -470,11 +470,11 @@
                                 style="color:rgb(0, 153, 255); text-decoration: underline;">Время</legend>
 
                             <div class="nameInf1">Непрерывной работы :</div>
-                            <div id="pWrk" style="display: inline-block; width: 35%; text-align: center;">-</div>
-                            <div class="nameInf1">Наработка :</div>
-                            <div id="pTot" style="display: inline-block; width: 35%; text-align: center;">-</div>
-                            <div class="nameInf1">На устройстве:</div>
-                            <div id="pDev" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                            <div id="timeWork" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                            <div class="nameInf1">Суммарное работы:</div>
+                            <div id="timeTotalWork" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                            <!-- <div class="nameInf1">На устройстве:</div>
+                            <div id="timeDevice" style="display: inline-block; width: 35%; text-align: center;">-</div> -->
                             <div class="nameInf1">Задержка включения :</div>
                             <input name="set" class="integer" type="number" style="width: 35%;" size="3" id="pTou"
                                 maxlength="3" min="10" max="300" step="1" required pattern="\\d*" value="">
@@ -490,6 +490,7 @@
                             <input type="date" name="set" id="iDP" value="">
                             <div class="nameInf">Ступеней: </div>
                             <select id="iS" name="set1" style="width: 40%; text-align-last:center; ">
+                                <option value="0"> </option>
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                             </select>
