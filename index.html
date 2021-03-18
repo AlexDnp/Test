@@ -236,16 +236,19 @@
             border-bottom: none;
         }
 
+
+
         @media (max-height: 400px) {
             .carousel-indicators {
                 display: none;
             }
+
             .carousel-item {
-            padding-top: 50px;
-            height: 95vh;
-            padding-bottom: 50px;
-           
-        }
+                padding-top: 50px;
+                height: 95vh;
+                padding-bottom: 50px;
+
+            }
         }
 
         @media (max-width: 400px) {
@@ -279,10 +282,10 @@
 
         @media (min-width: 576px) {
             .carousel-item {
-            padding-top: 50px;
-            padding-bottom: 50px;
-            padding-right: 50px;
-        }
+                padding-top: 50px;
+                padding-bottom: 50px;
+                padding-right: 50px;
+            }
         }
 
         @media (min-width: 768px) {
@@ -296,24 +299,25 @@
                 flex-basis: unset;
             }
 
-            /* show 3 items */
-            .carousel-inner .active,
+            /* show 2 items */
+            /* .carousel-inner .active, */
             .carousel-inner .active+.carousel-item {
                 display: block;
             }
 
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item,
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item {
+            .carousel-inner .carousel-item.active:not(.carousel-item-left),
+            .carousel-inner .carousel-item.active:not(.carousel-item-right),
+            .carousel-inner .carousel-item.active+.carousel-item
+            {
                 transition: none;
                 margin-right: initial;
             }
-
+/* 
             .carousel-inner .carousel-item-next,
             .carousel-inner .carousel-item-prev {
                 position: relative;
                 transform: translate3d(0, 0, 0);
-            }
+            } */
 
             .carousel-inner .active.carousel-item+.carousel-item+.carousel-item {
                 position: absolute;
@@ -325,36 +329,37 @@
             }
 
             /* left or forward direction */
-            .active.carousel-item-left+.carousel-item-next.carousel-item-left,
-            .carousel-item-next.carousel-item-left+.carousel-item,
-            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item,
-            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item {
+            /* .active.carousel-item-left+.carousel-item-next.carousel-item-left, */
+            /* .carousel-item-next.carousel-item-left+.carousel-item */
+            /* .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item,
+            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item */
+             /* {
                 position: relative;
                 transform: translate3d(-100%, 0, 0);
                 visibility: visible;
-            }
+            } */
 
             /* farthest right hidden item must be abso position for animations */
-            .carousel-inner .carousel-item-prev.carousel-item-right {
+            /* .carousel-inner .carousel-item-prev.carousel-item-right {
                 position: absolute;
                 top: 0;
                 left: 0;
                 z-index: -1;
                 display: block;
                 visibility: visible;
-            }
+            } */
 
             /* right or prev direction */
-            .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
-            .carousel-item-prev.carousel-item-right+.carousel-item,
-            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item,
-            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item {
+            /* .active.carousel-item-right+.carousel-item-prev.carousel-item-right, */
+            /* .carousel-item-prev.carousel-item-right+.carousel-item */
+            /* .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item,
+            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item */
+             /* {
                 position: relative;
                 transform: translate3d(100%, 0, 0);
                 visibility: visible;
-                display: block;
-                visibility: visible;
-            }
+            
+            } */
 
         }
     </style>
@@ -451,54 +456,54 @@
                 <div class="page " id="pageinfo" style="padding-top: 20px;margin-bottom: 1.5em;">
                     <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 "
                        > -->
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border"
-                                style="color:rgb(0, 153, 255); text-decoration: underline;">
-                                <span class="legendClick" id="message">Статистика</span>
-                                <button class="d-none" id="btClrMessage" style=" float: left;margin-right: 20px;">clear</button>
-                            </legend>
-                            <div class="nameInf1">Напряжение макс.:</div>
-                            <div id="mUmax" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border" style="color:rgb(0, 153, 255); text-decoration: underline;">
+                            <span class="legendClick" id="message">Статистика</span>
+                            <button class="d-none" id="btClrMessage"
+                                style=" float: left;margin-right: 20px;">clear</button>
+                        </legend>
+                        <div class="nameInf1">Напряжение макс.:</div>
+                        <div id="mUmax" style="display: inline-block; width: 35%; text-align: center;">-</div>
 
-                            <div class="nameInf1">Напряжение мин. :</div>
-                            <div id="mUmin" style="display: inline-block; width: 35%; text-align: center;">-</div>
-                            <div class="nameInf1">Входное ток. макс :</div>
-                            <div id="mCmax" style="display: inline-block; width: 35%; text-align: center;">-</div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border legendClick" id="period"
-                                style="color:rgb(0, 153, 255); text-decoration: underline;">Время</legend>
+                        <div class="nameInf1">Напряжение мин. :</div>
+                        <div id="mUmin" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                        <div class="nameInf1">Входное ток. макс :</div>
+                        <div id="mCmax" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border legendClick" id="period"
+                            style="color:rgb(0, 153, 255); text-decoration: underline;">Время</legend>
 
-                            <div class="nameInf1">Непрерывной работы :</div>
-                            <div id="timeWork" style="display: inline-block; width: 35%; text-align: center;">-</div>
-                            <div class="nameInf1">Суммарное работы:</div>
-                            <div id="timeTotalWork" style="display: inline-block; width: 35%; text-align: center;">-</div>
-                            <!-- <div class="nameInf1">На устройстве:</div>
+                        <div class="nameInf1">Непрерывной работы :</div>
+                        <div id="timeWork" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                        <div class="nameInf1">Суммарное работы:</div>
+                        <div id="timeTotalWork" style="display: inline-block; width: 35%; text-align: center;">-</div>
+                        <!-- <div class="nameInf1">На устройстве:</div>
                             <div id="timeDevice" style="display: inline-block; width: 35%; text-align: center;">-</div> -->
-                            <div class="nameInf1">Задержка включения :</div>
-                            <input name="set" class="integer" type="number" style="width: 35%;" size="3" id="pTou"
-                                maxlength="3" min="10" max="300" step="1" required pattern="\\d*" value="">
-                        </fieldset>
-                        <fieldset class="scheduler-border" style="margin-top: 10px;">
-                            <legend class="scheduler-border legendClick" id="info"
-                                style="color:rgb(0, 153, 255); text-decoration: underline;">Информация</legend>
-                            <div class="nameInf">№ устройства: </div>
-                            <input type="text" maxlength="7" id="iN" name="set" value="">
-                            <div class="nameInf">Мощность кВт: </div>
-                            <input type="text" maxlength="3" id="iP" name="set" required pattern="[0-9]{1,3}" value="">
-                            <div class="nameInf">Изготовлен: </div>
-                            <input type="date" name="set" id="iDP" value="">
-                            <div class="nameInf">Ступеней: </div>
-                            <select id="iS" name="set1" style="width: 40%; text-align-last:center; ">
-                                <option value="0"> </option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                            </select>
-                            <div class="nameInf"> Дата ПО :</div>
-                            <label id="iDS" style="width: 40%; text-align: center;"></label>
-                            <div class="nameInf">Примечание: </div>
-                            <input type="text" maxlength="20" id="iC" name="set" value="">
-                        </fieldset>
+                        <div class="nameInf1">Задержка включения :</div>
+                        <input name="set" class="integer" type="number" style="width: 35%;" size="3" id="pTou"
+                            maxlength="3" min="10" max="300" step="1" required pattern="\\d*" value="">
+                    </fieldset>
+                    <fieldset class="scheduler-border" style="margin-top: 10px;">
+                        <legend class="scheduler-border legendClick" id="info"
+                            style="color:rgb(0, 153, 255); text-decoration: underline;">Информация</legend>
+                        <div class="nameInf">№ устройства: </div>
+                        <input type="text" maxlength="7" id="iN" name="set" value="">
+                        <div class="nameInf">Мощность кВт: </div>
+                        <input type="text" maxlength="3" id="iP" name="set" required pattern="[0-9]{1,3}" value="">
+                        <div class="nameInf">Изготовлен: </div>
+                        <input type="date" name="set" id="iDP" value="">
+                        <div class="nameInf">Ступеней: </div>
+                        <select id="iS" name="set1" style="width: 40%; text-align-last:center; ">
+                            <option value="0"> </option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                        <div class="nameInf"> Дата ПО :</div>
+                        <label id="iDS" style="width: 40%; text-align: center;"></label>
+                        <div class="nameInf">Примечание: </div>
+                        <input type="text" maxlength="20" id="iC" name="set" value="">
+                    </fieldset>
 
                     <!-- </div> -->
                     <br>
@@ -508,7 +513,8 @@
                 <h4 class="titlePage" name="steps" style="text-align: center;">Ступени</h4>
                 <div class="page d-none" id="pagesteps">
 
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 " style="margin-right: 5px;margin-left: 0px;">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 "
+                        style="margin-right: 5px;margin-left: 0px;">
                         <fieldset name="st1" class="d-none">
                             <div class="numSteps"> 1 ступень :</div>
                             <input name="set" class="integer" type="number" size="3" id="st1" maxlength="3" min="100"
@@ -675,14 +681,15 @@
                 </div>
             </div>
         </div>
+        <ol class="carousel-indicators" style="bottom: -15px; position: relative;">
+            <li data-target="#carouselContent" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselContent" data-slide-to="1"></li>
+            <li data-target="#carouselContent" data-slide-to="2"></li>
+            <li data-target="#carouselContent" data-slide-to="3"></li>
+            <li data-target="#carouselContent" data-slide-to="4"></li>
+        </ol>
     </div>
-    <ol class="carousel-indicators  " id="carIndicators">
-        <li data-target="#carouselContent" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselContent" data-slide-to="1"></li>
-        <li data-target="#carouselContent" data-slide-to="2"></li>
-        <li data-target="#carouselContent" data-slide-to="3"></li>
-        <li data-target="#carouselContent" data-slide-to="4"></li>
-    </ol>
+
     <div id="carousel-control" class="d-none">
         <div class="d-none d-sm-block">
             <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev" style="width: 5%;">
