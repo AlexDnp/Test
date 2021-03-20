@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="windows-1251">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link href="styles.css" rel="stylesheet">-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -104,6 +104,38 @@
             color: black;
         }
 
+        #terminalHistory {
+            -moz-appearance: textfield-multiline;
+            -webkit-appearance: textarea;
+            border: 1px solid gray;
+            font: medium -moz-fixed;
+            font: -webkit-small-control;
+            /* height: 95px; */
+            overflow: auto;
+            padding: 2px;
+            /* resize: both; */
+            width: 100%;
+            height: auto;
+            max-height: 90%;
+            /* padding-left: 10%;
+            padding-right: 10%; */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: transparent;
+            color: white;
+        }
+
+        #terminalHistory::-webkit-scrollbar {
+            width: 5px;
+            background-color: #f9f9fd;
+
+        }
+
+        #terminalHistory::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #18aaaa;
+        }
+
         select[name=set],
         input[name=set] {
             width: 40%;
@@ -194,6 +226,7 @@
             text-align: center;
             text-decoration: underline;
             color: rgb(0, 153, 255);
+            cursor: pointer;
         }
 
         .nameInf {
@@ -234,6 +267,7 @@
             width: auto;
             padding: 0 10px;
             border-bottom: none;
+            cursor: pointer;
         }
 
 
@@ -307,12 +341,12 @@
 
             .carousel-inner .carousel-item.active:not(.carousel-item-left),
             .carousel-inner .carousel-item.active:not(.carousel-item-right),
-            .carousel-inner .carousel-item.active+.carousel-item
-            {
+            .carousel-inner .carousel-item.active+.carousel-item {
                 transition: none;
                 margin-right: initial;
             }
-/* 
+
+            /* 
             .carousel-inner .carousel-item-next,
             .carousel-inner .carousel-item-prev {
                 position: relative;
@@ -333,7 +367,7 @@
             /* .carousel-item-next.carousel-item-left+.carousel-item */
             /* .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item,
             .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item */
-             /* {
+            /* {
                 position: relative;
                 transform: translate3d(-100%, 0, 0);
                 visibility: visible;
@@ -354,7 +388,7 @@
             /* .carousel-item-prev.carousel-item-right+.carousel-item */
             /* .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item,
             .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item */
-             /* {
+            /* {
                 position: relative;
                 transform: translate3d(100%, 0, 0);
                 visibility: visible;
@@ -578,22 +612,26 @@
             <div class="carousel-item  col-md-6 " id="history">
                 <h4 class="titlePage" name="history" style="text-align: center;">История</h4>
 
+                <fieldset class="" name="hRec" style="padding-left: 10%;padding-right: 10%; color: white;">
+                    <div style="width: 55%; display: inline-block;">
+                        <div style="display: inline-block;">Записей : </div>
+                        <span id="hRec">255</span>
+                    </div>
+                    <button id="hClr">Очистить</button>
+                </fieldset>
+                <br>
                 <div class="page d-none" id="pagehistory">
-                    <div class="d-none" name="hRec">
-                        <div style="width: 150px; display: inline-block;">
-                            <label style="width: 80px">Записей: </label>
-                            <span id="hRec">255</span>
-                        </div>
-                        <button class="d-none" id="hClr">Удалить</button>
+                    <div id="terminalHistory">   
                     </div>
                 </div>
             </div>
 
             <div class="carousel-item col-md-6 " id="term">
+                <h4 style="text-align: center; color: white; padding-top: 10px;">Терминал</h4>
+                <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
+                <br>
                 <div class="page ">
-                    <h4 style="text-align: center; text-decoration: underline">Терминал</h4>
-                    <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
-                    <br>
+
                     <br>
                     <div id="terminal"></div>
                     <br>

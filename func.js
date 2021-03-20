@@ -69,6 +69,11 @@ $(document).ready(function () {
     }
   });
 
+  $('#hClr').click(function () {
+    let id = $(this).attr('id');
+    send(id);
+  });
+
   $('input').bind('copy paste', function (e) {
     e.preventDefault();
   });
@@ -373,11 +378,15 @@ function receiveData(data) {
           var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
           var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          if(days>0)
-       //   let str=days+"d"+ hours+"h"+minutes+"m";
-          $("#timeWork").text(days+"d"+ hours+"h"+minutes+"m");
+          if (days > 0)
+            //   let str=days+"d"+ hours+"h"+minutes+"m";
+            $("#timeWork").text(days + "d" + hours + "h" + minutes + "m");
           else
-          $("#timeWork").text(hours+"h"+minutes+"m");
+            $("#timeWork").text(hours + "h" + minutes + "m");
+          break;
+        case "hCnt":
+          let str = '<div>' + ' ' + jsonResponse['hCnt'] + ' ' + jsonResponse['hTm'] + ' ' + jsonResponse['hStr'] + '</div>';
+          $('#terminalHistory').append(str);
           break;
       }
 
