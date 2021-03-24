@@ -8,6 +8,13 @@ const idInfo = {
   InfDateSoft: "iDS"
 }
 
+var days;
+var hours;
+var minutes;
+
+var historyCountRec = 0;
+var historySelectRec = 0;
+
 const idStep = [
   "st1",
   "st2",
@@ -160,15 +167,33 @@ $(document).ready(function () {
   // });
 
   $('#hRec').bind('DOMSubtreeModified', function () {
-    let value = $('#hRec').text();
-    if (Number($('#hRec').text()) > 0) {
+    if ($('#hRec').text() == "")
+      return;
+    historyCountRec = Number($('#hRec').text());
+    if (historyCountRec > 0) {
       if ($('#hClr').hasClass('d-none'))
         $('#hClr').removeClass('d-none');
+
+      $("[name='hRec']").each(function () {
+        if ($(this).hasClass('d-none'))
+          $(this).removeClass('d-none');
+      });
+      let rc = historyCountRec - historySelectRec;
+      if (rc > 0) {
+        // historySelectRec++;
+        send("{hRec:" + rc + "}");
+      }
     }
-    $("[name='hRec']").each(function () {
-      if ($(this).hasClass('d-none'))
-        $(this).removeClass('d-none');
-    });
+    else {
+      historySelectRec = 0;
+      if ($('#hClr').hasClass('d-none') == false)
+        $('#hClr').addClass('d-none');
+      $("[name='hRec']").each(function () {
+        if ($(this).hasClass('d-none') == false)
+          $(this).addClass('d-none');
+      });
+    }
+
   });
 
 });
@@ -186,7 +211,6 @@ document.onkeydown = function (e) {
     SubmitDisabledToggle();
   }
 }
-
 
 function sendNewValue(e) {
   let id = e.target.id;
@@ -339,8 +363,11 @@ function SubmitDisabled(request) {
   }
 }
 
-function ParseTime() {
-
+function ParseTime(distance) {
+  days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  seconds = Math.floor((distance % (1000 * 60)) / 1000);
 }
 
 // Обработка полученных данных
@@ -374,10 +401,8 @@ function receiveData(data) {
         case "pWrk":
           let distance = jsonResponse[key] * 1000;
           // Time calculations for days, hours, minutes and seconds
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          ParseTime(distance);
+
           if (days > 0)
             //   let str=days+"d"+ hours+"h"+minutes+"m";
             $("#timeWork").text(days + "d" + hours + "h" + minutes + "m");
@@ -385,12 +410,43 @@ function receiveData(data) {
             $("#timeWork").text(hours + "h" + minutes + "m");
           break;
         case "hCnt":
-          let str = '<div>' + ' ' + jsonResponse['hCnt'] + ' ' + jsonResponse['hTm'] + ' ' + jsonResponse['hStr'] + '</div>';
-          $('#terminalHistory').append(str);
+          // let sa=$('#bodyHistory').find("td:nth-child(1):contains('14')").length;
+          // let sq=$('#bodyHistory').find("td:nth-child(1):contains('18')").length;
+          // let sw=$('#bodyHistory').find("td:nth-child(1):contains(1)").length;
+          // let sb=$('#bodyHistory').find("td:nth-child(1):contains("+ jsonResponse['hCnt'].toString() +")").length;
+          let cnt = $('#bodyHistory td:nth-child(1)').filter(function () {
+            if ($(this).text() === jsonResponse['hCnt'].toString())
+              return true;
+          })
+          if (cnt.length > 0)
+            return;
+          historySelectRec ++;
+          let dist = jsonResponse['hTm'] * 1000;
+          ParseTime(dist);
+          var container = document.getElementById("bodyHistory");
+          var row = document.createElement("TR");
+
+          // var td = document.createElement("TD");
+          var td = '<td >' + jsonResponse['hCnt'] + '</td>';
+          row.insertAdjacentHTML('beforeend', td);
+          td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
+          row.insertAdjacentHTML('beforeend', td);
+          td = '<td>' + jsonResponse['hStr'] + '</td>';
+          row.insertAdjacentHTML('beforeend', td);
+          container.appendChild(row);
+          var d = $('#pagehistory');
+          d.scrollTop(d.prop("scrollHeight"));
+          // let str = '<div>' + ' ' + 'Запись : ' + " " + jsonResponse['hCnt'] + "  "
+          //   + 'Время :' + " " + jsonResponse['hTm'] + "  " + 'Причина : ' + " " + jsonResponse['hStr'] + '</div>';
+          // $('#terminalHistory').append(str);
           break;
       }
 
     }
   }
+}
+
+function To2(val) {
+  return (val < 10 ? "0" + val : val);
 }
 

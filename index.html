@@ -612,17 +612,57 @@
             <div class="carousel-item  col-md-6 " id="history">
                 <h4 class="titlePage" name="history" style="text-align: center;">История</h4>
 
-                <fieldset class="" name="hRec" style="padding-left: 10%;padding-right: 10%; color: white;">
+                <fieldset class="d-none" name="hRec" style="padding-left: 10%;padding-right: 10%; color: white;">
                     <div style="width: 55%; display: inline-block;">
                         <div style="display: inline-block;">Записей : </div>
-                        <span id="hRec">255</span>
+                        <span id="hRec"></span>
                     </div>
+                    <!-- <button id="hGet">Читать</button> -->
+
                     <button id="hClr">Очистить</button>
                 </fieldset>
-                <br>
-                <div class="page d-none" id="pagehistory">
-                    <div id="terminalHistory">   
-                    </div>
+                <!-- <br> -->
+                <div class="page d-none" id="pagehistory" name="hRec">
+                    <table class="table table-striped" id="tableHistory" style="color:white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">№</th>
+                                <th scope="col">Время</th>
+                                <th scope="col" style="text-align: center;">Состояние</th>                        
+                            </tr>
+                        </thead>
+
+                        <tbody id="bodyHistory" style="height: auto; max-height: 80%; overflow: auto;">
+                            <!-- <div id="terminalHistory1"> -->
+                                <!-- <tr>
+                                    <td>12</td>
+                                    <td>00:20:12</td>
+                                    <td>sdssdsdsdsdsdsds</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>00:20:12</td>
+                                    <td>sdssdsdsdsdsdsds</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>00:20:12</td>
+                                    <td>sdssdsdsdsdsdsds</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>00:20:12</td>
+                                    <td>sdssdsdsdsdsdsds</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>00:20:12</td>
+                                    <td>sdssdsdsdsdsdsds</td>
+                                </tr> -->
+                            <!-- </div> -->
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
 
