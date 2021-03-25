@@ -198,6 +198,11 @@ $(document).ready(function () {
 
 });
 
+let downKeys = {}; // the set of keys currently down
+document.onkeyup = function (e) {
+  downKeys[e.key] = false;
+}
+
 document.onkeydown = function (e) {
   var evtobj = window.event ? event : e
   // var element = document.getElementById('edit-content');
@@ -207,9 +212,14 @@ document.onkeydown = function (e) {
   // if (charCode === 's' && evtobj.ctrlKey && element) {
   //   evtobj.preventDefault(); send_request_edit(this, val('edit-json'), window.location.search.substring(1).split("&")[0] + '.json'); toggle('edit-content'); toggle('url-content');
   // }
+  downKeys[evtobj.key] = true;
+  if (downKeys['/'] && downKeys['M']) {
+    SubmitDisabledToggle();
+  }
   if (charCode === 'm' && evtobj.ctrlKey) {
     SubmitDisabledToggle();
   }
+
 }
 
 function sendNewValue(e) {
