@@ -48,6 +48,13 @@ $(document).ready(function () {
   $("body").css("-o-user-select", "none");
   $("body").css("user-select", "none");
 
+  // $('.navbar .dropdown').hover(function() {
+  //   $(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
+  // }, function() {
+  //   $(this).find('.dropdown-menu').first().stop(true, true).slideUp(105)
+  // });
+
+
   // let wh = $(window).width();
   // $("#vUi").html(wh);
   // let h = $(window).height();
@@ -124,12 +131,38 @@ $(document).ready(function () {
     }
   });
 
-  // $('legend[name=legendClick]').click(function (e) {
-  //   let id = $(this).attr('id');
-  //   send(id);
+
+//   $(element).on('click', function () {
+//     if(longpress) { // if detect hold, stop onclick function
+//         return false;
+//     };
+// });
+
+$('.legendClick').on('mousedown touchstart', function () {
+    longpress = false; //longpress is false initially
+    pressTimer = window.setTimeout(function(){
+      document.getElementById("myDropdown").classList.toggle("show");
+
+    longpress = true; //if run hold function, longpress is true
+    },1000)
+});
+
+$('.legendClick').on('mouseup touchend', function () {
+  window.clearTimeout(pressTimer); //clear time on mouseup
+});
+
+  // var timerq;
+
+  // $('.legendClick').bind("mousedown touchstart", function (e) {
+  //   timerq = setTimeout(function () {
+  //     document.getElementById("myDropdown").classList.toggle("show");
+  //   }, 2000);
   // });
 
   $('.legendClick').click(function (e) {
+    if(longpress) { // if detect hold, stop onclick function
+      return false;
+  };
     let id = $(this).attr('id');
     send(id);
   });
@@ -430,7 +463,7 @@ function receiveData(data) {
           })
           if (cnt.length > 0)
             return;
-          historySelectRec ++;
+          historySelectRec++;
           let dist = jsonResponse['hTm'] * 1000;
           ParseTime(dist);
           var container = document.getElementById("bodyHistory");

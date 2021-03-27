@@ -395,6 +395,8 @@
             
             } */
 
+            .show {display:block;}
+
         }
     </style>
 
@@ -491,8 +493,13 @@
                     <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 "
                        > -->
                     <fieldset class="scheduler-border">
-                        <legend class="scheduler-border" style="color:rgb(0, 153, 255); text-decoration: underline;">
-                            <span class="legendClick" id="message">Статистика</span>
+                        <legend class="scheduler-border dropdown" style="color:rgb(0, 153, 255); text-decoration: underline;">
+                            <span class="legendClick " id="message">Статистика</span>
+                            <ul class="dropdown-menu" id="myDropdown">
+                                <li>Очистить</li>
+                                <li>Link 2</li>
+                                <li>Link 3</li>
+                            </ul>
                             <button class="d-none" id="btClrMessage"
                                 style=" float: left;margin-right: 20px;">clear</button>
                         </legend>
@@ -503,6 +510,7 @@
                         <div id="mUmin" style="display: inline-block; width: 35%; text-align: center;">-</div>
                         <div class="nameInf1">Входное ток. макс :</div>
                         <div id="mCmax" style="display: inline-block; width: 35%; text-align: center;">-</div>
+
                     </fieldset>
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border legendClick" id="period"
@@ -628,13 +636,13 @@
                             <tr>
                                 <th scope="col">№</th>
                                 <th scope="col">Время</th>
-                                <th scope="col" style="text-align: center;">Состояние</th>                        
+                                <th scope="col" style="text-align: center;">Состояние</th>
                             </tr>
                         </thead>
 
                         <tbody id="bodyHistory" style="height: auto; max-height: 80%; overflow: auto;">
                             <!-- <div id="terminalHistory1"> -->
-                                <!-- <tr>
+                            <!-- <tr>
                                     <td>12</td>
                                     <td>00:20:12</td>
                                     <td>sdssdsdsdsdsdsds</td>
