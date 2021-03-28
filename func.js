@@ -134,11 +134,12 @@ $(document).ready(function () {
   var pressTimer;
 
   $('.legendClick, .titlePage').on('mousedown touchstart', function () {
-    // if (isConnected === false)
-    // return;
     $(".dropdown-content").each(function () {
       $(this).hide();
     });
+    if (isConnected === false)
+      return;
+
     let nm = '.' + $(this).attr('id');
     let el = $(nm);//.find(".dropdown-content");
     if (el.length) {
@@ -156,7 +157,7 @@ $(document).ready(function () {
 
   window.onclick = function (event) {
     $(".dropdown-content").each(function () {
-      if ($.contains(this,event.target)) 
+      if ($.contains(this, event.target))
         $(this).hide();
     });
 
@@ -168,6 +169,8 @@ $(document).ready(function () {
   }
 
   $('.legendClick, .clear').click(function (e) {
+    if (isConnected === false)
+    return;
     let id = $(this).attr('id');
     send(id);
   });
@@ -310,7 +313,7 @@ function selectCarouselItem(e) {
 }
 
 function requestIzm() {
-  send("vizm");
+  //send("vizm");
   timerId = setTimeout(requestIzm, 500);
 }
 
@@ -442,10 +445,6 @@ function receiveData(data) {
             $("#timeWork").text(hours + "h" + minutes + "m");
           break;
         case "hCnt":
-          // let sa=$('#bodyHistory').find("td:nth-child(1):contains('14')").length;
-          // let sq=$('#bodyHistory').find("td:nth-child(1):contains('18')").length;
-          // let sw=$('#bodyHistory').find("td:nth-child(1):contains(1)").length;
-          // let sb=$('#bodyHistory').find("td:nth-child(1):contains("+ jsonResponse['hCnt'].toString() +")").length;
           let cnt = $('#bodyHistory td:nth-child(1)').filter(function () {
             if ($(this).text() === jsonResponse['hCnt'].toString())
               return true;

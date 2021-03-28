@@ -134,7 +134,7 @@ function startNotifications(characteristic) {
 
 // Получение данных
 function handleCharacteristicValueChanged(event) {
-  let value = new TextDecoder().decode(event.target.value);
+  let value = new TextDecoder('windows-1251').decode(event.target.value);
 
   for (let c of value) {
     if (c === '\n') {
