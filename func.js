@@ -118,7 +118,7 @@ $(document).ready(function () {
   $("#carouselContent").on('slide.bs.carousel', selectCarouselItem);
 
   $(".titlePage").click(function (e) {
-    let str = idInfo.InfComment;
+    // let str = idInfo.InfComment;
 
     if (isConnected === false)
       return;
@@ -131,38 +131,43 @@ $(document).ready(function () {
     }
   });
 
+  var pressTimer;
 
-//   $(element).on('click', function () {
-//     if(longpress) { // if detect hold, stop onclick function
-//         return false;
-//     };
-// });
+  $('.legendClick, .titlePage').on('mousedown touchstart', function () {
+    // if (isConnected === false)
+    // return;
+    $(".dropdown-content").each(function () {
+      $(this).hide();
+    });
+    let nm = '.' + $(this).attr('id');
+    let el = $(nm);//.find(".dropdown-content");
+    if (el.length) {
+      pressTimer = window.setTimeout(function () {
+        $(el[0]).show();
+      }, 1000)
+    }
+  });
 
-$('.legendClick').on('mousedown touchstart', function () {
-    longpress = false; //longpress is false initially
-    pressTimer = window.setTimeout(function(){
-      document.getElementById("myDropdown").classList.toggle("show");
+  $('.legendClick, .titlePage').on('mouseup touchend', function () {
+    window.clearTimeout(pressTimer); //clear time on mouseup
+  });
 
-    longpress = true; //if run hold function, longpress is true
-    },1000)
-});
 
-$('.legendClick').on('mouseup touchend', function () {
-  window.clearTimeout(pressTimer); //clear time on mouseup
-});
 
-  // var timerq;
+  window.onclick = function (event) {
+    $(".dropdown-content").each(function () {
+      if ($.contains(this,event.target)) 
+        $(this).hide();
+    });
 
-  // $('.legendClick').bind("mousedown touchstart", function (e) {
-  //   timerq = setTimeout(function () {
-  //     document.getElementById("myDropdown").classList.toggle("show");
-  //   }, 2000);
-  // });
+    // if (document.getElementsByClassName('dropdown-content')[0].contains(event.target)) {
+    //   $(".dropdown-content").each(function () {
+    //     $(this).hide();
+    //   });
+    // }
+  }
 
-  $('.legendClick').click(function (e) {
-    if(longpress) { // if detect hold, stop onclick function
-      return false;
-  };
+  $('.legendClick, .clear').click(function (e) {
     let id = $(this).attr('id');
     send(id);
   });
@@ -173,7 +178,6 @@ $('.legendClick').on('mouseup touchend', function () {
     $(".vizm").each(function () {
       if ($(this).hasClass('d-none'))
         $(this).removeClass('d-none');
-
     });
   });
 
@@ -183,21 +187,6 @@ $('.legendClick').on('mouseup touchend', function () {
     var sam = new Date();
     sam.setTime(time * 1000);
   });
-
-  // $('#hRec').trigger("contentchanged");
-
-
-  // $("#hRec").on("contentchanged", function () {
-  //   let value = $('#hRec').text();
-  //   if (Number($('#hRec').text()) > 0) {
-  //     if ($('#hClr').hasClass('d-none'))
-  //       $('#hClr').removeClass('d-none');
-  //   }
-  //   $("[name='hRec']").each(function () {
-  //     if ($(this).hasClass('d-none'))
-  //       $(this).removeClass('d-none');
-  //   });
-  // });
 
   $('#hRec').bind('DOMSubtreeModified', function () {
     if ($('#hRec').text() == "")
