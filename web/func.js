@@ -1,3 +1,5 @@
+'use strict';
+
 const idInfo = {
   InfLanguage: "iL",
   InfNumDevice: "iN",
@@ -170,7 +172,7 @@ $(document).ready(function () {
 
   $('.legendClick, .clear').click(function (e) {
     if (isConnected === false)
-    return;
+      return;
     let id = $(this).attr('id');
     send(id);
   });
@@ -481,3 +483,14 @@ function To2(val) {
   return (val < 10 ? "0" + val : val);
 }
 
+// Install service worker - for offline support
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('serviceworker.js')
+    .then((reg) => {
+      // регистрация сработала
+      console.log('Registration succeeded. Scope is ' + reg.scope);
+    }).catch((error) => {
+      // регистрация прошла неудачно
+      console.log('Registration failed with ' + error);
+    });
+}
