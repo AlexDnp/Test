@@ -134,6 +134,7 @@ function setOfCachedUrls(cache) {
 }
 
 self.addEventListener('install', function(event) {
+  console.log('[Service Worker] Install');
   event.waitUntil(
     caches.open(cacheName).then(function(cache) {
       return setOfCachedUrls(cache).then(function(cachedUrls) {
