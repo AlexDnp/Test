@@ -13,6 +13,7 @@ const idInfo = {
 var days;
 var hours;
 var minutes;
+var seconds;
 
 var historyCountRec = 0;
 var historySelectRec = 0;
