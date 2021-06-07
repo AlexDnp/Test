@@ -11,12 +11,17 @@
     <link rel="manifest" href="manifest.json">
     <!-- <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5"> -->
     <meta name="theme-color" content="#ffffff">
-
+    <script src="Chart.min.js?v22.10.2017" charset="utf-8"></script>
+    <script src="graph.js?v22.10.2017" type="text/javascript"></script>
     <link href="bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: rgb(92, 92, 92);
 
+        }
+
+        canvas {
+            background-color: rgba(237, 242, 245, 0.836);
         }
 
         .page::-webkit-scrollbar {
@@ -503,7 +508,7 @@
                     <a class="nav-link" id="sett" href="#" onclick="ItemSelect(4)">Настройка</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link disabled"  >07.06.2021 V2.01</a>
+                    <a class="nav-link disabled">07.06.2021 V2.01</a>
                 </li>
             </ul>
         </div>
@@ -513,7 +518,14 @@
     <div id="carouselContent" class="carousel slide" data-ride="carousel" data-interval="false">
 
         <div class="carousel-inner" role="listbox">
-            <div class="carousel-item col-md-6 active " id="info">
+            <div class="carousel-item col-md-6 active ">
+
+                <canvas class="my-4 w-100 chartjs-render-monitor" id="inputChart"
+                    style="display: block; width: 964px; height: 200px;"></canvas>
+                <div id="legend"></div>
+
+            </div>
+            <div class="carousel-item col-md-6 " id="info">
                 <h4 class="titlePage" name="info"> Информация</h4>
                 <div class="page " id="pageinfo" style="padding-top: 20px;margin-bottom: 1.5em;">
                     <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 dropdown"
@@ -864,15 +876,15 @@
 
     }
 
-// Проверка того, что наш браузер поддерживает Service Worker API.
-if ('serviceWorker' in navigator) {
-    // Весь код регистрации у нас асинхронный.
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => navigator.serviceWorker.ready.then((worker) => {
-        worker.sync.register('syncdata');
-      }))
-      .catch((err) => console.log(err));
-}
+    // Проверка того, что наш браузер поддерживает Service Worker API.
+    if ('serviceWorker' in navigator) {
+        // Весь код регистрации у нас асинхронный.
+        navigator.serviceWorker.register('./sw.js')
+            .then(() => navigator.serviceWorker.ready.then((worker) => {
+                worker.sync.register('syncdata');
+            }))
+            .catch((err) => console.log(err));
+    }
 
 
 </script>
