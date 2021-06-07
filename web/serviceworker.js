@@ -160,6 +160,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
+  console.log('[Service Worker] active');
   var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
 
   event.waitUntil(
@@ -183,6 +184,7 @@ self.addEventListener('activate', function(event) {
 
 
 self.addEventListener('fetch', function(event) {
+  console.log('[Service Worker] fetch');
   if (event.request.method === 'GET') {
     // Should we call event.respondWith() inside this fetch event handler?
     // This needs to be determined synchronously, which will give other fetch
@@ -235,6 +237,11 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
+self.addEventListener('message', ev => {  
+  if (ev.data === 'skipWaiting') return skipWaiting();
+});
+
+// вызов модального окна
 
 // *** Start of auto-included sw-toolbox code. ***
 /* 

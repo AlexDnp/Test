@@ -10,6 +10,7 @@ let logContainer = document.getElementById('log');
 // Подключение к устройству при нажатии на кнопку Connect
 connectButton.addEventListener('click', function () {
   connect();
+  
 });
 
 // Отключение от устройства при нажатии на кнопку Disconnect

@@ -503,7 +503,7 @@
                     <a class="nav-link" id="sett" href="#" onclick="ItemSelect(4)">Настройка</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link disabled"  >05.06.2021</a>
+                    <a class="nav-link disabled"  >05.06.2021 8</a>
                 </li>
             </ul>
         </div>
@@ -863,6 +863,16 @@
 
 
     }
+
+// Проверка того, что наш браузер поддерживает Service Worker API.
+if ('serviceWorker' in navigator) {
+    // Весь код регистрации у нас асинхронный.
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => navigator.serviceWorker.ready.then((worker) => {
+        worker.sync.register('syncdata');
+      }))
+      .catch((err) => console.log(err));
+}
 
 
 </script>

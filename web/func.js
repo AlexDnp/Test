@@ -250,6 +250,30 @@ document.onkeydown = function (e) {
 
 }
 
+/* функция добавления ведущих нулей */
+/* (если число меньше десяти, перед числом добавляем ноль) */
+function zero_first_format(value) {
+  if (value < 10) {
+    value = '0' + value;
+  }
+  return value;
+}
+
+/* функция получения текущей даты и времени */
+// Результат:
+// 05.06.2021 21:34:24
+function date_time() {
+  var current_datetime = new Date();
+  var day = zero_first_format(current_datetime.getDate());
+  var month = zero_first_format(current_datetime.getMonth() + 1);
+  var year = current_datetime.getFullYear();
+  var hours = zero_first_format(current_datetime.getHours());
+  var minutes = zero_first_format(current_datetime.getMinutes());
+  var seconds = zero_first_format(current_datetime.getSeconds());
+
+  return day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
+}
+
 function sendNewValue(e) {
   let id = e.target.id;
   let vl = e.target.value;
@@ -484,14 +508,45 @@ function To2(val) {
   return (val < 10 ? "0" + val : val);
 }
 
+const askUserToUpdate = reg => {
+  return Modal.confirm({
+    onOk: async () => {
+      // вешаем обработчик изменения состояния
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
+      });
+
+      // пропускаем ожидание 
+      if (reg && reg.waiting) {
+        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+    },
+
+    onCancel: () => {
+      Modal.destroyAll();
+    },
+    icon: null,
+    title: 'Хорошие новости 11! ? ',
+    content:
+      'Мы только что обновили версию приложения! Чтобы получить обновления, нажмите на кнопку ниже (страница перезагрузится)',
+    cancelText: 'Не обновлять',
+    okText: 'Обновить'
+  });
+};
+
 // Install service worker - for offline support
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('serviceworker.js')
-    .then((reg) => {
-      // регистрация сработала
-      console.log('Registration succeeded. Scope is ' + reg.scope);
-    }).catch((error) => {
-      // регистрация прошла неудачно
-      console.log('Registration failed with ' + error);
-    });
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('serviceworker.js')
+//     .then((reg) => {
+//       if (reg.waiting) {
+//         console.log('Reg waiting');
+//         // оброботчик SW в ожидании
+//         askUserToUpdate(reg);
+//       }
+//       // регистрация сработала
+//       console.log('Registration succeeded. Scope is ' + reg.scope);
+//     }).catch((error) => {
+//       // регистрация прошла неудачно
+//       console.log('Registration failed with ' + error);
+//     });
+// }
