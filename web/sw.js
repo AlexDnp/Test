@@ -38,6 +38,7 @@ self.addEventListener('fetch', (event) => {
 function fromNetwork(request, timeout) {
     return new Promise((fulfill, reject) => {
         var timeoutId = setTimeout(reject, timeout);
+        console.log('net');
         fetch(request).then((response) => {
             clearTimeout(timeoutId);
             fulfill(response);
@@ -46,6 +47,7 @@ function fromNetwork(request, timeout) {
 }
 
 function fromCache(request) {
+    console.log('Cache');
     // Открываем наше хранилище кэша (CacheStorage API), выполняем поиск запрошенного ресурса.
     // Обратите внимание, что в случае отсутствия соответствия значения Promise выполнится успешно, но со значением `undefined`
     return caches.open(CACHE).then((cache) =>
