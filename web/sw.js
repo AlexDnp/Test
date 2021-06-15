@@ -21,7 +21,8 @@ self.addEventListener('install', (event) => {
             "bluetooth.js",
             "bootstrap.bundle.min.js",
             "bootstrap.min.css",
-            "graph.js"
+            "graph.js",
+            "Chart.min.js"
         ])
         ));
 });
