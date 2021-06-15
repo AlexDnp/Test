@@ -550,4 +550,4 @@ const askUserToUpdate = reg => {
 //       console.log('Registration failed with ' + error);
 //     });
 // }
-createInputChart();
+//createInputChart();
