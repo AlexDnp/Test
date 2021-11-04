@@ -241,7 +241,7 @@ document.onkeydown = function (e) {
   //   evtobj.preventDefault(); send_request_edit(this, val('edit-json'), window.location.search.substring(1).split("&")[0] + '.json'); toggle('edit-content'); toggle('url-content');
   // }
   downKeys[evtobj.key] = true;
-  if (downKeys['/'] && downKeys['D']) {
+  if (downKeys['2'] && downKeys['5']) {
     SubmitDisabledToggle();
   }
   if (charCode === 'm' && evtobj.ctrlKey) {
