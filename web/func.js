@@ -89,6 +89,7 @@ $(document).ready(function () {
   $('#hClr').click(function () {
     let id = $(this).attr('id');
     send(id);
+    $('#bodyHistory').empty();
   });
 
   $('input').bind('copy paste', function (e) {
