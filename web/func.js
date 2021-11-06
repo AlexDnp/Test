@@ -101,7 +101,7 @@ $(document).ready(function () {
   $('#selectSet').click(function () {
     if (isConnected) {
       if (timerSelect === null) {
-        timerSelect = setTimeout(endTime, 5000);
+        timerSelect = setTimeout(endTime, 3000);
       } else if (++countSelect === 3) {
         SubmitDisabledToggle();
         endTime();
