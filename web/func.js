@@ -317,11 +317,21 @@ function changeInputNumber(e) {
 function requestPage(rq) {
   let id = '#page' + rq
   if ($(id).length) {
+    searchLegend(id);
     if ($(id).hasClass('d-none')) {
       $(id).removeClass('d-none');
       send(rq);
     }
-  }
+  } //else
+  //   searchLegend(rd);
+}
+
+function searchLegend(id) {
+  $(id + '> fieldset').each(function () {
+    $(this).children('.legendClick').each(function () {
+      $(this).click();
+    });
+  });
 }
 
 
@@ -357,10 +367,10 @@ function checkInputNumber(event) {
 }
 
 function selectCarouselItem(e) {
-  if (isConnected) {
-    var id = e.relatedTarget.id;
-    requestPage(id);
-  }
+  // if (isConnected) {
+  var id = e.relatedTarget.id;
+  requestPage(id);
+  // }
 
 }
 
@@ -373,6 +383,9 @@ function StateConnect(state) {
 
   if (state && isConnected === false) {
     isConnected = true;
+    var id = $(".carousel-item , .active").attr('id');
+    if (id)
+      requestPage(id);
     $(".page").each(function () {
       // let id = this.id;
       if (this.id === "") {
