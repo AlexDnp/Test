@@ -14,7 +14,7 @@ var N = 30;
 var InputChart;
 function createInputChart() {
   var ctx = document.getElementById('inputChart').getContext('2d');
-  ctx.backgroundColor='rgb(0, 153, 255)';
+  ctx.backgroundColor = 'rgb(0, 153, 255)';
   InputChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -95,9 +95,17 @@ function createInputChart() {
       },
       scales: {
         xAxes: [{
-          display: false,
-          min: 10,
-          maxTicksLimit: 80
+          display: true,
+          ticks: {
+            // beginAtZero: true,
+            steps: 1,
+            stepValue: 1,
+            suggestedMin: 1,
+            suggestedMax: 30
+
+          }
+         // min: 10//,
+         // maxTicksLimit: 80
         }],
         yAxes: [{
           display: true,
@@ -128,12 +136,12 @@ function createInputChart() {
     legendItems[i].addEventListener("click", legendClickCallback, false);
   }
 }
-function updateBufChart(name, uinput) {
-  if (name == "uin")
+function updateBufChart(id, data) {
+  if (id == "vUi")
     var buf = UinputArray;
-  else if (name == "uout")
+  else if (id == "vUo")
     var buf = UoutArray;
-  else if (name == "cur")
+  else if (id == "vCr")
     var buf = CurArray;
   else
     return;
@@ -141,7 +149,8 @@ function updateBufChart(name, uinput) {
   if (buf.length > N - 1)
     buf.shift();
 
-buf.push(uinput);
+  buf.push(data);
+ // updateChart()
 }
 
 function updateChart() {

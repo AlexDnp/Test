@@ -43,6 +43,7 @@ var isPageInfo = false;
 let timerId;
 
 
+createInputChart();
 
 
 $(document).ready(function () {
@@ -71,6 +72,12 @@ $(document).ready(function () {
   //   let h = $(window).height();
   //   $("#vUo").html(h);
   // });
+
+  $("#vUi ,#vUo ,#vCr").change(function () {
+    updateBufChart(this.id, this.innerText);
+  });
+
+ 
 
   $('#dfan').change(function () {
     let id = $(this).attr('id');
@@ -405,7 +412,7 @@ function StateConnect(state) {
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
     timerId = setTimeout(requestIzm, 500);
-
+    createInputChart();
   }
   else if (state === false && isConnected) {
     clearTimeout(timerId);
@@ -493,6 +500,8 @@ function receiveData(data) {
         }
       } else {
         elem.innerText = jsonResponse[key];
+        $("#vUi").change();
+        $("#vUo").change();
       }
     }
     else {
