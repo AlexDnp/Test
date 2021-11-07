@@ -73,11 +73,9 @@ $(document).ready(function () {
   //   $("#vUo").html(h);
   // });
 
-  $("#vUi ,#vUo ,#vCr").change(function () {
-    updateBufChart(this.id, this.innerText);
-  });
 
- 
+
+
 
   $('#dfan').change(function () {
     let id = $(this).attr('id');
@@ -210,14 +208,34 @@ $(document).ready(function () {
     send(id);
   });
 
-  $('.vizm').bind('DOMSubtreeModified', function () {
-    if ($(".vStr").hasClass('d-none') === false)
-      $(".vStr").addClass('d-none');
+  // $('body').on('DOMSubtreeModified', '#vUi ,#vUo ,#vCr', function(){
+  //   var dd=this.id;
+  //   console.log('changed');
+  // });
+  // $("#vUi ,#vUo ,#vCr").change(function () {
+  //   updateBufChart(this.id, this.innerText);
+  // });
+
+  $('#vUi ,#vUo ,#vCr').bind('DOMSubtreeModified', function () {
+    if (this.innerText === '')
+      return;
+    updateBufChart(this.id, this.innerText);
+    if ($(".vSt").hasClass('d-none') === false)
+      $(".vSt").addClass('d-none');
     $(".vizm").each(function () {
       if ($(this).hasClass('d-none'))
         $(this).removeClass('d-none');
     });
+
   });
+  // $('.vizm').bind('DOMSubtreeModified', function () {
+  //   if ($(".vStr").hasClass('d-none') === false)
+  //     $(".vStr").addClass('d-none');
+  //   $(".vizm").each(function () {
+  //     if ($(this).hasClass('d-none'))
+  //       $(this).removeClass('d-none');
+  //   });
+  // });
 
 
   $('#pDev').bind('DOMSubtreeModified', function () {
@@ -500,9 +518,13 @@ function receiveData(data) {
         }
       } else {
         elem.innerText = jsonResponse[key];
-        $("#vUi").change();
-        $("#vUo").change();
-        $("#vCr").change();
+        var df = $("#vUi").text();
+        $("#vUi").text(df);
+        df = $("#vUo").text();
+        $("#vUo").text(df);
+        var dd = parseInt($("#vCr").text());
+        dd = dd + 1;
+        $("#vCr").text(dd);
       }
     }
     else {
