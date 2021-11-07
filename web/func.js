@@ -501,7 +501,8 @@ function receiveData(data) {
       } else {
         elem.innerText = jsonResponse[key];
         $("#vUi").change();
-       // $("#vUo").change();
+        $("#vUo").change();
+        $("#vCr").change();
       }
     }
     else {

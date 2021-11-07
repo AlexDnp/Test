@@ -104,8 +104,8 @@ function createInputChart() {
             suggestedMax: 30
 
           }
-         // min: 10//,
-         // maxTicksLimit: 80
+          // min: 10//,
+          // maxTicksLimit: 80
         }],
         yAxes: [{
           display: true,
@@ -136,13 +136,18 @@ function createInputChart() {
     legendItems[i].addEventListener("click", legendClickCallback, false);
   }
 }
+
+
 function updateBufChart(id, data) {
+  var tmp = false;
   if (id == "vUi")
     var buf = UinputArray;
   else if (id == "vUo")
     var buf = UoutArray;
-  else if (id == "vCr")
+  else if (id == "vCr") {
     var buf = CurArray;
+    tmp = true;
+  }
   else
     return;
 
@@ -150,7 +155,8 @@ function updateBufChart(id, data) {
     buf.shift();
 
   buf.push(data);
-  updateChart()
+  if (tmp)
+    updateChart()
 }
 
 function updateChart() {
