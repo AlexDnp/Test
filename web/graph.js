@@ -150,7 +150,7 @@ function updateBufChart(id, data) {
     buf.shift();
 
   buf.push(data);
- // updateChart()
+  updateChart()
 }
 
 function updateChart() {

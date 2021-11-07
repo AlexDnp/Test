@@ -412,7 +412,7 @@ function StateConnect(state) {
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
     timerId = setTimeout(requestIzm, 500);
-    createInputChart();
+    //createInputChart();
   }
   else if (state === false && isConnected) {
     clearTimeout(timerId);
@@ -501,7 +501,7 @@ function receiveData(data) {
       } else {
         elem.innerText = jsonResponse[key];
         $("#vUi").change();
-        $("#vUo").change();
+       // $("#vUo").change();
       }
     }
     else {
