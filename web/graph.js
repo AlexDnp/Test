@@ -26,7 +26,9 @@ function createInputChart() {
         backgroundColor: 'rgb(0, 153, 255)',
         borderWidth: 2,
         lineTension: 0,
-        fill: false
+        fill: false,
+        pointRadius: 1,
+        pointHoverRadius: 1
       },
       {
         label: 'Выходное напряжение',
@@ -34,7 +36,9 @@ function createInputChart() {
         borderColor: '#28b62c',
         borderWidth: 2,
         lineTension: 0,
-        fill: false
+        fill: false,
+        pointRadius: 1,
+        pointHoverRadius: 1
       },
       {
         label: 'Ток',
@@ -42,12 +46,14 @@ function createInputChart() {
         borderColor: '#ff4136',
         borderWidth: 2,
         lineTension: 0,
-        fill: false
+        fill: false,
+        pointRadius: 1,
+        pointHoverRadius: 1
       },]
     },
     options: {
 
-      legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend1"><% for (var i=0; i<segments.length; i++){%><li class="chapter__item"><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
+    //  legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li class="chapter__item22" style=" color:red"><span style=" background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
       legend: {
 
         display: false,
@@ -133,6 +139,8 @@ function createInputChart() {
   myLegendContainer.innerHTML = InputChart.generateLegend();
   var legendItems = myLegendContainer.getElementsByTagName('li');
   for (var i = 0; i < legendItems.length; i += 1) {
+
+    legendItems[i].style.color =  InputChart.data.datasets[i].borderColor;
     legendItems[i].addEventListener("click", legendClickCallback, false);
   }
 }
