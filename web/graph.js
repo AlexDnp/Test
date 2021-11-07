@@ -21,6 +21,7 @@ function createInputChart() {
       //  labels: ['1', '2', '3', '4', '5', '6', '7'],
       datasets: [{
         label: 'Входное напряжение',
+        yAxisID: 'A',
         data: UinputArray, // json value received used in method
         borderColor: '#158cba',
         backgroundColor: 'rgb(0, 153, 255)',
@@ -32,6 +33,7 @@ function createInputChart() {
       },
       {
         label: 'Выходное напряжение',
+        yAxisID: 'A',
         data: UoutArray, // json value received used in method
         borderColor: '#28b62c',
         borderWidth: 2,
@@ -42,6 +44,7 @@ function createInputChart() {
       },
       {
         label: 'Ток',
+        yAxisID: 'B',
         data: CurArray, // json value received used in method
         borderColor: '#ff4136',
         borderWidth: 2,
@@ -53,7 +56,7 @@ function createInputChart() {
     },
     options: {
 
-    //  legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li class="chapter__item22" style=" color:red"><span style=" background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
+      //  legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li class="chapter__item22" style=" color:red"><span style=" background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
       legend: {
 
         display: false,
@@ -102,6 +105,7 @@ function createInputChart() {
       scales: {
         xAxes: [{
           display: true,
+
           ticks: {
             // beginAtZero: true,
             steps: 1,
@@ -114,16 +118,28 @@ function createInputChart() {
           // maxTicksLimit: 80
         }],
         yAxes: [{
+          id: 'B',
+          display: true,
+          position: 'right',         
+          gridLines: {
+            drawOnChartArea: false
+        },
+          ticks: {
+            beginAtZero: true,
+            fontColor: 'red',
+            suggestedMax: 40
+          }
+        }, {
+          id: 'A',
           display: true,
           ticks: {
-            // beginAtZero: true,
             steps: 10,
             stepValue: 5,
             suggestedMin: 100,
             suggestedMax: 400
 
           }
-        }]
+        }],
       },
       tooltips: {
         mode: false,
@@ -140,7 +156,7 @@ function createInputChart() {
   var legendItems = myLegendContainer.getElementsByTagName('li');
   for (var i = 0; i < legendItems.length; i += 1) {
 
-    legendItems[i].style.color =  InputChart.data.datasets[i].borderColor;
+    legendItems[i].style.color = InputChart.data.datasets[i].borderColor;
     legendItems[i].addEventListener("click", legendClickCallback, false);
   }
 }
