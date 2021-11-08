@@ -6,7 +6,7 @@
   "short_name": "Страж",
   "display": "standalone",
   "start_url": "index.html",
-
+  "orientation": "landscape",
   "icons": [
     {
       "src": "images/icon.png",
