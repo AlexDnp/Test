@@ -309,6 +309,13 @@ function zero_first_format(value) {
   return value;
 }
 
+
+function sendTime() {
+  var NumericValue = parseInt(new Date().getTime() / 1000);//// milliseconds since Jan 1, 1970, 00:00:00.000 GMT
+  let js = "{tm:" + NumericValue + "}";
+  send(js);
+}
+
 /* функция получения текущей даты и времени */
 // Результат:
 // 05.06.2021 21:34:24
@@ -340,6 +347,8 @@ function changeInputNumber(e) {
 }
 
 function requestPage(rq) {
+  if (isConnected === false)
+    return;
   let id = '#page' + rq
   if ($(id).length) {
     searchLegend(id);
@@ -408,6 +417,7 @@ function StateConnect(state) {
 
   if (state && isConnected === false) {
     isConnected = true;
+    sendTime();
     var id = $(".carousel-item , .active").attr('id');
     if (id)
       requestPage(id);
