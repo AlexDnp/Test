@@ -4,21 +4,21 @@ const CACHE = 'cache-and-update-v1';
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE).then((cache) =>
-            cache.addAll([ "func.js",
-            "images/icon.png",
-            "index.html",
-            "manifest.json",
-            "bluetooth.js",
-            "bootstrap.bundle.min.js",
-            "bootstrap.min.css",
-            "graph.js",
-            "Chart.min.js"
-        ]))
+            cache.addAll(["func.js",
+                "images/icon.png",
+                "index.html",
+                "manifest.json",
+                "bluetooth.js",
+                "bootstrap.bundle.min.js",
+                "bootstrap.min.css",
+                "graph.js",
+                "Chart.min.js"
+            ]))
     );
 });
 
 // при событии fetch, мы используем кэш, и только потом обновляем его данным с сервера
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
     // Мы используем `respondWith()`, чтобы мгновенно ответить без ожидания ответа с сервера.
     event.respondWith(fromCache(event.request));
     // `waitUntil()` нужен, чтобы предотвратить прекращение работы worker'a до того как кэш обновиться.
@@ -35,7 +35,7 @@ function fromCache(request) {
 function update(request) {
     return caches.open(CACHE).then((cache) =>
         fetch(request).then((response) =>
-            cache.put(request, response)
+            cache.put(request, response.clone())
         )
     );
 }
