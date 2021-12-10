@@ -312,7 +312,9 @@
                 left: 0;
             }
         } */
-        @media (max-width: 768px) {/*768*/
+        @media (max-width: 768px) {
+
+            /*768*/
             .vizm[name="divizm"] {
                 width: 85%;
             }
@@ -326,7 +328,8 @@
             }
         }
 
-        @media (min-width: 768px) {/*768 963*/
+        @media (min-width: 768px) {
+            /*768 963*/
 
 
             .vizm[name="divizm"] {
@@ -530,6 +533,12 @@
             </div> -->
             <div class="carousel-item col-md-6 active " id="info">
                 <h4 class="titlePage" name="info"> Информация</h4>
+
+                <form action="" method="post">
+                    <textarea >ццуцуцуцу</textarea>
+                    <button type="submit">Send</button>
+                </form>
+
                 <div class="page d-none" id="pageinfo" style="padding-top: 20px;margin-bottom: 1.5em;">
 
 
@@ -650,10 +659,10 @@
             <div class="carousel-item col-md-6 " id="chart">
                 <h4 style="text-align: center; color: white; padding-top: 10px;">График</h4>
                 <div class="page d-none">
-                    
+
                     <canvas class=" w-100 chartjs-render-monitor" id="inputChart"
                         style="display: block; width: 964px; height: 60%; min-height: 150px;"></canvas>
-                      
+
                     <div id="legend" style="padding-top: 20px;"></div>
                 </div>
             </div>
@@ -863,13 +872,16 @@
         }
     </script>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-3.6.0.min.js"><\/script>')</script> -->
 <script src="bootstrap.bundle.min.js"></script>
 <script src="bluetooth.js"></script>
 <script src="func.js"></script>
+<!-- <script src="form_ask_us_ru.php"></script> -->
 <script>
     SubmitDisabled(true);
     var navMain = $(".navbar-collapse");
