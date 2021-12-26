@@ -895,7 +895,7 @@
     });
 
     function testUrl() {
-        fetch("http://192.168.1.110").then(function (response) {
+        fetch("https://192.168.1.110").then(function (response) {
             response.text().then(function (text) {
                 document.getElementById("sliderAmount").innerHTML = text;
             });
