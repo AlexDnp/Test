@@ -534,6 +534,8 @@
             <div class="carousel-item col-md-6 active " id="info">
                 <h4 class="titlePage" name="info"> Информация </h4>
 
+                <div id="sliderAmount"></div>
+                <button  type="button" onclick="testUrl()">test</button>
                 <!-- <form action="" method="post">
                     <textarea >ццуцуцуцу</textarea>
                     <button type="submit">Send</button>
@@ -577,6 +579,9 @@
                     <fieldset class="scheduler-border" style="margin-top: 10px;">
                         <legend class="scheduler-border legendClick" id="info"
                             style="color:rgb(0, 153, 255); text-decoration: underline;">Информация</legend>
+
+ 
+
                         <div class="nameInf">№ устройства: </div>
                         <input type="text" maxlength="7" id="iN" name="set" value="">
                         <div class="nameInf">Мощность кВт: </div>
@@ -888,6 +893,14 @@
     navMain.on("click", "a:not([data-toggle])", null, function () {
         navMain.collapse('hide');
     });
+
+    function testUrl() {
+        fetch("http://192.168.1.110").then(function (response) {
+            response.text().then(function (text) {
+                document.getElementById("sliderAmount").innerHTML = text;
+            });
+        });
+    }
 
     function ItemSelect(cnt) {
         $("#carouselContent").carousel(cnt);
