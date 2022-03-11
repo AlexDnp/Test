@@ -1,14 +1,14 @@
-'use strict';
+//'use strict';
 
-const idInfo = {
-  InfLanguage: "iL",
-  InfNumDevice: "iN",
-  InfPower: "iP",
-  InfComment: "iC",
-  InfSteps: "iS",
-  InfDateProduction: "iDP",
-  InfDateSoft: "iDS"
-}
+// const idInfo = {
+//   InfLanguage: "iL",
+//   InfNumDevice: "iN",
+//   InfPower: "iP",
+//   InfComment: "iC",
+//   InfSteps: "iS",
+//   InfDateProduction: "iDP",
+//   InfDateSoft: "iDS"
+// }
 
 var days;
 var hours;
@@ -18,17 +18,17 @@ var seconds;
 var historyCountRec = 0;
 var historySelectRec = 0;
 
-const idStep = [
-  "st1",
-  "st2",
-  "st3",
-  "st4",
-  "st5",
-  "st6",
-  "st7",
-  "st8",
-  "st9"
-]
+// const idStep = [
+//   "st1",
+//   "st2",
+//   "st3",
+//   "st4",
+//   "st5",
+//   "st6",
+//   "st7",
+//   "st8",
+//   "st9"
+// ]
 // let strInfo = [
 //   "iL",
 //   "iN",
@@ -40,10 +40,10 @@ const idStep = [
 
 var isConnected = false;
 var isPageInfo = false;
-let timerId;
+var timerId;
 
 
-createInputChart();
+//createInputChart();
 
 
 $(document).ready(function () {
