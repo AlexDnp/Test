@@ -409,7 +409,8 @@ function selectCarouselItem(e) {
 }
 
 function requestIzm() {
-  send("dSt?");
+  //send("dSt?");
+  send("vizm");
   timerId = setTimeout(requestIzm, 500);
 }
 
