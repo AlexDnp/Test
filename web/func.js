@@ -532,9 +532,8 @@ function receiveData(data) {
         $("#vUi").text(df);
         df = $("#vUo").text();
         $("#vUo").text(df);
-        var dd = parseInt($("#vCr").text());
-        dd = dd + 1;
-        $("#vCr").text(dd);
+       df = $("#vCr").text();
+        $("#vCr").text(df);
       }
     }
     else {
