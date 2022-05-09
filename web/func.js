@@ -9,6 +9,14 @@
 //   InfDateProduction: "iDP",
 //   InfDateSoft: "iDS"
 // }
+const MODE = {
+  MODE_OFF: 0,
+  MODE_RUN: 1,
+  MODE_WAIT_START: 2,
+  MODE_START: 3,
+  MODE_PAUSE: 4,
+  MODE_RESTART: 5
+}
 
 var days;
 var hours;
@@ -41,7 +49,7 @@ var historySelectRec = 0;
 var isConnected = false;
 var isPageInfo = false;
 var timerId;
-
+var mode = 0;
 
 //createInputChart();
 
@@ -73,7 +81,28 @@ $(document).ready(function () {
   //   $("#vUo").html(h);
   // });
 
+  $('#mode').change(function () {
+    let id = $(this).attr('id');
+    // let vl = Number(this.checked);
+    let js;
 
+    if (this.checked) {
+      if (mode === MODE.MODE_RUN) {
+        $('#lbmode').text("Включить");
+        js = "{" + id + ":" + MODE.MODE_PAUSE + "}";
+        send(js);
+      }
+      else
+        this.checked = false;
+    }
+    else {
+      $('#lbmode').text("Выключить");
+      if (mode === MODE_PAUSE) {
+        js = "{" + id + ":" + MODE.MODE_RESTART + "}";
+        send(js);
+      }
+    }
+  });
 
 
 
@@ -408,10 +437,26 @@ function selectCarouselItem(e) {
 
 }
 
+let st= false;
+
 function requestIzm() {
+
   //send("dSt?");
-  send("vizm");
-  timerId = setTimeout(requestIzm, 500);
+  if (mode === MODE.MODE_RUN) {
+        st=false;
+    send("vizm");
+    timerId = setTimeout(requestIzm, 500);
+  }
+  else if(st){
+    st=false;
+    send("vizm");
+    timerId = setTimeout(requestIzm, 250);
+  }
+  else{
+    send("St?");
+    timerId = setTimeout(requestIzm, 250);
+    st=true;
+  }
 }
 
 function StateConnect(state) {
@@ -533,12 +578,19 @@ function receiveData(data) {
         $("#vUi").text(df);
         df = $("#vUo").text();
         $("#vUo").text(df);
-       df = $("#vCr").text();
+        df = $("#vCr").text();
         $("#vCr").text(df);
       }
     }
     else {
       switch (key) {
+        case "mode":
+          mode = parseInt(jsonResponse[key]);
+          if (mode === MODE.MODE_OFF) {
+            if ($("#mode").checked)
+              $("#mode").checked = false;
+          }
+          break;
         case "pDev":
         case "pWrk":
           let distance = jsonResponse[key] * 1000;
@@ -632,4 +684,3 @@ const askUserToUpdate = reg => {
 // }
 //createInputChart();
 
-	
