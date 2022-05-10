@@ -51,7 +51,14 @@ var isPageInfo = false;
 var timerId;
 var mode = 0;
 
-//createInputChart();
+const trans = {
+  BLE: 0,
+  SERIAL: 1,
+}// });
+
+let transport = trans.BLE; selConnect;
+
+createInputChart();
 
 
 $(document).ready(function () {
@@ -79,7 +86,25 @@ $(document).ready(function () {
   //   $("#vUi").html(wh);
   //   let h = $(window).height();
   //   $("#vUo").html(h);
-  // });
+
+
+  let connectButton = document.getElementById('connectBLE');
+
+  // Подключение к устройству при нажатии на кнопку Connect
+  connectButton.addEventListener('click', function () {
+    if (transport === trans.BLE)
+      connectBluetooth();
+    else
+      connectSerial();
+  });
+
+
+  $('#selConnect').change(function () {
+    if (this.checked)
+      transport = trans.SERIAL;
+    else
+      transport = trans.BLE;
+  });
 
   $('#mode').change(function () {
     let id = $(this).attr('id');
@@ -329,6 +354,22 @@ document.onkeydown = function (e) {
 
 }
 
+// Отправить данные подключенному устройству
+function send(data) {
+  data = String(data);
+
+  if (!data) {
+    return;
+  }
+  data += '\r';
+  data += '\n';
+
+  if (transport === trans.BLE)
+    sendBluetooth(data);
+  else
+    sendSerial(data);
+}
+
 /* функция добавления ведущих нулей */
 /* (если число меньше десяти, перед числом добавляем ноль) */
 function zero_first_format(value) {
@@ -437,25 +478,25 @@ function selectCarouselItem(e) {
 
 }
 
-let st= false;
+let st = false;
 
 function requestIzm() {
 
   //send("dSt?");
   if (mode === MODE.MODE_RUN) {
-        st=false;
+    st = false;
     send("vizm");
     timerId = setTimeout(requestIzm, 500);
   }
-  else if(st){
-    st=false;
+  else if (st) {
+    st = false;
     send("vizm");
     timerId = setTimeout(requestIzm, 250);
   }
-  else{
+  else {
     send("St?");
     timerId = setTimeout(requestIzm, 250);
-    st=true;
+    st = true;
   }
 }
 
@@ -481,7 +522,7 @@ function StateConnect(state) {
 
       lst[i].classList.remove("disabled");
     }
-
+    document.getElementById("selConnect").setAttribute("disabled", "true");
     document.getElementById("connectBLE").classList.add("d-none");
     document.getElementById("disconnectBLE").classList.remove("d-none");
 
@@ -517,8 +558,8 @@ function StateConnect(state) {
 function SubmitDisabledToggle() {
   var element = document.getElementsByTagName("input");
   for (var i = 0; i < element.length; i++) {
-    //  if (element[i].type === 'button') {
-    element[i].disabled = !element[i].disabled;
+    if (element[i].id != 'selConnect')
+      element[i].disabled = !element[i].disabled;
     //  }
   }
   var element = document.getElementsByTagName("select");
@@ -532,8 +573,8 @@ function SubmitDisabledToggle() {
 function SubmitDisabled(request) {
   var element = document.getElementsByTagName("input");
   for (var i = 0; i < element.length; i++) {
-    //  if (element[i].type === 'button') {
-    element[i].disabled = request;
+    if (element[i].id != 'selConnect')
+      element[i].disabled = request;
     //  }
   }
   var element = document.getElementsByTagName("select");
@@ -553,86 +594,91 @@ function ParseTime(distance) {
 
 // Обработка полученных данных
 function receiveData(data) {
-  var jsonResponse = JSON.parse(data);
-  for (var key in jsonResponse) {
-    var elem = document.getElementById(key);
-    if (elem) {
-      if (elem.tagName == 'SELECT') {
-        for (var i = 0; i < elem.length; i++) {
-          if (elem[i].value == jsonResponse[key]) {
-            elem.selectedIndex = i;
-            // elem.disabled = false;
+  try {
+    var jsonResponse = JSON.parse(data);
+    for (var key in jsonResponse) {
+      var elem = document.getElementById(key);
+      if (elem) {
+        if (elem.tagName == 'SELECT') {
+          for (var i = 0; i < elem.length; i++) {
+            if (elem[i].value == jsonResponse[key]) {
+              elem.selectedIndex = i;
+              // elem.disabled = false;
+              break;
+            }
+          }
+        }
+        else if (elem.tagName == 'INPUT') {
+          elem.value = jsonResponse[key];
+          let inputs = document.getElementsByName(key);
+          for (let i = 0; i < inputs.length; i++) { // проходим циклом по всем элементам 
+            inputs[i].classList.remove('d-none');
+          }
+        } else {
+          elem.innerText = jsonResponse[key];
+          var df = $("#vUi").text();
+          $("#vUi").text(df);
+          df = $("#vUo").text();
+          $("#vUo").text(df);
+          df = $("#vCr").text();
+          $("#vCr").text(df);
+        }
+      }
+      else {
+        switch (key) {
+          case "mode":
+            mode = parseInt(jsonResponse[key]);
+            if (mode === MODE.MODE_OFF) {
+              if ($("#mode").checked)
+                $("#mode").checked = false;
+            }
             break;
-          }
+          case "pDev":
+          case "pWrk":
+            let distance = jsonResponse[key] * 1000;
+            // Time calculations for days, hours, minutes and seconds
+            ParseTime(distance);
+
+            if (days > 0)
+              //   let str=days+"d"+ hours+"h"+minutes+"m";
+              $("#timeWork").text(days + "d" + hours + "h" + minutes + "m");
+            else
+              $("#timeWork").text(hours + "h" + minutes + "m");
+            break;
+          case "hCnt":
+            let cnt = $('#bodyHistory td:nth-child(1)').filter(function () {
+              if ($(this).text() === jsonResponse['hCnt'].toString())
+                return true;
+            })
+            if (cnt.length > 0)
+              return;
+            historySelectRec++;
+            let dist = jsonResponse['hTm'] * 1000;
+            ParseTime(dist);
+            var container = document.getElementById("bodyHistory");
+            var row = document.createElement("TR");
+
+            // var td = document.createElement("TD");
+            var td = '<td >' + jsonResponse['hCnt'] + '</td>';
+            row.insertAdjacentHTML('beforeend', td);
+            td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
+            row.insertAdjacentHTML('beforeend', td);
+            td = '<td>' + jsonResponse['hStr'] + '</td>';
+            row.insertAdjacentHTML('beforeend', td);
+            container.appendChild(row);
+            var d = $('#pagehistory');
+            d.scrollTop(d.prop("scrollHeight"));
+            // let str = '<div>' + ' ' + 'Запись : ' + " " + jsonResponse['hCnt'] + "  "
+            //   + 'Время :' + " " + jsonResponse['hTm'] + "  " + 'Причина : ' + " " + jsonResponse['hStr'] + '</div>';
+            // $('#terminalHistory').append(str);
+            break;
         }
-      }
-      else if (elem.tagName == 'INPUT') {
-        elem.value = jsonResponse[key];
-        let inputs = document.getElementsByName(key);
-        for (let i = 0; i < inputs.length; i++) { // проходим циклом по всем элементам 
-          inputs[i].classList.remove('d-none');
-        }
-      } else {
-        elem.innerText = jsonResponse[key];
-        var df = $("#vUi").text();
-        $("#vUi").text(df);
-        df = $("#vUo").text();
-        $("#vUo").text(df);
-        df = $("#vCr").text();
-        $("#vCr").text(df);
+
       }
     }
-    else {
-      switch (key) {
-        case "mode":
-          mode = parseInt(jsonResponse[key]);
-          if (mode === MODE.MODE_OFF) {
-            if ($("#mode").checked)
-              $("#mode").checked = false;
-          }
-          break;
-        case "pDev":
-        case "pWrk":
-          let distance = jsonResponse[key] * 1000;
-          // Time calculations for days, hours, minutes and seconds
-          ParseTime(distance);
-
-          if (days > 0)
-            //   let str=days+"d"+ hours+"h"+minutes+"m";
-            $("#timeWork").text(days + "d" + hours + "h" + minutes + "m");
-          else
-            $("#timeWork").text(hours + "h" + minutes + "m");
-          break;
-        case "hCnt":
-          let cnt = $('#bodyHistory td:nth-child(1)').filter(function () {
-            if ($(this).text() === jsonResponse['hCnt'].toString())
-              return true;
-          })
-          if (cnt.length > 0)
-            return;
-          historySelectRec++;
-          let dist = jsonResponse['hTm'] * 1000;
-          ParseTime(dist);
-          var container = document.getElementById("bodyHistory");
-          var row = document.createElement("TR");
-
-          // var td = document.createElement("TD");
-          var td = '<td >' + jsonResponse['hCnt'] + '</td>';
-          row.insertAdjacentHTML('beforeend', td);
-          td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
-          row.insertAdjacentHTML('beforeend', td);
-          td = '<td>' + jsonResponse['hStr'] + '</td>';
-          row.insertAdjacentHTML('beforeend', td);
-          container.appendChild(row);
-          var d = $('#pagehistory');
-          d.scrollTop(d.prop("scrollHeight"));
-          // let str = '<div>' + ' ' + 'Запись : ' + " " + jsonResponse['hCnt'] + "  "
-          //   + 'Время :' + " " + jsonResponse['hTm'] + "  " + 'Причина : ' + " " + jsonResponse['hStr'] + '</div>';
-          // $('#terminalHistory').append(str);
-          break;
-      }
-
-    }
+  }
+  catch (e) {
+    log(e);
   }
 }
 

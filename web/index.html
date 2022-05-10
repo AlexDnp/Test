@@ -468,7 +468,7 @@
             transition: .4s;
         }
 
-        input:checked+.slider {
+        input:checked+.slider[name=mode] {
             background-color: #e46c47;
             /* background-color: #2196F3; */
         }
@@ -504,7 +504,8 @@
     </div>
 
     <nav class=" navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="navbar">
-        <button class="" id="connectBLE" type="button" style=" width: 150px;">Подключить</button>
+        <button class="" id="connectBLE" type="button" style=" width: 120px;">Подключить</button>
+
         <div id="dSt" class="vSt" style="width: auto;color: white; text-align: left;"></div>
 
         <div class="row vizm d-none" name="divizm" style="flex-wrap: nowrap; color: white;  margin-right:0px;">
@@ -556,8 +557,7 @@
         <div class="collapse navbar-collapse " id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                    <a class="nav-link " href="#" onclick="ItemSelect(0)">Информация <span
-                            class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="#" onclick="ItemSelect(0)">Информация </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="#" onclick="ItemSelect(1)">История </a>
@@ -573,10 +573,11 @@
                     <a class="nav-link " href="#" onclick="ItemSelect(4)">Ступени</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" id="term" href="#" onclick="ItemSelect(5)">Терминал</a>
+                    <a class="nav-link" id="term" href="#" onclick="ItemSelect(5)">Терминал <span
+                        class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link disabled">V2.06</a>
+                    <a class="nav-link disabled">V2.08</a>
                 </li>
             </ul>
         </div>
@@ -604,8 +605,8 @@
                 </form> -->
 
 
-                <iframe frameborder=0 src="http://192.168.1.110/update" scrolling="auto" noresize>
-                </iframe>
+                <!-- <iframe frameborder=0 src="http://192.168.1.110/update" scrolling="auto" noresize>
+                </iframe> -->
 
 
                 <div class="page d-none" id="pageinfo" style="padding-top: 20px;margin-bottom: 1.5em;">
@@ -745,7 +746,7 @@
                 <div class="page d-none" id="pagesetting">
                     <label class="switch">
                         <input type="checkbox" id="mode">
-                        <span class="slider round"></span>
+                        <span class="slider round" name="mode" ></span>
                     </label>
                     <label id="lbmode">Выключить</label>
                     <fieldset class="scheduler-border">
@@ -889,6 +890,12 @@
             </div>
             <div class="carousel-item col-md-6 " id="term">
                 <h4 style="text-align: center; color: white; padding-top: 10px;">Терминал</h4>
+                <label style="color:white; top: 5px;">Bluetooth</label>
+                <label class="switch">
+                    <input type="checkbox" id="selConnect" >
+                    <span class="slider round"></span>   
+                </label>
+                <label style="color:white;">Serial</label> 
                 <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
                 <br>
                 <div class="page ">
@@ -958,10 +965,11 @@
 <!-- <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-3.6.0.min.js"><\/script>')</script> -->
 <script src="bootstrap.bundle.min.js"></script>
 <script src="bluetooth.js"></script>
+<script src="serial.js"></script>
 <script src="func.js"></script>
 <!-- <script src="form_ask_us_ru.php"></script> -->
 <script>
-    // SubmitDisabled(true);
+     SubmitDisabled(true);
     var navMain = $(".navbar-collapse");
     navMain.on("click", "a:not([data-toggle])", null, function () {
         navMain.collapse('hide');
@@ -977,6 +985,7 @@
     //     };
     //     request.send();
     // }
+    ItemSelect(5);
 
     function ItemSelect(cnt) {
         $("#carouselContent").carousel(cnt);
@@ -990,6 +999,19 @@
 
 
     }
+
+
+
+    // Вывод в терминал
+    function log(data, type = '') {
+        terminalContainer.insertAdjacentHTML('beforeend',
+            '<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
+        terminalContainer.scrollTop = terminalContainer.scrollHeight;
+        let el = terminalContainer.querySelectorAll('div');
+        if (el.length > 20)
+            el[0].remove();
+    }
+
 
     // Проверка того, что наш браузер поддерживает Service Worker API.
     if ('serviceWorker' in navigator) {

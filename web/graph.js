@@ -76,29 +76,29 @@ function createInputChart() {
         //   return text.join("");
         // },
         labels: {
-          generateLabels: function (chart) {
-            var data = chart.data;
-            return Chart.helpers.isArray(data.datasets) ? data.datasets.map(function (dataset, i) {
+          // generateLabels: function (chart) {
+          //   var data = chart.data;
+          //   return Chart.helpers.isArray(data.datasets) ? data.datasets.map(function (dataset, i) {
 
-              return {
-                text: dataset.label + " : " + dataset.data[dataset.data.length - 1],
-                // text: dataset.label + " (Max Value: " + Chart.helpers.max(dataset.data).toLocaleString() + ")",
+          //     return {
+          //       text: dataset.label + " : " + dataset.data[dataset.data.length - 1],
+          //       // text: dataset.label + " (Max Value: " + Chart.helpers.max(dataset.data).toLocaleString() + ")",
 
-                fillStyle: (!Chart.helpers.isArray(dataset.backgroundColor) ? dataset.backgroundColor : dataset.backgroundColor[0]),
-                hidden: !chart.isDatasetVisible(i),
-                lineCap: dataset.borderCapStyle,
-                lineDash: dataset.borderDash,
-                lineDashOffset: dataset.borderDashOffset,
-                lineJoin: dataset.borderJoinStyle,
-                lineWidth: dataset.borderWidth,
-                strokeStyle: dataset.borderColor,
-                pointStyle: dataset.pointStyle,
+          //       fillStyle: (!Chart.helpers.isArray(dataset.backgroundColor) ? dataset.backgroundColor : dataset.backgroundColor[0]),
+          //       hidden: !chart.isDatasetVisible(i),
+          //       lineCap: dataset.borderCapStyle,
+          //       lineDash: dataset.borderDash,
+          //       lineDashOffset: dataset.borderDashOffset,
+          //       lineJoin: dataset.borderJoinStyle,
+          //       lineWidth: dataset.borderWidth,
+          //       strokeStyle: dataset.borderColor,
+          //       pointStyle: dataset.pointStyle,
 
-                // Below is extra data used for toggling the datasets
-                datasetIndex: i
-              };
-            }, this) : [];
-          },
+          //       // Below is extra data used for toggling the datasets
+          //       datasetIndex: i
+          //     };
+          //   }, this) : [];
+          // },
 
         },
       },
@@ -107,7 +107,7 @@ function createInputChart() {
           display: true,
 
           ticks: {
-            // beginAtZero: true,
+            beginAtZero: true,
             steps: 1,
             stepValue: 1,
             suggestedMin: 1,
@@ -178,15 +178,18 @@ function updateBufChart(id, data) {
   if (buf.length > N - 1)
     buf.shift();
 
+ // buf.push(Math.round(Math.random() * 100));
   buf.push(data);
+
   if (tmp)
     updateChart()
 }
 
-function updateChart() {
-  if (UinputArray.length < N)
-    InputChart.data.labels.push("");
-  InputChart.update();
+async function updateChart() {
+  if (InputChart.data.labels.length < N)
+   InputChart.data.labels.push("");
+   //  InputChart.data.labels.splice(-1, 1); // remove the label first
+await  InputChart.update();
 }
 
 function legendClickCallback(event) {

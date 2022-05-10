@@ -1,5 +1,5 @@
 // Получение ссылок на элементы UI
-let connectButton = document.getElementById('connectBLE');
+//let connectButton = document.getElementById('connectBLE');
 let disconnectButton = document.getElementById('disconnectBLE');
 let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
@@ -8,10 +8,10 @@ let logContainer = document.getElementById('log');
 
 
 // Подключение к устройству при нажатии на кнопку Connect
-connectButton.addEventListener('click', function () {
-  connect();
+// connectButton.addEventListener('click', function () {
+//   connect();
 
-});
+// });
 
 // Отключение от устройства при нажатии на кнопку Disconnect
 disconnectButton.addEventListener('click', function () {
@@ -53,7 +53,7 @@ let readBuffer = '';
 // }
 
 // Запустить выбор Bluetooth устройства и подключиться к выбранному
-function connect() {
+function connectBluetooth() {
   return (deviceCache ? Promise.resolve(deviceCache) :
     requestBluetoothDevice()).
     then(device => connectDeviceAndCacheCharacteristic(device)).
@@ -236,18 +236,13 @@ function dataTransfer() {
   }
 }
 
-// Отправить данные подключенному устройству
-function send(data) {
-  data = String(data);
 
-  if (!data || !characteristicCache) {
+
+function sendBluetooth(data){
+  if (!data || !characteristicCache) 
     return;
-  }
-  data += '\r';
-  data += '\n';
   arrSend.push(data);
   dataTransfer();
-
 }
 
 // Записать значение в характеристику
