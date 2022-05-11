@@ -12,6 +12,7 @@ self.addEventListener('install', (event) => {
                 "bootstrap.bundle.min.js",
                 "bootstrap.min.css",
                 "graph.js",
+                "serial.js",
                 "Chart.min.js"
             ]))
     );
