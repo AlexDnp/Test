@@ -494,7 +494,7 @@ function requestIzm() {
     timerId = setTimeout(requestIzm, 250);
   }
   else {
-    send("St?");
+    send("dSt?");
     timerId = setTimeout(requestIzm, 250);
     st = true;
   }
