@@ -274,8 +274,8 @@ $(document).ready(function () {
     if (this.innerText === '')
       return;
     updateBufChart(this.id, this.innerText);
-    if ($(".vSt").hasClass('d-none') === false)
-      $(".vSt").addClass('d-none');
+    // if ($(".vSt").hasClass('d-none') === false)
+    //   $(".vSt").addClass('d-none');
     $(".vizm").each(function () {
       if ($(this).hasClass('d-none'))
         $(this).removeClass('d-none');
