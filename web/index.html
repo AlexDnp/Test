@@ -503,16 +503,16 @@
         <h3> Устойства Bluetooth не поддерживаются</h3>
     </div>
 
-    <nav class=" navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="navbar">
+    <nav class=" navbar navbar-expand-lg navbar-dark fixed-top bg-dark justify-content-start" style="padding-left:0 ;" id="navbar">
+        <span id="sm" style=" display: inline-block; left: 1px;
+                font-size: 11px; color: red; visibility: hidden;">&#10040;</span>
         <button class="" id="connectBLE" type="button" style=" width: 120px;">Подключить</button>
-
-        
 
         <div class="row vizm d-none" name="divizm" style="flex-wrap: nowrap; color: white;  margin-right:0px;">
 
             <div class="col-2 " style="min-width:60px;">
                 <div class="row" style=" text-align: right; padding-left: 5px;">
-                    <span class=" d-none d-lg-inline-block" style=" text-align: right;">Вх</span>
+                    <!-- <span class=" d-none d-lg-inline-block" style=" text-align: right;">Вх</span> -->
                     <div class="col-1 " id="vUi"
                         style=" min-width: 40px;padding-right: 1px; padding-left: 2px; text-align: right;">0</div>
                     <div style="display: inline-block;">V</div>
@@ -531,7 +531,7 @@
             </div>
             <div class="col-5 ">
                 <div class="row" style=" text-align: center; padding-left: 5px;">
-                    <span class=" d-none d-lg-inline-block" style=" text-align: right;">Вых</span>
+                    <!-- <span class=" d-none d-lg-inline-block" style=" text-align: right;">Вых</span> -->
                     <div class="col-2" id="vUo"
                         style=" min-width: 30px; padding-left: 2px; text-align: right;padding-right: 1px;">0</div>
                     <div style="display: inline-block;">V</div>
@@ -549,7 +549,7 @@
             </div> -->
         </div>
 
-        <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        <button class=" navbar-toggler ml-auto"  type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -574,10 +574,10 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" id="term" href="#" onclick="ItemSelect(5)">Терминал <span
-                        class="sr-only">(current)</span></a>
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link disabled">V2.08</a>
+                    <a class="nav-link disabled">V2.1</a>
                 </li>
             </ul>
         </div>
@@ -746,7 +746,7 @@
                 <div class="page d-none" id="pagesetting">
                     <label class="switch">
                         <input type="checkbox" id="mode">
-                        <span class="slider round" name="mode" ></span>
+                        <span class="slider round" name="mode"></span>
                     </label>
                     <label id="lbmode">Выключить</label>
                     <fieldset class="scheduler-border">
@@ -892,10 +892,10 @@
                 <h4 style="text-align: center; color: white; padding-top: 10px;">Терминал</h4>
                 <label style="color:white; top: 5px;">Bluetooth</label>
                 <label class="switch">
-                    <input type="checkbox" id="selConnect" >
-                    <span class="slider round"></span>   
+                    <input type="checkbox" id="selConnect">
+                    <span class="slider round"></span>
                 </label>
-                <label style="color:white;">Serial</label> 
+                <label style="color:white;">Serial</label>
                 <button class="d-none" id="disconnectBLE" type="button" style="width: 150px;">Отключить</button>
                 <br>
                 <div class="page ">
@@ -911,6 +911,7 @@
             </div>
 
         </div>
+
         <ol class="carousel-indicators" style="bottom: -15px; position: relative;">
             <li data-target="#carouselContent" data-slide-to="0" class="active"></li>
             <li data-target="#carouselContent" data-slide-to="1"></li>
@@ -951,9 +952,9 @@
             }
         }
         catch {
-            document.getElementById("noBluetooth").classList.remove("d-none");
-            document.getElementById("carouselContent").classList.add("d-none");
-            document.getElementById("navbar").classList.add("d-none");
+            //  document.getElementById("noBluetooth").classList.remove("d-none");
+            //  document.getElementById("carouselContent").classList.add("d-none");
+            //  document.getElementById("navbar").classList.add("d-none");
         }
     </script>
 </body>
@@ -969,7 +970,7 @@
 <script src="func.js"></script>
 <!-- <script src="form_ask_us_ru.php"></script> -->
 <script>
-     SubmitDisabled(true);
+    SubmitDisabled(true);
     var navMain = $(".navbar-collapse");
     navMain.on("click", "a:not([data-toggle])", null, function () {
         navMain.collapse('hide');

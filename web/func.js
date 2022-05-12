@@ -592,10 +592,31 @@ function ParseTime(distance) {
   seconds = Math.floor((distance % (1000 * 60)) / 1000);
 }
 
+var tm500 = false;
+var isRec = false;
+function timer500ms() {
+  // document.getElementById("sm").style.visibility = 'hidden';
+  //  $('#sm').toggle();
+  if ($('#sm').css('visibility') == 'hidden')
+    $('#sm').css('visibility', 'visible');
+  else
+    $('#sm').css('visibility', 'hidden');
+  if (isRec)
+    setTimeout(timer500ms, 500);
+    else
+    $('#sm').css('visibility', 'hidden');
+
+}
+
+
 // Обработка полученных данных
 function receiveData(data) {
   try {
     var jsonResponse = JSON.parse(data);
+    if (isRec === false) {
+      setTimeout(timer500ms, 500);
+    }
+    isRec = true;
     for (var key in jsonResponse) {
       var elem = document.getElementById(key);
       if (elem) {
