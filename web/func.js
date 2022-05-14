@@ -603,7 +603,7 @@ function timer500ms() {
     $('#sm').css('visibility', 'hidden');
   if (isRec)
     setTimeout(timer500ms, 500);
-    else
+  else
     $('#sm').css('visibility', 'hidden');
 
 }
@@ -646,6 +646,13 @@ function receiveData(data) {
         }
       }
       else {
+        if (key[0] === 'p') {
+          let distance = jsonResponse[key] * 1000;
+          // Time calculations for days, hours, minutes and seconds
+          if (jsonResponse[key] >= 0)
+            ParseTime(distance);
+
+        }
         switch (key) {
           case "mode":
             mode = parseInt(jsonResponse[key]);
@@ -654,17 +661,29 @@ function receiveData(data) {
                 $("#mode").checked = false;
             }
             break;
-          case "pDev":
-          case "pWrk":
-            let distance = jsonResponse[key] * 1000;
-            // Time calculations for days, hours, minutes and seconds
-            ParseTime(distance);
-
-            if (days > 0)
-              //   let str=days+"d"+ hours+"h"+minutes+"m";
-              $("#timeWork").text(days + "d" + hours + "h" + minutes + "m");
+          case "pTot":
+            if (jsonResponse[key] >= 0) {
+              if (days > 0)
+                //   let str=days+"d"+ hours+"h"+minutes+"m";
+                $("#timeTotalWork").text(days + "d " + To2(hours) + ":" + To2(minutes));
+              else
+                $("#timeTotalWork").text(To2(hours) + ":" + To2(minutes));
+            }
             else
-              $("#timeWork").text(hours + "h" + minutes + "m");
+              $("#timeTotalWork").text('-');
+            break;
+          case "pDev":
+
+            break;
+          case "pWrk":
+            if (jsonResponse[key] >= 0) {
+              if (days > 0)
+                $("#timeWork").text(days + "d " + To2(hours) + ":" + To2(minutes));
+              else
+                $("#timeWork").text(To2(hours) + ":" + To2(minutes));
+            }
+            else
+              $("#timeWork").text('-');
             break;
           case "hCnt":
             let cnt = $('#bodyHistory td:nth-child(1)').filter(function () {
@@ -683,6 +702,7 @@ function receiveData(data) {
             var td = '<td >' + jsonResponse['hCnt'] + '</td>';
             row.insertAdjacentHTML('beforeend', td);
             td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
+            //td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
             row.insertAdjacentHTML('beforeend', td);
             td = '<td>' + jsonResponse['hStr'] + '</td>';
             row.insertAdjacentHTML('beforeend', td);
