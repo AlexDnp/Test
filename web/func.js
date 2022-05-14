@@ -593,7 +593,7 @@ function ParseTime(distance) {
 }
 
 var tm500 = false;
-var isRec = false;
+var countRec = 0;
 function timer500ms() {
   // document.getElementById("sm").style.visibility = 'hidden';
   //  $('#sm').toggle();
@@ -601,8 +601,10 @@ function timer500ms() {
     $('#sm').css('visibility', 'visible');
   else
     $('#sm').css('visibility', 'hidden');
-  if (isRec)
-    setTimeout(timer500ms, 500);
+  if (countRec > 0) {
+    setTimeout(timer500ms, 1000);
+    countRec--;
+  }
   else
     $('#sm').css('visibility', 'hidden');
 
@@ -613,10 +615,10 @@ function timer500ms() {
 function receiveData(data) {
   try {
     var jsonResponse = JSON.parse(data);
-    if (isRec === false) {
+    if (countRec === 0) {
       setTimeout(timer500ms, 500);
     }
-    isRec = true;
+        countRec = 5;  
     for (var key in jsonResponse) {
       var elem = document.getElementById(key);
       if (elem) {
