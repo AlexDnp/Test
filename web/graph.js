@@ -185,11 +185,11 @@ function updateBufChart(id, data) {
     updateChart()
 }
 
-async function updateChart() {
+ async function updateChart() {
   if (InputChart.data.labels.length < N)
    InputChart.data.labels.push("");
    //  InputChart.data.labels.splice(-1, 1); // remove the label first
-await  InputChart.update();
+await InputChart.update();
 }
 
 function legendClickCallback(event) {
@@ -206,8 +206,9 @@ function legendClickCallback(event) {
 
   chart.legend.options.onClick.call(chart, event, chart.legend.legendItems[index]);
   if (chart.isDatasetVisible(index)) {
-    target.classList.remove('through');
+    target.classList.remove('line-through');
   } else {
-    target.classList.add('through');
+    target.classList.add('line-through');
   }
+ // $(this).toggleClass("line-through");
 }

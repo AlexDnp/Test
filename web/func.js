@@ -274,8 +274,6 @@ $(document).ready(function () {
     if (this.innerText === '')
       return;
     updateBufChart(this.id, this.innerText);
-    // if ($(".vSt").hasClass('d-none') === false)
-    //   $(".vSt").addClass('d-none');
     $(".vizm").each(function () {
       if ($(this).hasClass('d-none'))
         $(this).removeClass('d-none');
@@ -494,7 +492,7 @@ function requestIzm() {
     timerId = setTimeout(requestIzm, 250);
   }
   else {
-    send("dSt?");
+    send("vizm");// send("dSt?");
     timerId = setTimeout(requestIzm, 250);
     st = true;
   }
@@ -639,12 +637,12 @@ function receiveData(data) {
           }
         } else {
           elem.innerText = jsonResponse[key];
-          var df = $("#vUi").text();
-          $("#vUi").text(df);
-          df = $("#vUo").text();
-          $("#vUo").text(df);
-          df = $("#vCr").text();
-          $("#vCr").text(df);
+          // var df = $("#vUi").text();
+          // $("#vUi").text(df);
+          // df = $("#vUo").text();
+          // $("#vUo").text(df);
+          // df = $("#vCr").text();
+          // $("#vCr").text(df);
         }
       }
       else {
