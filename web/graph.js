@@ -55,7 +55,7 @@ function createInputChart() {
       },]
     },
     options: {
-
+      animation : false,
       //  legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li class="chapter__item22" style=" color:red"><span style=" background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
       legend: {
 
