@@ -492,7 +492,7 @@ function requestIzm() {
     timerId = setTimeout(requestIzm, 250);
   }
   else {
-    send("vizm");// send("dSt?");
+    send("dSt?");
     timerId = setTimeout(requestIzm, 250);
     st = true;
   }
