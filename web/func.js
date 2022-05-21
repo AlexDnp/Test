@@ -616,7 +616,7 @@ function receiveData(data) {
     if (countRec === 0) {
       setTimeout(timer500ms, 500);
     }
-        countRec = 5;  
+    countRec = 5;
     for (var key in jsonResponse) {
       var elem = document.getElementById(key);
       if (elem) {
@@ -656,10 +656,18 @@ function receiveData(data) {
         switch (key) {
           case "mode":
             mode = parseInt(jsonResponse[key]);
-            if (mode === MODE.MODE_OFF) {
-              if ($("#mode").checked)
-                $("#mode").checked = false;
+            if (mode === MODE.MODE_RUN) {
+              if ($('.mode').css('visibility') == 'hidden')
+                $('.mode').css('visibility', 'visible');
+                document.getElementById('dSt').innerHTML = "Включен";
             }
+            else if (mode === MODE.MODE_OFF) {
+              if ($('.mode').css('visibility') == 'visible')
+                $('.mode').css('visibility', 'hidden');
+              if ($(".mode").checked)
+                $(".mode").checked = false;
+            }
+
             break;
           case "pTot":
             if (jsonResponse[key] >= 0) {
