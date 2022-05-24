@@ -688,9 +688,10 @@ function receiveData(data) {
         switch (key) {
           case "vMd": {
             mode = parseInt(jsonResponse[key]);
-            if (mode === MODE.MODE_OFF) {
-              if ($("#mode").checked)
-                $("#mode").checked = false;
+            if (mode === MODE.MODE_RUN) {
+              if ($('.mode').css('visibility') == 'hidden')
+                $('.mode').css('visibility', 'visible');
+              document.getElementById('dSt').innerHTML = "Включен";
             }
             let tkey = Number(jsonResponse['vSt']);
             let strOut = "";
