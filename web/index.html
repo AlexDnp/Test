@@ -582,7 +582,7 @@
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link disabled">V2.11</a>
+                    <a class="nav-link disabled">V2.13</a>
                 </li>
             </ul>
         </div>
@@ -652,9 +652,6 @@
                     <fieldset class="scheduler-border" style="margin-top: 10px;">
                         <legend class="scheduler-border legendClick" id="info"
                             style="color:rgb(0, 153, 255); text-decoration: underline;">Информация</legend>
-
-
-
                         <div class="nameInf">№ устройства: </div>
                         <input type="text" maxlength="7" id="iN" name="set" value="">
                         <div class="nameInf">Мощность кВт: </div>
@@ -663,7 +660,7 @@
                         <input type="date" name="set" id="iDP" value="">
                         <div class="nameInf">Ступеней: </div>
                         <select id="iS" name="set1" style="width: 40%; text-align-last:center; ">
-                            <option value="0"> </option>
+                            <!-- <option value="0"> </option> -->
                             <option value="8">8</option>
                             <option value="9">9</option>
                         </select>
@@ -746,8 +743,8 @@
             </div>
             <div class="carousel-item  col-md-6 " id="setting">
                 <h4 id="selectSet" style="text-align: center; color: white; padding-top: 10px;">Настройка</h4>
-                <!-- <div id="lbmodeState"></div> -->
-                <div id="dSt" class="vSt" style="width: auto;color: white; text-align: left;  padding-left: 10%;"></div>
+                <!-- <div id="vSt" class="d-none"></div> -->
+                <div id="strState" class="vSt" style="width: auto;color: white; text-align: left;  padding-left: 10%;"></div>
                 <div class="page d-none" id="pagesetting">
                     <label class="switch">
                         <input type="checkbox" id="mode">
@@ -795,7 +792,7 @@
                             maxlength="3" min="80" max="380" step="1" required pattern="\\d*" value="">
                         <div class="nameInf">Входной ток: </div>
                         <input name="set" class="integer" class="integer" type="number" size="3" id="oCur" maxlength="3"
-                            min="80" max="300" step="1" required pattern="\\d*" value="">
+                            min="10" max="300" step="1" required pattern="\\d*" value="">
                     </fieldset>
 
                     <h5 style="color: rgb(214, 76, 57)">Внимание!!!
@@ -901,6 +898,16 @@
                     <span class="slider round"></span>
                 </label>
                 <label style="color:white;">Serial </label>
+                <!-- <label style="color:white;padding-left: 20px;">Speed </label> -->
+                <select id="speed" style="width: auto; text-align-last: center; ">
+                    <option value="1200">1200</option>
+                    <option value="2400">2400</option>
+                    <option value="4800">4800</option>
+                    <option value="9600">9600</option>
+                    <option value="19200">19200</option>
+                    <option value="57600">57600</option>
+                    <option value="115200">115200</option>
+                </select>
                 <button class="d-none" id="disconnectBLE" type="button" style="width: 120px;">Отключить</button>
                 <br>
                 <div class="page ">
@@ -972,6 +979,7 @@
 <script src="bootstrap.bundle.min.js"></script>
 <script src="bluetooth.js"></script>
 <script src="serial.js"></script>
+<script src="langState.js"></script>
 <script src="func.js"></script>
 <!-- <script src="form_ask_us_ru.php"></script> -->
 <script>

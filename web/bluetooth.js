@@ -225,8 +225,8 @@ function dataTransfer() {
     else {
       writeToCharacteristic(characteristicCache, data);
     }
-    var dat = 'TX: ' + data;
-    log(dat, 'out');
+    // var dat = 'TX: ' + data;
+    // log(dat, 'out');
     isBusy = true;
     timerBusy = setTimeout(() => {
       isBusy = false;

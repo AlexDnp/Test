@@ -16,7 +16,7 @@ async function connectSerial() {
   // Prompt user to select any serial port.
   port = await navigator.serial.requestPort().then((port) => {
     // Connect to `port` or add it to the list of available ports.
-    port.open({ baudRate: 115200 }).then(() => {
+    port.open({ baudRate: 4800 }).then(() => {
       log('Port Open');
       // const textEncoder = new TextEncoderStream();
       // const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);

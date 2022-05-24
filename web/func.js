@@ -114,8 +114,9 @@ $(document).ready(function () {
     if (this.checked) {
       if (mode === MODE.MODE_RUN) {
         $('#lbmode').text("Включить");
-        js = "{" + id + ":" + MODE.MODE_PAUSE + "}";
-        send(js);
+        sendJson(id, MODE.MODE_PAUSE);
+        // js = "{" + id + ":" + MODE.MODE_PAUSE + "}";
+        // send(js);
       }
       else
         this.checked = false;
@@ -123,8 +124,9 @@ $(document).ready(function () {
     else {
       $('#lbmode').text("Выключить");
       if (mode === MODE_PAUSE) {
-        js = "{" + id + ":" + MODE.MODE_RESTART + "}";
-        send(js);
+        sendJson(id, MODE.MODE_RESTART);
+        // js = "{" + id + ":" + MODE.MODE_RESTART + "}";
+        // send(js);
       }
     }
   });
@@ -134,18 +136,13 @@ $(document).ready(function () {
   $('#dfan').change(function () {
     let id = $(this).attr('id');
     let vl = Number(this.checked);
-    let js = "{" + id + ":" + vl + "}";
-    send(js);
+    sendJson(id, vl);
+    // let js = "{" + id + ":" + vl + "}";
+    // send(js);
   });
 
-  $('#dkey').change(function () {
-    let id = $(this).attr('id');
-    let vl = $(this).val();
-    if (vl != "") {
-      let js = "{" + id + ":" + vl + "}";
-      send(js);
-    }
-  });
+
+
 
   $('#hClr').click(function () {
     let id = $(this).attr('id');
@@ -184,8 +181,9 @@ $(document).ready(function () {
     let id = $(this).attr('id');
     let vl = $(this).val();
     if (vl != "") {
-      let js = "{" + id + ":" + vl + "}";
-      send(js);
+      sendJson(id, vl);
+      // let js = "{" + id + ":" + vl + "}";
+      // send(js);
     }
   });
   $('input[type=date]').on('change', sendNewValue);
@@ -290,6 +288,18 @@ $(document).ready(function () {
   // });
 
 
+  // $('#vSt').bind('DOMSubtreeModified', function () {
+  //   let tkey = Number(this.innerText);
+  //   let strOut = "";
+
+  //   if (tkey) {
+  //     let str = State[tkey];
+  //     if (str)
+  //       strOut = str;
+  //   }
+  //   document.getElementById('strState').innerHTML = strOut
+  // });
+
   $('#pDev').bind('DOMSubtreeModified', function () {
     let time = Number($('#pDev').text());
     var sam = new Date();
@@ -311,7 +321,8 @@ $(document).ready(function () {
       let rc = historyCountRec - historySelectRec;
       if (rc > 0) {
         // historySelectRec++;
-        send("{hRec:" + rc + "}");
+        sendJson('hRec', rc);
+        //send("{hRec:" + rc + "}");
       }
     }
     else {
@@ -326,6 +337,16 @@ $(document).ready(function () {
 
   });
 
+});
+
+$('#dkey, #iS').change(function () {
+  let id = $(this).attr('id');
+  let vl = $(this).val();
+  if (vl != "") {
+    sendJson(id, vl);
+    // let js = "{\"" + id + "\":" + vl + "}";
+    // send(js);
+  }
 });
 
 let downKeys = {}; // the set of keys currently down
@@ -352,8 +373,16 @@ document.onkeydown = function (e) {
 
 }
 
+let jsSend = "";
+function sendJson(id, vl) {
+  jsSend = "{\"" + id + "\":" + vl + "}";
+  send(jsSend);
+}
+
+
 // Отправить данные подключенному устройству
 function send(data) {
+  clearTimeout(timerId);
   data = String(data);
 
   if (!data) {
@@ -362,10 +391,14 @@ function send(data) {
   data += '\r';
   data += '\n';
 
+  var dat = 'TX: ' + data;
+  log(dat, 'out');
+
   if (transport === trans.BLE)
     sendBluetooth(data);
   else
     sendSerial(data);
+  timerId = setTimeout(requestIzm, 500);
 }
 
 /* функция добавления ведущих нулей */
@@ -380,8 +413,9 @@ function zero_first_format(value) {
 
 function sendTime() {
   var NumericValue = parseInt(new Date().getTime() / 1000);//// milliseconds since Jan 1, 1970, 00:00:00.000 GMT
-  let js = "{tm:" + NumericValue + "}";
-  send(js);
+  sendJson('tm', NumericValue);
+  // let js = "{tm:" + NumericValue + "}";
+  // send(js);
 }
 
 /* функция получения текущей даты и времени */
@@ -403,8 +437,9 @@ function sendNewValue(e) {
   let id = e.target.id;
   let vl = e.target.value;
   if (vl != "") {
-    let js = "{" + id + ":" + vl + "}";
-    send(js);
+    sendJson(id, vl);
+    // let js = "{" + id + ":" + vl + "}";
+    // send(js);
   }
 }
 
@@ -476,26 +511,19 @@ function selectCarouselItem(e) {
 
 }
 
-let st = false;
+let cn = 0;
 
 function requestIzm() {
 
-  //send("dSt?");
-  if (mode === MODE.MODE_RUN) {
-    st = false;
+  if (jsSend.length === 0) {
     send("vizm");
-    timerId = setTimeout(requestIzm, 500);
+    cn = 0;
+  } else {
+    send(jsSend);
+    if (++cn > 3)
+      jsSend = "";
   }
-  else if (st) {
-    st = false;
-    send("vizm");
-    timerId = setTimeout(requestIzm, 250);
-  }
-  else {
-    send("dSt?");
-    timerId = setTimeout(requestIzm, 250);
-    st = true;
-  }
+
 }
 
 function StateConnect(state) {
@@ -562,8 +590,8 @@ function SubmitDisabledToggle() {
   }
   var element = document.getElementsByTagName("select");
   for (var i = 0; i < element.length; i++) {
-    //  if (element[i].type === 'button') {
-    element[i].disabled = !element[i].disabled;
+    if (element[i].id != 'speed')
+      element[i].disabled = !element[i].disabled;
     //  }
   }
 }
@@ -577,8 +605,8 @@ function SubmitDisabled(request) {
   }
   var element = document.getElementsByTagName("select");
   for (var i = 0; i < element.length; i++) {
-    //  if (element[i].type === 'button') {
-    element[i].disabled = request;
+    if (element[i].id != 'speed')
+      element[i].disabled = request;
     //  }
   }
 }
@@ -613,10 +641,14 @@ function timer500ms() {
 function receiveData(data) {
   try {
     var jsonResponse = JSON.parse(data);
+    if (jsSend.length > 0) {
+      if (jsSend.localeCompare(data) === 0)
+        jsSend = "";
+    }
     if (countRec === 0) {
       setTimeout(timer500ms, 500);
     }
-        countRec = 5;  
+    countRec = 5;
     for (var key in jsonResponse) {
       var elem = document.getElementById(key);
       if (elem) {
@@ -654,12 +686,23 @@ function receiveData(data) {
 
         }
         switch (key) {
-          case "mode":
+          case "vMd": {
             mode = parseInt(jsonResponse[key]);
             if (mode === MODE.MODE_OFF) {
               if ($("#mode").checked)
                 $("#mode").checked = false;
             }
+            let tkey = Number(jsonResponse['vSt']);
+            let strOut = "";
+            if (jsonResponse['vDt'] > 0)
+              strOut += (jsonResponse['vDt'] + " ");
+            if (tkey) {
+              let str = State[tkey];
+              if (str)
+                strOut += str;
+            }
+            document.getElementById('strState').innerHTML = strOut
+          }
             break;
           case "pTot":
             if (jsonResponse[key] >= 0) {
@@ -685,6 +728,7 @@ function receiveData(data) {
             else
               $("#timeWork").text('-');
             break;
+
           case "hCnt":
             let cnt = $('#bodyHistory td:nth-child(1)').filter(function () {
               if ($(this).text() === jsonResponse['hCnt'].toString())
@@ -704,7 +748,18 @@ function receiveData(data) {
             td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
             //td = '<td>' + To2(hours) + ':' + To2(minutes) + '</td>';
             row.insertAdjacentHTML('beforeend', td);
-            td = '<td>' + jsonResponse['hStr'] + '</td>';
+
+            let tkey = Number(jsonResponse['hSt']);
+            let strOut = "";
+            if (jsonResponse['hDt'] > 0)
+              strOut += (jsonResponse['hDt'] + " ");
+            if (tkey) {
+              let str = State[tkey];
+              if (str)
+                strOut += str;
+            }
+
+            td = '<td>' + strOut + '</td>';//jsonResponse['hStr']
             row.insertAdjacentHTML('beforeend', td);
             container.appendChild(row);
             var d = $('#pagehistory');
