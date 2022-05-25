@@ -541,7 +541,7 @@
                         style=" min-width: 30px; padding-left: 2px; text-align: right;padding-right: 1px;">0</div>
                     <div style="display: inline-block;">V</div>
                     <div class=" d-none d-sm-block" style="background-color: teal; margin-left: 10px; ">
-                        <div id="vSw" style="padding-left: 5px; text-align: center; display: inline-block;">0</div>
+                        <div name="vSw" style="padding-left: 5px; text-align: center; display: inline-block;">0</div>
                         <div style="display: inline-block; width: 20px;">ст.</div>
                     </div>
 
@@ -628,7 +628,6 @@
                         </div>
                         <div class="nameInf1">Напряжение макс.:</div>
                         <div id="mUmax" style="display: inline-block; width: 35%; text-align: center;">-</div>
-
                         <div class="nameInf1">Напряжение мин. :</div>
                         <div id="mUmin" style="display: inline-block; width: 35%; text-align: center;">-</div>
                         <div class="nameInf1">Входное ток. макс :</div>
@@ -743,14 +742,24 @@
             </div>
             <div class="carousel-item  col-md-6 " id="setting">
                 <h4 id="selectSet" style="text-align: center; color: white; padding-top: 10px;">Настройка</h4>
-                <!-- <div id="vSt" class="d-none"></div> -->
-                <div id="strState" class="vSt" style="width: auto;color: white; text-align: left;  padding-left: 10%;"></div>
+
                 <div class="page d-none" id="pagesetting">
-                    <label class="switch">
-                        <input type="checkbox" class="mode">
-                        <span class="slider round" name="mode"></span>
-                    </label>
-                    <label id="lbmode">Выключить</label>
+                    <fieldset class="scheduler-border">
+                        
+                    <label name="vSw" style="color: #e46c47; padding-left: 5px; padding-top: 15px;" >0</label>
+                    <label style="color: #e46c47;">ст.</label>
+
+                    <label id="strState" class="vSt" style="color: white; padding-left: 10px; padding-top: 15px;"></label>
+
+                    <div id="swMd" style="float: right; padding-right: 10px;">Пауза
+                        <label class="switch">
+                            <input type="checkbox" id="mode" class="mode" style="visibility: hidden;">
+                            <span class="slider round" name="mode"></span>
+                        </label>
+                        
+                    </div>
+                    </fieldset>
+
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border legendClick" id="qcoef"
                             style="color:rgb(0, 153, 255); text-decoration: underline;">Установка
@@ -827,7 +836,9 @@
             <div class="carousel-item col-md-6 " id="steps">
                 <h4 class="titlePage" name="steps" style="text-align: center;">Ступени</h4>
                 <div class="page d-none" id="pagesteps">
-
+                    <div name="vSw"
+                        style="color: #e46c47; padding-left: 10px; text-align: center; display: inline-block;">0</div>
+                    <div style="color: #e46c47; display: inline-block; width: auto;"> ступень выбрана</div>
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-1 "
                         style="margin-right: 5px;margin-left: 0px;">
                         <fieldset name="st1" class="d-none">

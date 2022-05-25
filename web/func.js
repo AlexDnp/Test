@@ -50,6 +50,7 @@ var isConnected = false;
 var isPageInfo = false;
 var timerId;
 var mode = 0;
+let selectStep = 0;
 
 const trans = {
   BLE: 0,
@@ -108,25 +109,17 @@ $(document).ready(function () {
 
   $('#mode').change(function () {
     let id = $(this).attr('id');
-    // let vl = Number(this.checked);
-    let js;
-
     if (this.checked) {
-      if (mode === MODE.MODE_RUN) {
-        $('#lbmode').text("Включить");
+      if (mode === MODE.MODE_RUN | selectStep > 0) {
+        // $('#lbmode').text("Включить");
         sendJson(id, MODE.MODE_PAUSE);
-        // js = "{" + id + ":" + MODE.MODE_PAUSE + "}";
-        // send(js);
       }
       else
         this.checked = false;
     }
     else {
-      $('#lbmode').text("Выключить");
-      if (mode === MODE_PAUSE) {
+      if (mode === MODE.MODE_PAUSE) {
         sendJson(id, MODE.MODE_RESTART);
-        // js = "{" + id + ":" + MODE.MODE_RESTART + "}";
-        // send(js);
       }
     }
   });
@@ -300,10 +293,17 @@ $(document).ready(function () {
   //   document.getElementById('strState').innerHTML = strOut
   // });
 
+
   $('#pDev').bind('DOMSubtreeModified', function () {
     let time = Number($('#pDev').text());
     var sam = new Date();
     sam.setTime(time * 1000);
+  });
+
+  $('#mUmax,#mUmin,#mCmax').on('DOMSubtreeModified', function () {
+    let nm = parseInt(this.innerHTML);
+    if (nm == 0 | nm == 1000)
+      this.innerHTML = '-';
   });
 
   $('#hRec').bind('DOMSubtreeModified', function () {
@@ -513,8 +513,8 @@ function selectCarouselItem(e) {
 
 let cn = 0;
 
-function requestIzm() {
 
+function requestIzm() {
   if (jsSend.length === 0) {
     send("vizm");
     cn = 0;
@@ -687,20 +687,38 @@ function receiveData(data) {
         }
         switch (key) {
           case "vMd": {
+            let strOut = "";
             mode = parseInt(jsonResponse[key]);
             if (mode === MODE.MODE_RUN) {
-              if ($('.mode').css('visibility') == 'hidden')
-                $('.mode').css('visibility', 'visible');
-              document.getElementById('dSt').innerHTML = "Включен";
-            }
-            let tkey = Number(jsonResponse['vSt']);
-            let strOut = "";
-            if (jsonResponse['vDt'] > 0)
-              strOut += (jsonResponse['vDt'] + " ");
-            if (tkey) {
-              let str = State[tkey];
-              if (str)
-                strOut += str;
+              if ($('#swMd').hasClass('d-none'))
+                $('#swMd').removeClass('d-none');
+              if ($('#dkey').hasClass('d-none') === false)
+                $('#dkey').addClass('d-none');
+              // if ($('.mode').css('visibility') == 'hidden')
+              //   $('.mode').css('visibility', 'visible');
+              strOut = "Включен";
+            } else {
+              if (mode === MODE.MODE_OFF) {
+                if ($('#dkey').hasClass('d-none'))
+                  $('#dkey').removeClass('d-none');
+                if ($('#swMd').hasClass('d-none') === false)
+                  $('#swMd').addClass('d-none');
+                if (selectStep === 0) {
+                  if ($('.mode').is(":checked"))
+                    $('.mode').prop('checked', false);
+                }
+              }
+              // if ($('.mode').css('visibility') == 'visible')
+              //   $('.mode').css('visibility', 'hidden');
+              let tkey = Number(jsonResponse['vSt']);
+              if (jsonResponse['vDt'] > 0)
+                strOut += (jsonResponse['vDt'] + " ");
+              if (tkey) {
+
+                let str = State[tkey];
+                if (str)
+                  strOut += str;
+              }
             }
             document.getElementById('strState').innerHTML = strOut
           }
@@ -718,6 +736,12 @@ function receiveData(data) {
             break;
           case "pDev":
 
+            break;
+          case "vSw":
+            selectStep = jsonResponse[key];
+            $("[name='vSw']").each(function () {
+              this.innerHTML = jsonResponse[key];//"1"
+            });
             break;
           case "pWrk":
             if (jsonResponse[key] >= 0) {

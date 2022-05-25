@@ -27,7 +27,7 @@ const STATE_WORK_ERROR = 23;
 
 const State = {
     1: "Нет фазы ",//STATE_WORK_NO_IZM
-    2: "Включение",//STATE_WORK_READY
+    2: "Готов",//STATE_WORK_READY
     3: "Пропадание фазы ",//STATE_WORK_PHASE_FAILURE
     4: "Высокое вх.напр.",//STATE_WORK_OFF_U_IN_MAX
     5: "Низкое вх.напр. ",//STATE_WORK_OFF_U_IN_MIN
