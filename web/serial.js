@@ -63,8 +63,17 @@ async function readLoop() {
           readBuffer = '';
 
           if (data) {
+            isSend = false;
             receive(data);
             receiveData(data);
+           
+          }
+          if (timerBusy != null) {
+            isBusy = false;
+            clearTimeout(timerBusy);
+            timerBusy != null;
+            if (arrSend.length)
+            sendS();
           }
         }
         else {
@@ -83,22 +92,42 @@ async function readLoop() {
 
 }
 
-async function sendSerial(str) {
-  var df = new Uint8Array(str.length);
-  for (var i = 0; i < str.length; i++) {
-    var charcode = str.charCodeAt(i);
-    if (charcode < 0x80) {
-      df[i] = charcode;
+var arrSend = [];
+//let isBusy = false;
+var timerBusy = null;
+
+function sendSerial(str) {
+  arrSend.push(str);
+  if (!isBusy)
+    sendS();
+}
+
+
+async function sendS() {
+  if (arrSend.length) {
+    var str = arrSend.shift();
+    var df = new Uint8Array(str.length);
+    for (var i = 0; i < str.length; i++) {
+      var charcode = str.charCodeAt(i);
+      if (charcode < 0x80) {
+        df[i] = charcode;
+      }
+      else if (charcode <= 0x04FF || charcode >= 0x0410) {
+        df[i] = charcode - 0x0350;
+      }
+      else if (charcode === 0x2116) {
+        df[i] = 185;
+      }
+      else {
+        df[i] = 169;
+      }
     }
-    else if (charcode <= 0x04FF || charcode >= 0x0410) {
-      df[i] = charcode - 0x0350;
-    }
-    else if (charcode === 0x2116) {
-      df[i] = 185;
-    }
-    else {
-      df[i] = 169;
-    }
+    await writer.write(df);//data
+    isBusy = true;
+    timerBusy = setTimeout(() => {
+      isBusy = false;
+      if (arrSend.length)
+        sendS();
+    }, 300);
   }
-  await writer.write(df);//data
 }
