@@ -124,7 +124,9 @@ $(document).ready(function () {
     }
   });
 
-
+  $('#gUoff').change(function () {
+    $('#dqoff').prop("disabled", false);
+  });
 
   $('#dfan').change(function () {
     let id = $(this).attr('id');
