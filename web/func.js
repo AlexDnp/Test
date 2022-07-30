@@ -134,8 +134,10 @@ $(document).ready(function () {
     // send(js);
   });
 
-
-
+  $('#dqoff').click(function () {
+    let id = $(this).attr('id');
+    sendJson(id, 1);
+  });
 
   $('#hClr').click(function () {
     let id = $(this).attr('id');
