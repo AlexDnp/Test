@@ -743,21 +743,22 @@
             <div class="carousel-item  col-md-6 " id="setting">
                 <h4 id="selectSet" style="text-align: center; color: white; padding-top: 10px;">Настройка</h4>
 
-                <div class="page d-none" id="pagesetting">
+                <div class="page " id="pagesetting"><!-- todo d-none-->
                     <fieldset class="scheduler-border">
-                        
-                    <label name="vSw" style="color: #e46c47; padding-left: 5px; padding-top: 15px;" >0</label>
-                    <label style="color: #e46c47;">ст.</label>
 
-                    <label id="strState" class="vSt" style="color: white; padding-left: 10px; padding-top: 15px;"></label>
+                        <label name="vSw" style="color: #e46c47; padding-left: 5px; padding-top: 15px;">0</label>
+                        <label style="color: #e46c47;">ст.</label>
 
-                    <div id="swMd" style="float: right; padding-right: 10px;">Пауза
-                        <label class="switch">
-                            <input type="checkbox" id="mode" class="mode" style="visibility: hidden;">
-                            <span class="slider round" name="mode"></span>
-                        </label>
-                        
-                    </div>
+                        <label id="strState" class="vSt"
+                            style="color: white; padding-left: 10px; padding-top: 15px;"></label>
+
+                        <div id="swMd" style="float: right; padding-right: 10px;">Пауза
+                            <label class="switch">
+                                <input type="checkbox" id="mode" class="mode" style="visibility: hidden;">
+                                <span class="slider round" name="mode"></span>
+                            </label>
+
+                        </div>
                     </fieldset>
 
                     <fieldset class="scheduler-border">
@@ -767,11 +768,10 @@
                         <div class="nameInf">Вх. напряжения : </div>
                         <input name="set" type="number" size="4" step="0.0001" id="kUin" maxlength="8" min="0" max="10"
                             required pattern="[0-9.]{3.5}" value="">
-                        <div class="nameInf">Вых. напряжения : </div>
+                        <!-- <div class="nameInf">Вых. напряжения : </div>
                         <input name="set" type="number" size="4" step="0.0001" id="kUout" maxlength="4" min="0" max="10"
-                            required pattern="[0-9.]{3.5}" value="">
+                            required pattern="[0-9.]{3.5}" value=""> -->
                         <div class="nameInf">Входной ток :</div>
-
                         <input name="set" type="number" size="4" step="0.0001" id="kCur" maxlength="4" min="0" max="10"
                             required pattern="[0-9.]{3.5}" value="">
                     </fieldset>
@@ -802,6 +802,17 @@
                         <div class="nameInf">Входной ток: </div>
                         <input name="set" class="integer" class="integer" type="number" size="3" id="oCur" maxlength="3"
                             min="10" max="300" step="1" required pattern="\\d*" value="">
+                    </fieldset>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border legendClick" id="quard"
+                            style="color:rgb(0, 153, 255); text-decoration: underline;">Авт.Защита</legend>
+                        <div class="nameInf">Напряжение выкл.: </div>
+                        <input name="set" class="integer" class="integer" type="number" size="3" id="gUoff"
+                            maxlength="3" min="80" max="380" step="1" required pattern="\\d*" value="">
+                        <div class="nameInf">Настр.напряжения : </div>
+                        <input name="set" class="integer" class="integer" type="number" size="3" id="gkUout"
+                        maxlength="3" min="80" max="1000" step="1" required pattern="\\d*" value="">
                     </fieldset>
 
                     <h5 style="color: rgb(214, 76, 57)">Внимание!!!
