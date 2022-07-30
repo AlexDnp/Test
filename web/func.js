@@ -124,8 +124,15 @@ $(document).ready(function () {
     }
   });
 
-  $('#gUoff').change(function () {
-    $('#dqoff').prop("disabled", false);
+  $('#gUoff,#gkUout').change(function () {
+    $('#gtst').prop("disabled", false);
+    let id = $(this).attr('id');
+    sendJson(id, 1);
+  });
+  
+    $('#gtst').click(function () {
+    let id = $(this).attr('id');
+    sendJson(id, 1);
   });
 
   $('#dfan').change(function () {
@@ -136,10 +143,7 @@ $(document).ready(function () {
     // send(js);
   });
 
-  $('#dqoff').click(function () {
-    let id = $(this).attr('id');
-    sendJson(id, 1);
-  });
+
 
   $('#hClr').click(function () {
     let id = $(this).attr('id');
