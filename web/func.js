@@ -675,7 +675,7 @@ function receiveData(data) {
           for (let i = 0; i < inputs.length; i++) { // проходим циклом по всем элементам 
             inputs[i].classList.remove('d-none');
           }
-        } else {
+        } else if (elem.tagName != 'BUTTON'){
           elem.innerText = jsonResponse[key];
           // var df = $("#vUi").text();
           // $("#vUi").text(df);
