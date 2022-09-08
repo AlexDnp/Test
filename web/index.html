@@ -660,6 +660,8 @@
                         <div class="nameInf">Ступеней: </div>
                         <select id="iS" name="set1" style="width: 40%; text-align-last:center; ">
                             <!-- <option value="0"> </option> -->
+                            <option value="6">6</option>
+                            <option value="7">7</option>
                             <option value="8">8</option>
                             <option value="9">9</option>
                         </select>
@@ -743,7 +745,8 @@
             <div class="carousel-item  col-md-6 " id="setting">
                 <h4 id="selectSet" style="text-align: center; color: white; padding-top: 10px;">Настройка</h4>
 
-                <div class="page d-none" id="pagesetting"><!-- todo d-none-->
+                <div class="page d-none" id="pagesetting">
+                    <!-- todo d-none-->
                     <fieldset class="scheduler-border">
 
                         <label name="vSw" style="color: #e46c47; padding-left: 5px; padding-top: 15px;">0</label>
@@ -812,10 +815,11 @@
                             maxlength="3" min="80" max="380" step="1" required pattern="\\d*" value="">
                         <div class="nameInf">Настр.напряжения : </div>
                         <input name="set" class="integer" class="integer" type="number" size="3" id="gkUout"
-                        maxlength="3" min="80" max="1000" step="1" required pattern="\\d*" value="">
-    
-                        <button class="testguard" id="gtst" type="button" style="margin-top: 15px; margin-left: 15px; width: 120px;" disabled>Проверка</button>
- 
+                            maxlength="3" min="80" max="1000" step="1" required pattern="\\d*" value="">
+
+                        <button class="testguard" id="gtst" type="button"
+                            style="margin-top: 15px; margin-left: 15px; width: 120px;" disabled>Проверка</button>
+
                     </fieldset>
 
                     <h5 style="color: rgb(214, 76, 57)">Внимание!!!
@@ -837,8 +841,13 @@
                             <option value="8">8</option>
                             <option value="9">9</option>
                         </select>
+                        <Br></Br>
                         <div class="nameInf">Вкл. вентилятор : </div>
-                        <input type="checkbox" id="dfan" style="width: 40%;">
+                        <label class="switch">
+                            <input type="checkbox" id="dfan" class="mode1" style="visibility: hidden;">
+                            <span class="slider round" name="mode1"></span>
+                        </label>
+                        <!-- <input type="checkbox" id="dfan" style="width: 40%;"> -->
                     </fieldset>
 
                     <!-- <div class="d-none">
