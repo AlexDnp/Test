@@ -1013,6 +1013,8 @@
     //     };
     //     request.send();
     // }
+
+
     ItemSelect(5);
 
     function ItemSelect(cnt) {
@@ -1030,6 +1032,12 @@
 
 
     }
+
+    $('#carouselContent').on('slide.bs.carousel', function () {
+        $(".dropdown-content").each(function () {
+            $(this).hide();
+        });
+    });
 
 
 
