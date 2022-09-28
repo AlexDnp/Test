@@ -125,12 +125,12 @@ $(document).ready(function () {
   });
 
   $('#gUoff,#gkUout').change(function () {
-    $('#gtst').prop("disabled", false);
+    //$('#gtst').prop("disabled", false);
     let id = $(this).attr('id');
     sendJson(id, 1);
   });
-  
-    $('#gtst').click(function () {
+
+  $('#gtst').click(function () {
     let id = $(this).attr('id');
     sendJson(id, 1);
   });
@@ -156,6 +156,7 @@ $(document).ready(function () {
   let timerSelect = null;
   var countSelect = 0;
   $('#selectSet').click(function () {
+   // SubmitDisabledToggle(); test
     if (isConnected) {
       if (timerSelect === null) {
         timerSelect = setTimeout(endTime, 3000);
@@ -602,6 +603,8 @@ function SubmitDisabledToggle() {
       element[i].disabled = !element[i].disabled;
     //  }
   }
+  document.getElementById('gtst').disabled = !document.getElementById('gtst').disabled;
+  //$('#gtst').prop("disabled", false);
 }
 
 function SubmitDisabled(request) {
@@ -675,7 +678,7 @@ function receiveData(data) {
           for (let i = 0; i < inputs.length; i++) { // проходим циклом по всем элементам 
             inputs[i].classList.remove('d-none');
           }
-        } else if (elem.tagName != 'BUTTON'){
+        } else if (elem.tagName != 'BUTTON') {
           elem.innerText = jsonResponse[key];
           // var df = $("#vUi").text();
           // $("#vUi").text(df);
