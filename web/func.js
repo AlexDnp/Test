@@ -262,14 +262,6 @@ $(document).ready(function () {
     send(id);
   });
 
-  // $('body').on('DOMSubtreeModified', '#vUi ,#vUo ,#vCr', function(){
-  //   var dd=this.id;
-  //   console.log('changed');
-  // });
-  // $("#vUi ,#vUo ,#vCr").change(function () {
-  //   updateBufChart(this.id, this.innerText);
-  // });
-
   $('#vUi ,#vUo ,#vCr').bind('DOMSubtreeModified', function () {
     if (this.innerText === '')
       return;
@@ -280,28 +272,6 @@ $(document).ready(function () {
     });
 
   });
-  // $('.vizm').bind('DOMSubtreeModified', function () {
-  //   if ($(".vStr").hasClass('d-none') === false)
-  //     $(".vStr").addClass('d-none');
-  //   $(".vizm").each(function () {
-  //     if ($(this).hasClass('d-none'))
-  //       $(this).removeClass('d-none');
-  //   });
-  // });
-
-
-  // $('#vSt').bind('DOMSubtreeModified', function () {
-  //   let tkey = Number(this.innerText);
-  //   let strOut = "";
-
-  //   if (tkey) {
-  //     let str = State[tkey];
-  //     if (str)
-  //       strOut = str;
-  //   }
-  //   document.getElementById('strState').innerHTML = strOut
-  // });
-
 
   $('#pDev').bind('DOMSubtreeModified', function () {
     let time = Number($('#pDev').text());
@@ -609,6 +579,7 @@ function SubmitDisabledToggle() {
     $('#dtClr').removeClass('d-none');
   else
     $('#dtClr').addClass('d-none');
+    
 }
 
 function SubmitDisabled(request) {
