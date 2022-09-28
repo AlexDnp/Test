@@ -156,7 +156,7 @@ $(document).ready(function () {
   let timerSelect = null;
   var countSelect = 0;
   $('#selectSet').click(function () {
-   // SubmitDisabledToggle(); test
+    // SubmitDisabledToggle(); test
     if (isConnected) {
       if (timerSelect === null) {
         timerSelect = setTimeout(endTime, 3000);
@@ -605,6 +605,10 @@ function SubmitDisabledToggle() {
   }
   document.getElementById('gtst').disabled = !document.getElementById('gtst').disabled;
   //$('#gtst').prop("disabled", false);
+  if ($('#dtClr').hasClass('d-none'))
+    $('#dtClr').removeClass('d-none');
+  else
+    $('#dtClr').addClass('d-none');
 }
 
 function SubmitDisabled(request) {
