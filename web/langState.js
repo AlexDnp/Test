@@ -38,11 +38,12 @@ const State = {
 
     11: "Включен", // STATE_WORK_RUN  
     12: "Нет настроек",//STATE_WORK_NO_SETTING
-
+    13: "Ошибка настройки",//STATE_WORK_ERROR_SETTING
     14: "Перегрев",//STATE_WORK_OFF_THERMO
 
     16: "ключ закрыт",//STATE_WORK_KEY_CLOSE
     17: "ключ открыт",//STATE_WORK_KEY_OPEN
     18: "ключ не выбран",//STATE_WORK_KEY_NOSELECT
     19: "Ошибка синхронизации",//STATE_WORK_ERROR_SYNCHRONIZATION
+    20: "Критическая ошибка",//STATE_WORK_ERROR
 }
