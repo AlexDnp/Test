@@ -262,30 +262,59 @@ $(document).ready(function () {
     send(id);
   });
 
-  $('#vUi ,#vUo ,#vCr').bind('DOMSubtreeModified', function () {
-    if (this.innerText === '')
-      return;
-    updateBufChart(this.id, this.innerText);
-    $(".vizm").each(function () {
-      if ($(this).hasClass('d-none'))
-        $(this).removeClass('d-none');
+
+  $(function () {
+    var observer = new MutationObserver((mutations) => {
+      mutations.forEach(function (mutation) {
+
+        var el = mutation.target;
+        if (el.innerText === '')
+          return;
+        updateBufChart(el.id, el.innerText);
+        $(".vizm").each(function () {
+          if ($(this).hasClass('d-none'))
+            $(this).removeClass('d-none');
+        });
+      });
     });
-
+    observer.observe($('#vUi')[0], { characterData: true, childList: true });
+    observer.observe($('#vUo')[0], { characterData: true, childList: true });
+    observer.observe($('#vCr')[0], { characterData: true, childList: true });
   });
 
-  $('#pDev').bind('DOMSubtreeModified', function () {
-    let time = Number($('#pDev').text());
-    var sam = new Date();
-    sam.setTime(time * 1000);
-  });
 
-  $('#mUmax,#mUmin,#mCmax').on('DOMSubtreeModified', function () {
-    let nm = parseInt(this.innerHTML);
-    if (nm == 0 | nm == 1000)
-      this.innerHTML = '-';
-  });
+  // $('#vUi ,#vUo ,#vCr').bind('DOMSubtreeModified', function () {
+  //   if (this.innerText === '')
+  //     return;
+  //   updateBufChart(this.id, this.innerText);
+  //   $(".vizm").each(function () {
+  //     if ($(this).hasClass('d-none'))
+  //       $(this).removeClass('d-none');
+  //   });
 
-  $('#hRec').bind('DOMSubtreeModified', function () {
+  // });
+
+  // pDev = new MutationObserver(function () {
+  //   let time = Number($('#pDev').text());
+  //   var sam = new Date();
+  //   sam.setTime(time * 1000);
+  // });
+  // pDev.observe($('#pDev')[0], { childList: true, subtree: true });
+
+
+  // $('#mUmax,#mUmin,#mCmax').on('DOMSubtreeModified', function () {
+  //   let nm = parseInt(this.innerHTML);
+  //   if (nm == 0 | nm == 1000)
+  //     this.innerHTML = '-';
+  // });
+
+  new MutationObserver(function () {
+    history();
+  }).observe($('#hRec')[0], { childList: true, subtree: true });
+
+
+  // $('#hRec').bind('DOMSubtreeModified', function () {
+  function history() {
     if ($('#hRec').text() == "")
       return;
     historyCountRec = Number($('#hRec').text());
@@ -313,10 +342,24 @@ $(document).ready(function () {
           $(this).addClass('d-none');
       });
     }
+  }
 
+  observerMax = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      var el = mutation.target;
+      let nm = parseInt(el.innerText);
+      if (nm == 0 | nm == 1000)
+        el.innerText = '-';
+    }
   });
+  observerMax.observe($('#mCmax')[0], { childList: true, subtree: true });
+  observerMax.observe($('#mUmax')[0], { childList: true, subtree: true });
+  observerMax.observe($('#mUmin')[0], { childList: true, subtree: true });
+  // });
 
 });
+
+
 
 $('#dkey, #iS').change(function () {
   let id = $(this).attr('id');
@@ -579,7 +622,7 @@ function SubmitDisabledToggle() {
     $('#dtClr').removeClass('d-none');
   else
     $('#dtClr').addClass('d-none');
-    
+
 }
 
 function SubmitDisabled(request) {
