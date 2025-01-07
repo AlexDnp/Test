@@ -10,7 +10,7 @@ const STATE_WORK_OFF_U_OUT_MAX = 7;
 const STATE_WORK_OFF_U_OUT_MIN = 8;
 const STATE_WORK_OFF_I_MAX = 9;
 const STATE_WORK_TIMEOUT = 10;
-const STATE_WORK_RUN = 11;
+const STATE_WORK_LOW_BOD = 11;
 const STATE_WORK_NO_SETTING = 12;
 const STATE_WORK_SETTING = 13;
 const STATE_WORK_OFF_THERMO = 14;
@@ -36,7 +36,7 @@ const State = {
     8: "Низкое вых.напр. ",//STATE_WORK_OFF_U_OUT_MIN
     9: "Большой ток",//STATE_WORK_OFF_I_MAX
 
-    11: "Включен", // STATE_WORK_RUN  
+    11: "Низкое напр. МК", // STATE_WORK_LOW_BOD  
     12: "Нет настроек",//STATE_WORK_NO_SETTING
     13: "Ошибка настройки",//STATE_WORK_ERROR_SETTING
     14: "Перегрев",//STATE_WORK_OFF_THERMO
